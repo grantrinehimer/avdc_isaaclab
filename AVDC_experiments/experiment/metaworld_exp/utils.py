@@ -1,6 +1,9 @@
 from mujoco_py.generated import const
 import numpy as np
 import cv2
+from typing import Iterable, Tuple
+
+from ..env_interfaces.base import EnvAdapter
 
 def get_robot_seg(env):
     seg = env.render(segmentation=True)
@@ -92,6 +95,40 @@ def sample_n_frames(frames, n):
     return np.array([frames[i] for i in new_vid_ind])
 
 
+class MetaworldEnvAdapter(EnvAdapter):
+    """Adapter that exposes the perception hooks required by MyPolicy_CL."""
 
-    
-    
+    def __init__(self, env):
+        super().__init__(name=getattr(env, "env_name", "metaworld"))
+        self._env = env
+
+    @property
+    def raw_env(self):
+        return self._env
+
+    def reset(self, seed: int | None = None):
+        if seed is not None and hasattr(self._env, "reset"):
+            return self._env.reset(seed=seed)
+        return self._env.reset()
+
+    def step(self, action):
+        return self._env.step(action)
+
+    def fetch_rgbd(self, camera_name: str, resolution: Tuple[int, int], *, depth: bool = True):
+        image, depth_map = self._env.render(
+            resolution=resolution,
+            depth=depth,
+            camera_name=camera_name,
+        )
+        return image, depth_map
+
+    def fetch_intrinsics(self, camera_name: str, resolution: Tuple[int, int]):
+        return get_cmat(self._env, camera_name, resolution)
+
+    def fetch_segmentation(
+        self,
+        camera_name: str,
+        resolution: Tuple[int, int],
+        seg_ids: Iterable[int],
+    ):
+        return get_seg(self._env, camera_name, resolution, seg_ids)

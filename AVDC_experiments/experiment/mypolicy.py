@@ -1,7 +1,7 @@
 from metaworld.policies.policy import Policy, assert_fully_parsed, move
 from metaworld.policies.action import Action
 import numpy as np
-from metaworld_exp.utils import get_seg, get_cmat
+from metaworld_exp.utils import get_seg, get_cmat, MetaworldEnvAdapter
 import json
 import cv2
 from flowdiffusion.inference_utils import pred_video
@@ -13,6 +13,7 @@ import torch
 import time
 import pickle
 import random
+from env_interfaces.base import EnvAdapter
 
 random.seed(1)
 np.random.seed(1)
@@ -32,6 +33,14 @@ def log_time(time_vid, time_flow, time_action, n_replan, log_dir="logs"):
 def log_time_execution(time_execution, n_replan, log_dir="logs"):
     with open(f"{log_dir}/time_execution_{n_replan}.txt", "a") as f:
         f.write(f"{time_execution}\n")
+
+
+def _resolve_env_adapter(env, env_adapter: EnvAdapter | None):
+    if env_adapter is not None:
+        return env_adapter
+    if env is None:
+        raise ValueError("MyPolicy_CL requires either an env instance or an EnvAdapter.")
+    return MetaworldEnvAdapter(env)
 
 class ProxyPolicy(Policy):
     def __init__(self, env, proxy_model, camera, task, resolution=(320, 240)):
@@ -74,9 +83,11 @@ class ProxyPolicy(Policy):
         return subgoals
 
     def calculate_next_plan(self):
-        image, depth = self.env.render(resolution=self.resolution, depth=True, camera_name=self.camera)
-        cmat = get_cmat(self.env, self.camera, resolution=self.resolution)
-        seg = get_seg(self.env, resolution=self.resolution, camera=self.camera, seg_ids=self.seg_ids)
+        image, depth = self.env_adapter.fetch_rgbd(self.camera, self.resolution)
+        if depth is None:
+            raise RuntimeError("EnvAdapter.fetch_rgbd must return (rgb, depth) for MyPolicy_CL.")
+        cmat = self.env_adapter.fetch_intrinsics(self.camera, self.resolution)
+        seg = self.env_adapter.fetch_segmentation(self.camera, self.resolution, self.seg_ids)
 
         x = self.transform(Image.fromarray(image*np.expand_dims(seg, axis=2))).unsqueeze(0)
         # substract "-v2-goal-observable" from task string without rstip
@@ -370,8 +381,21 @@ class MyPolicy(Policy):
             return -0.8
 
 class MyPolicy_CL(Policy):
-    def __init__(self, env, task, camera, video_model, flow_model, resolution=(320, 240), plan_timeout=15, max_replans=0, log=False):
+    def __init__(
+        self,
+        env,
+        task,
+        camera,
+        video_model,
+        flow_model,
+        resolution=(320, 240),
+        plan_timeout=15,
+        max_replans=0,
+        log=False,
+        env_adapter: EnvAdapter | None = None,
+    ):
         self.env = env
+        self.env_adapter = _resolve_env_adapter(env, env_adapter)
         self.seg_ids = name2maskid[task]
         self.task = " ".join(task.split('-')[:-3])
         self.camera = camera
@@ -416,9 +440,11 @@ class MyPolicy_CL(Policy):
         return subgoals
 
     def calculate_next_plan(self):
-        image, depth = self.env.render(resolution=self.resolution, depth=True, camera_name=self.camera)
-        cmat = get_cmat(self.env, self.camera, resolution=self.resolution)
-        seg = get_seg(self.env, resolution=self.resolution, camera=self.camera, seg_ids=self.seg_ids)
+        image, depth = self.env_adapter.fetch_rgbd(self.camera, self.resolution)
+        if depth is None:
+            raise RuntimeError("EnvAdapter.fetch_rgbd must return (rgb, depth) for MyPolicy_CL.")
+        cmat = self.env_adapter.fetch_intrinsics(self.camera, self.resolution)
+        seg = self.env_adapter.fetch_segmentation(self.camera, self.resolution, self.seg_ids)
 
         # measure time for vidgen
         start = time.time()
