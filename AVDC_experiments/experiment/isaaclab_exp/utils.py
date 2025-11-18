@@ -6,18 +6,21 @@ import cv2
 def get_robot_seg(env):
     # TODO: remove old mw env functions
     cam = env.scene.sensors['camera']
-    seg = cam.data.info['instance_segmentation_fast']
+    seg = cam.data.info['instance_segmentation_fast'][0]
     # seg = env.render(segmentation=True)
-    img = np.zeros(seg.shape[:2], dtype=bool)
-    types = seg[:, :, 0]
-    ids = seg[:, :, 1]
-    geoms = types == const.OBJ_GEOM
-    geoms_ids = np.unique(ids[geoms])
+    # img = np.zeros(seg.shape[:2], dtype=bool)
+    # types = seg[:, :, 0]
+    # ids = seg[:, :, 1]
 
-    for i in geoms_ids:
-        if 2 <= i <= 33:
-            img[ids == i] = True
-    return img
+    # img = np.zeros(seg.shape[1:3], dtype=bool)
+    ids = seg[..., 0].cpu().numpy()
+    robot_instance_ids = env.scene.object_registry("robot", return_ids=True)
+
+    mask = np.zeros(ids.shape, dtype=bool)
+    for obj_id in robot_instance_ids:
+        mask |= (ids == obj_id)
+
+    return mask
 
 def get_seg(env, camera, resolution, seg_ids):
     # TODO: convert to isaaclab specific functions
@@ -25,19 +28,16 @@ def get_seg(env, camera, resolution, seg_ids):
     # seg = env.render(segmentation=True, resolution=resolution, camera_name=camera)
 
     cam = env.scene.sensors['camera']
-    seg = cam.data.info['instance_segmentation_fast']
-    img = np.zeros(seg.shape[:2], dtype=bool)
-    types = seg[:, :, 0]
-    ids = seg[:, :, 1]
-    geoms = types == const.OBJ_GEOM
-    geoms_ids = np.unique(ids[geoms])
-    # print(geoms_ids)
+    seg = cam.data.info['instance_segmentation_fast'][0]
+    # img = np.zeros(seg.shape[:2], dtype=bool)
+    ids = seg[..., 0].cpu().numpy()
+    mask = np.zeros(ids.shape, dtype=bool)
+    for sid in seg_ids:
+        mask |= (ids == sid)
 
-    for i in geoms_ids:
-        if i in seg_ids:
-            img[ids == i] = True
-    img = img.astype('uint8') * 255
-    return cv2.medianBlur(img, 3)
+    mask = (mask.astype(np.uint8) * 255)
+    mask = cv2.medianBlur(mask, 3)
+    return mask
 
 def get_cmat(env, cam_name, resolution):
     id = env.sim.model.camera_name2id(cam_name)
@@ -73,7 +73,9 @@ def collect_video(init_obs, env, policy, camera_name='corner3', resolution=(640,
 
     # image, depth = env.render(depth=True, offscreen=True, camera_name=camera_name, resolution=resolution)
     image = env.render()
-    depths = obs['depth']
+    cam = env.scene.sensors['camera']
+    depths = cam.data.info['depth']
+    # depths = obs['depth']
     images += [image]
     depths += [depths]
     
@@ -91,7 +93,8 @@ def collect_video(init_obs, env, policy, camera_name='corner3', resolution=(640,
         if dd != 10 and not done:
             break
         image = env.render()
-        depths = obs['depth']
+        depths = cam.data.info['depth']
+        # depths = obs['depth']
         images += [image]
         depths += [depths]
         
