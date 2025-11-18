@@ -4,6 +4,8 @@ import logging
 from dataclasses import dataclass
 from types import SimpleNamespace
 from typing import Dict, Tuple
+import numpy as np
+import cv2
 
 from .base import EnvAdapter
 
@@ -48,9 +50,18 @@ class IsaacLabEnvAdapter(EnvAdapter):
         return self._env.reset()
 
     def step(self, action):
+        '''Wraps around the Metaworld env step function
+
+        Originally returns:
+        - obs, reward, done, info
+        '''
         return self._env.step(action)
 
     def fetch_rgbd(self, camera_name, resolution, *, depth: bool = True):
+        cam = self._env.scene.sensors[camera_name]
+        depths = cam.data.info['depth']
+        img = self._env.render()
+        # return img, depths[0]
         raise NotImplementedError(
             "IsaacLab RGB-D capture is not wired yet. "
             "Add camera sensors and route their outputs through this adapter."
@@ -61,7 +72,30 @@ class IsaacLabEnvAdapter(EnvAdapter):
             "Camera intrinsics are undefined. Export the projection matrices from cs6758_custom."
         )
 
+    def fetch_robot_segmentation(self, camera_name):
+        cam = self._env.scene.sensors[camera_name]
+        seg = cam.data.info['instance_segmentation_fast'][0]
+        
+        ids = seg[..., 0].cpu().numpy()
+        robot_instance_ids = self._env.scene.object_registry("robot", return_ids=True)
+
+        mask = np.zeros(ids.shape, dtype=bool)
+        for obj_id in robot_instance_ids:
+            mask |= (ids == obj_id)
+
+        return mask
+
     def fetch_segmentation(self, camera_name, resolution, seg_ids):
+        cam = self._env.scene.sensors[camera_name]
+        seg = cam.data.info['instance_segmentation_fast'][0]
+        ids = seg[..., 0].cpu().numpy()
+
+        for sid in seg_ids:
+            mask |= (ids == sid)
+
+        mask = (mask.astype(np.uint8) * 255)
+        mask = cv2.medianBlur(mask, 3)
+        # return mask
         raise NotImplementedError(
             "Segmentation masks are not available yet. Provide instance IDs once the sensors exist."
         )
