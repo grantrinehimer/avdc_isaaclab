@@ -5,8 +5,8 @@ import cv2
 
 def get_robot_seg(env):
     # TODO: remove old mw env functions
-    obs= env.get_observations()
-    seg = obs[:]
+    cam = env.scene.sensors['camera']
+    seg = cam.data.info['instance_segmentation_fast']
     # seg = env.render(segmentation=True)
     img = np.zeros(seg.shape[:2], dtype=bool)
     types = seg[:, :, 0]
@@ -21,8 +21,11 @@ def get_robot_seg(env):
 
 def get_seg(env, camera, resolution, seg_ids):
     # TODO: convert to isaaclab specific functions
-    obs= env.get_observations()
-    seg = env.render(segmentation=True, resolution=resolution, camera_name=camera)
+    # obs= env.get_observations()
+    # seg = env.render(segmentation=True, resolution=resolution, camera_name=camera)
+
+    cam = env.scene.sensors['camera']
+    seg = cam.data.info['instance_segmentation_fast']
     img = np.zeros(seg.shape[:2], dtype=bool)
     types = seg[:, :, 0]
     ids = seg[:, :, 1]
