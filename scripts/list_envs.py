@@ -42,11 +42,12 @@ def main():
 
     # count of environments
     index = 0
-    # acquire all Isaac environments names
+    # acquire all environments registered through the avdc_isaaclab extension
     for task_spec in gym.registry.values():
-        if "Template-" in task_spec.id:
+        cfg_entry_point = task_spec.kwargs.get("env_cfg_entry_point")
+        if cfg_entry_point and cfg_entry_point.startswith("avdc_isaaclab"):
             # add details to table
-            table.add_row([index + 1, task_spec.id, task_spec.entry_point, task_spec.kwargs["env_cfg_entry_point"]])
+            table.add_row([index + 1, task_spec.id, task_spec.entry_point, cfg_entry_point])
             # increment count
             index += 1
 
