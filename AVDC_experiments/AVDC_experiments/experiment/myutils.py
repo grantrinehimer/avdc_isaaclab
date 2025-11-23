@@ -302,14 +302,10 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
     transformss = []
     center_2ds = []
     sampless = []
-    print("here1")
     samples_2d = sample_from_mask(seg, 500)
     sampless.append(samples_2d)
-    print("here2")
     samples_3d = to_3d(samples_2d, depth, cmat)
-    print("here3")
     grasp = get_grasp(samples_2d, depth, cmat)
-    print("here4")
     # print(grasp.shape)
     # print(samples_3d.shape)
     
@@ -324,7 +320,6 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
         t0 = time.time()
         _, inliners = ransac(points1_uv, center_uv, points2_uv, ransac_tries, ransac_threshold)
         t1 = time.time()
-        print("here5")
         # print("inliners:", len(inliners))
         points1_uv = np.array(points1_uv)[inliners]
         points2_uv = np.array(points2_uv)[inliners]
@@ -332,7 +327,6 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
         sampless.append(points2_uv)
         
         solution, mat = solve_3d_rigid_tfm(points1, points2_uv, cmat, rgd_tfm_tries, rgd_tfm_threshold)
-        print("here6")
         t2 = time.time()
 
         # print("ransac time:", t1-t0)
@@ -340,11 +334,9 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
         # print("transform parameters:", solution.x)
         # print("loss:", solution.fun)
         T = get_transformation_matrix(*solution.x)
-        print("here7")
         points1_ext = np.concatenate([points1, np.ones((len(points1), 1))], axis=1)
         points1 = (T @ points1_ext.T).T[:, :3]
         center = (T @ np.concatenate([center, np.ones((1, 1))], axis=1).T).T[:, :3]
-        print("here8")
         # print("center:", center)
         points1_uv = to_2d(points1, cmat)
         

@@ -3,6 +3,7 @@ from __future__ import annotations
 import time
 import warnings
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Sequence
 
 import cv2
@@ -43,7 +44,8 @@ class DiffusionPolicyConfig:
     resolution: tuple[int, int] = (320, 240)
     plan_timeout: int = 15
     max_replans: int = 0
-    position_gain: float = 20.0
+    # TODO: genuinely what should this be? it used to be 20.0
+    position_gain: float = 1.0
     env_index: int = 0
     target_terms: Sequence[str] = ("Object",)
     seg_ids: Sequence[int] | None = None
@@ -81,6 +83,7 @@ class IsaacMyPolicyCL:
         self.device = device or ("cuda:0" if torch.cuda.is_available() else "cpu")
         self.log = log
         self.flow_image_path = "/tmp/avdc_flow_latest.png"
+        self.diffusion_images_dir = Path(__file__).resolve().parent / "diffusion_images"
 
         self.scene = isaac_utils.get_scene(env)
         self.robot = self.scene["robot"]
@@ -183,18 +186,54 @@ class IsaacMyPolicyCL:
         )
         return image, depth, seg, cmat
 
+    def _load_diffusion_images(self, frame_0: np.ndarray) -> np.ndarray:
+        """Load cached diffusion frames and pad them to mirror pred_video output."""
+        if not self.diffusion_images_dir.exists():
+            raise FileNotFoundError(f"Diffusion image directory '{self.diffusion_images_dir}' not found.")
+
+        image_paths = sorted(self.diffusion_images_dir.glob("*.png"))
+        if len(image_paths) != 8:
+            raise ValueError(
+                f"Expected exactly 8 diffusion frames in '{self.diffusion_images_dir}', found {len(image_paths)}."
+            )
+
+        frames = []
+        for path in image_paths:
+            img = cv2.imread(str(path), cv2.IMREAD_COLOR)
+            if img is None:
+                raise FileNotFoundError(f"Failed to load diffusion frame '{path}'.")
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            if img.shape[:2] != (128, 128):
+                img = cv2.resize(img, (128, 128), interpolation=cv2.INTER_LINEAR)
+            frames.append(img)
+
+        frames_np = np.stack(frames, axis=0).astype(np.uint8)
+
+        original_shape = frame_0.shape
+        center = (original_shape[1] // 2, original_shape[0] // 2)
+        xpad = center[0] - 64
+        ypad = center[1] - 64
+        if xpad < 0 or ypad < 0:
+            raise ValueError(
+                f"Cannot pad diffusion frames to match original shape {original_shape}; resolution too small."
+            )
+
+        frames_chw = frames_np.transpose(0, 3, 1, 2)
+        frames_padded = np.pad(frames_chw, ((0, 0), (0, 0), (ypad, ypad), (xpad, xpad)), mode="constant")
+        return frames_padded
+
     def calculate_next_plan(self):
         image, depth, seg, cmat = self._fetch_camera_observations()
 
         start = time.time()
-        images = pred_video(self.video_model, image, self.task_prompt)
+        # images = pred_video(self.video_model, image, self.task_prompt)
+        images = self._load_diffusion_images(image)
         print(images.shape)
         time_vid = time.time() - start
-        self.video_model.model.to("cpu")
-        print(f"video model to {self.video_model.model.device}")
-        if hasattr(self.video_model, "text_encoder"):
-            print("text encoder in use")
-            self.video_model.text_encoder.to("cpu")
+        # print(f"video model to {self.video_model.model.device}")
+        # if hasattr(self.video_model, "text_encoder"):
+        #     print("text encoder in use")
+        #     self.video_model.text_encoder.to("cpu")
 
         start = time.time()
         _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device="cuda:0")
@@ -205,7 +244,6 @@ class IsaacMyPolicyCL:
         grasp, transforms, _, _ = get_transforms(seg, depth, cmat, flow)
         transform_mats = [get_transformation_matrix(*transform) for transform in transforms]
         time_action = time.time() - start
-        print("after transforms")
 
         if self.log:
             t = max(len(transform_mats), 1)
@@ -263,6 +301,7 @@ class IsaacMyPolicyCL:
         if not self.grasped and abs(pos_curr[2] - self.grasp[2]) > 0.04:
             return self.grasp
         if not self.grasped and abs(pos_curr[2] - self.grasp[2]) <= 0.04:
+            print("grasped")
             self.grasped = True
             return self.grasp
         if self.subgoals and np.linalg.norm(pos_curr - self.subgoals[0]) > move_precision:

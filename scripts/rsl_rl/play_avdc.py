@@ -128,6 +128,7 @@ def main():
     simulation_app = app_launcher.app
 
     import gymnasium as gym
+    import torch
 
     from isaaclab.envs import (
         DirectMARLEnv,
@@ -163,12 +164,13 @@ def main():
 
         obs, _ = env.reset()
 
-        video_model = load_diffusion_video_model(
-            args_cli._video_ckpt_dir,
-            args_cli._video_milestone,
-            flow=args_cli.video_flow,
-            timestep=args_cli.video_timestep,
-        )
+        # video_model = load_diffusion_video_model(
+        #     args_cli._video_ckpt_dir,
+        #     args_cli._video_milestone,
+        #     flow=args_cli.video_flow,
+        #     timestep=args_cli.video_timestep,
+        # )
+        video_model = None
         flow_model = get_flow_model(checkpoint_path=args_cli.flow_checkpoint)
 
         policy_cfg = DiffusionPolicyConfig(
@@ -193,7 +195,7 @@ def main():
         start_time = time.time()
         for step in range(args_cli.num_steps):
             action = policy.get_action(obs)
-            env_action = action[None, :]
+            env_action = torch.as_tensor(action[None, :], device=env.unwrapped.device)
             obs, _, terminated, truncated, info = env.step(env_action)
 
             if args_cli.save_video and len(frames) < args_cli.video_length:
@@ -205,8 +207,9 @@ def main():
                     return False
                 if isinstance(value, dict):
                     return any(_any_flag(v) for v in value.values())
+                if torch.is_tensor(value):
+                    value = value.detach().cpu().numpy()
                 return bool(np.any(np.asarray(value)))
-
             done = _any_flag(terminated) or _any_flag(truncated)
 
             if done:
