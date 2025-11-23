@@ -117,5 +117,36 @@ Because the directory hierarchy and PNG naming follow the existing Metaworld dat
 4. **Train diffusion policy**  
    Point `SequentialDatasetv2.path` at your newly recorded dataset.
 
+---
+
+## Playing back the AVDC policy in Isaac Lab
+
+After training a diffusion checkpoint (for example under `AVDC/results/mw/model-24.pt`) you can deploy the new
+`IsaacMyPolicyCL` controller directly inside Isaac Lab with the helper script:
+
+```bash
+./isaaclab.sh -p scripts/rsl_rl/play_avdc.py \
+  --task Isaac-Lift-Cube-Franka-Custom-IK-Rel-v0 \
+  --video_ckpt_dir AVDC/results/mw \
+  --video_milestone 24 \
+  --flow_checkpoint AVDC_experiments/experiment/pretrained/gmflow-scale2-regrefine6-mixdata-train320x576-4e7b215d.pth \
+  --task_prompt "lift cube" \
+  --plan_timeout 15 \
+  --camera_sensor overhead_camera
+```
+
+- Use `--video_ckpt_path /abs/path/to/model-XX.pt` if you would rather point at a single checkpoint file.
+- `--video_flow` switches the diffusion model into the flow-prediction variant.
+- Videos can be recorded with `--save_video --video_folder logs/avdc/videos`.
+
+The script automatically enables the overhead camera (RGB + depth + instance segmentation) that the policy consumes via
+`isaaclab_policy.IsaacMyPolicyCL`. When running custom datasets, adjust the `--target_label` substring so the instance
+segmentation mask isolates the desired object.
+
+Internally, `IsaacMyPolicyCL` (see `AVDC_experiments/experiment/isaaclab_policy.py`) mirrors the original Meta-World
+closed-loop controller, but sources RGB/depth/segmentation data via `isaaclab_exp.utils`. The helper
+`DiffusionPolicyConfig` lets you tune camera names, resolutions, and replanning parameters when embedding the policy in
+other tooling.
+
 This pipeline produces camera-aligned, expert-labelled demonstrations that can be fed directly into `AVDC/flowdiffusion/train_mw.py` and later consumed by `MyPolicy_CL`.
 

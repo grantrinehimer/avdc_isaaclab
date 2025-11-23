@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from argparse import ArgumentParser
 import sys
 sys.path.append('core')
@@ -7,12 +9,12 @@ from PIL import Image
 
 
 import imageio as imageio
-from unimatch.unimatch import UniMatch
+from .unimatch.unimatch import UniMatch
 import imageio
 from torchvision.utils import draw_bounding_boxes
-from utils.flow_viz import flow_to_image
+from .utils.flow_viz import flow_to_image
 import torch.nn.functional as F
-from rigid_transform import *
+from .rigid_transform import *
 import time 
 from torch import nn
 import random
@@ -26,7 +28,7 @@ class dummy_model(nn.Module):
         super().__init__()
         self.module = Unet()
 
-def get_flow_model():
+def get_flow_model(checkpoint_path: str | None = None):
     parser = ArgumentParser()
     parser.add_argument('--model', type=str, default='pretrained/gmflow-scale2-regrefine6-mixdata-train320x576-4e7b215d.pth')
     parser.add_argument('--feature_channels', type=int, default=128)
@@ -38,6 +40,8 @@ def get_flow_model():
     parser.add_argument('--reg_refine', type=bool, default=True)
     parser.add_argument('--task', type=str, default='flow')
     args = parser.parse_args(args=[])
+    if checkpoint_path is not None:
+        args.model = checkpoint_path
     DEVICE = 'cuda:0'
 
     model = UniMatch(feature_channels=args.feature_channels,
@@ -58,7 +62,7 @@ def get_flow_model():
     return model
 
 ### predict per frame flow   
-def pred_flow_frame(model, frames, stride=1, device='cuda:0'):
+def pred_flow_frame(model, frames, stride=1, device='cpu'):
     DEVICE = device 
     model = model.to(DEVICE)
     frames = torch.from_numpy(frames).float()
@@ -133,10 +137,13 @@ def get_bbox_keypoints(img_size, label, r=4):
     return kps, ((x0+x1)/2, (y0+y1)/2)
 
 def sample_with_binear(fmap, kp):
-    max_x, max_y = fmap.shape[1]-1, fmap.shape[0]-1
-    x0, y0 = int(kp[0]), int(kp[1])
-    x1, y1 = x0+1, y0+1
-    x, y = kp[0]-x0, kp[1]-y0
+    max_x, max_y = fmap.shape[1] - 1, fmap.shape[0] - 1
+    x0 = int(np.clip(np.floor(kp[0]), 0, max_x))
+    y0 = int(np.clip(np.floor(kp[1]), 0, max_y))
+    x1 = min(max_x, x0 + 1)
+    y1 = min(max_y, y0 + 1)
+    x = max(0.0, min(1.0, kp[0] - x0))
+    y = max(0.0, min(1.0, kp[1] - y0))
     fmap_x0y0 = fmap[y0, x0]
     fmap_x1y0 = fmap[y0, x1]
     fmap_x0y1 = fmap[y1, x0]
@@ -147,10 +154,13 @@ def sample_with_binear(fmap, kp):
     return feature
 
 def warp_kp_with_bilinear(flow, kp):
-    max_x, max_y = flow.shape[1]-1, flow.shape[0]-1
-    x0, y0 = int(kp[0]), int(kp[1])
-    x1, y1 = x0+1, y0+1
-    x, y = kp[0]-x0, kp[1]-y0
+    max_x, max_y = flow.shape[1] - 1, flow.shape[0] - 1
+    x0 = int(np.clip(np.floor(kp[0]), 0, max_x))
+    y0 = int(np.clip(np.floor(kp[1]), 0, max_y))
+    x1 = min(max_x, x0 + 1)
+    y1 = min(max_y, y0 + 1)
+    x = max(0.0, min(1.0, kp[0] - x0))
+    y = max(0.0, min(1.0, kp[1] - y0))
     flow_x0y0 = flow[y0, x0]
     flow_x1y0 = flow[y0, x1]
     flow_x0y1 = flow[y1, x0]
@@ -292,10 +302,14 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
     transformss = []
     center_2ds = []
     sampless = []
+    print("here1")
     samples_2d = sample_from_mask(seg, 500)
     sampless.append(samples_2d)
+    print("here2")
     samples_3d = to_3d(samples_2d, depth, cmat)
+    print("here3")
     grasp = get_grasp(samples_2d, depth, cmat)
+    print("here4")
     # print(grasp.shape)
     # print(samples_3d.shape)
     
@@ -310,6 +324,7 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
         t0 = time.time()
         _, inliners = ransac(points1_uv, center_uv, points2_uv, ransac_tries, ransac_threshold)
         t1 = time.time()
+        print("here5")
         # print("inliners:", len(inliners))
         points1_uv = np.array(points1_uv)[inliners]
         points2_uv = np.array(points2_uv)[inliners]
@@ -317,6 +332,7 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
         sampless.append(points2_uv)
         
         solution, mat = solve_3d_rigid_tfm(points1, points2_uv, cmat, rgd_tfm_tries, rgd_tfm_threshold)
+        print("here6")
         t2 = time.time()
 
         # print("ransac time:", t1-t0)
@@ -324,10 +340,11 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
         # print("transform parameters:", solution.x)
         # print("loss:", solution.fun)
         T = get_transformation_matrix(*solution.x)
-        
+        print("here7")
         points1_ext = np.concatenate([points1, np.ones((len(points1), 1))], axis=1)
         points1 = (T @ points1_ext.T).T[:, :3]
         center = (T @ np.concatenate([center, np.ones((1, 1))], axis=1).T).T[:, :3]
+        print("here8")
         # print("center:", center)
         points1_uv = to_2d(points1, cmat)
         

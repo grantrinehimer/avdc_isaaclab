@@ -36,6 +36,7 @@ import isaaclab_tasks  # noqa: F401
 from isaaclab_tasks.utils import parse_env_cfg
 
 import avdc_isaaclab.tasks  # noqa: F401
+import experiment
 
 
 def main():

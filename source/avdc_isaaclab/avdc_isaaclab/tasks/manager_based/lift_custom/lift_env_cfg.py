@@ -66,7 +66,8 @@ class ObjectTableSceneCfg(InteractiveSceneCfg):
     # overhead RGB camera used for data collection
     overhead_camera = CameraCfg(
         prim_path="{ENV_REGEX_NS}/OverheadCamera",
-        data_types=["rgb"],
+        data_types=["rgb", "depth", "instance_segmentation_fast"],
+        colorize_instance_segmentation=False,
         width=320,
         height=240,
         update_period=0.0,
