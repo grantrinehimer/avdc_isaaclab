@@ -196,7 +196,7 @@ def main():
         video_dir = None
         start_time = time.time()
         for step in range(1500):
-            repeat = 10
+            repeat = 20
             action = policy.get_action(obs)
             env_action = torch.as_tensor(action[None, :], device=env.unwrapped.device)
             for sub in range(repeat):

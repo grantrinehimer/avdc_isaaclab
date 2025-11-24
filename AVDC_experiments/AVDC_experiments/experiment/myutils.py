@@ -343,8 +343,6 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
     center_2ds = []
     sampless = []
     samples_2d = sample_from_mask(seg, 500)
-    print("samples_2d")
-    print(samples_2d)
     sampless.append(samples_2d)
     samples_3d = to_3d(samples_2d, depth, cmat)
     grasp = get_grasp(samples_2d, depth, cmat)
@@ -352,13 +350,22 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
     # print(samples_3d.shape)
     
     points1_uv = samples_2d
+    print("points1_uv")
+    print(points1_uv.mean(axis=0))
     points1 = samples_3d
     center = grasp
     for i in range(len(flows)):
         flow = flows[i]
+        print("flow shape")
+        print(flow.shape)
+        print("flow")
+        print(np.percentile(np.linalg.norm(flow, axis=2), [50, 95, 99]))
+        print(flow[144, 148])
         center_uv = to_2d(center, cmat)[0]
         center_2ds.append(center_uv)
         points2_uv = warp_points(flow, points1_uv)
+        print("point2_uv")
+        print(points2_uv.mean(axis=0))
         t0 = time.time()
         _, inliners = ransac(points1_uv, center_uv, points2_uv, ransac_tries, ransac_threshold)
         t1 = time.time()

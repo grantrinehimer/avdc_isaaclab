@@ -118,7 +118,7 @@ class IsaacMyPolicyCL:
         pos = self.robot.data.body_pos_w[self.env_index, self.hand_body_id]
         if isinstance(pos, torch.Tensor):
             pos = pos.detach().cpu().numpy()
-        return np.asarray(pos, dtype=np.float32) + np.array([-0.5, 0, 0])
+        return np.asarray(pos, dtype=np.float32)
 
     def _initialize_plan(self):
         grasp, transforms = self.calculate_next_plan()
@@ -152,8 +152,8 @@ class IsaacMyPolicyCL:
             subgoals.append(next_subgoal)
         print("subgoals")
         print(subgoals)
-        # return subgoals
-        return [np.array([0, 0, 1])]
+        return subgoals
+        # return [np.array([0, 0, 1])]
 
     def _resize_rgb(self, image: np.ndarray) -> np.ndarray:
         width, height = self.resolution
@@ -276,6 +276,7 @@ class IsaacMyPolicyCL:
 
         start = time.time()
         _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device="cuda:0")
+
         self._output_flow_image(flow_images)
         time_flow = time.time() - start
 
@@ -343,11 +344,11 @@ class IsaacMyPolicyCL:
             print("placing above object")
             return self.grasp + np.array([0.0, 0.0, 0.2])
         # drop end effector down on top of object
-        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) > 0.04:
+        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) > 0.06:
             print("dropping down on top of object")
             return self.grasp
         # grab object (if in grasp mode)
-        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) <= 0.04:
+        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) <= 0.06:
             print("grabbing object")
             self.grasped = True
             return self.grasp

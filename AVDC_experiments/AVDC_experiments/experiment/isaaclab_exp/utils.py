@@ -69,7 +69,7 @@ def get_camera_frame(env, camera_name: str, env_index: int = 0):
     position = _to_numpy(data.pos_w[env_index])
     print("position")
     print(position)
-    quat_world = _to_numpy(data.quat_w_opengl[env_index])
+    quat_world = _to_numpy(data.quat_w_ros[env_index])
 
     seg_info = None
     if data.info and len(data.info) > env_index:
