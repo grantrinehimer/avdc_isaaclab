@@ -66,7 +66,7 @@ class ObjectTableSceneCfg(InteractiveSceneCfg):
     # overhead RGB camera used for data collection
     overhead_camera = CameraCfg(
         prim_path="{ENV_REGEX_NS}/OverheadCamera",
-        data_types=["rgb", "depth", "instance_segmentation_fast"],
+        data_types=["rgb", "depth", "instance_segmentation_fast", "distance_to_image_plane"],
         colorize_instance_segmentation=False,
         width=320,
         height=240,
@@ -151,7 +151,7 @@ class EventCfg:
         func=mdp.reset_root_state_uniform,
         mode="reset",
         params={
-            # This makes the cube spawn deterministcally at (0,0,0)
+            # This makes the cube spawn deterministcally at (0.5,0,0.055)
             # "pose_range": {"x": (-0.1, 0.1), "y": (-0.25, 0.25), "z": (0.0, 0.0)},
             "pose_range": {"x": (0, 0), "y": (0, 0), "z": (0.0, 0.0)},
             "velocity_range": {},
@@ -245,7 +245,7 @@ class LiftEnvCfg(ManagerBasedRLEnvCfg):
         """Post initialization."""
         # general settings
         self.decimation = 2
-        self.episode_length_s = 5.0
+        self.episode_length_s = 20
         # simulation settings
         self.sim.dt = 0.01  # 100Hz
         self.sim.render_interval = self.decimation

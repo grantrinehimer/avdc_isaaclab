@@ -178,6 +178,7 @@ def main():
             resolution=(args_cli.camera_width, args_cli.camera_height),
             plan_timeout=args_cli.plan_timeout,
             max_replans=0,
+            seg_ids=[2],
             target_terms=(args_cli.target_label,) if args_cli.target_label else ("Object",),
         )
         policy = IsaacMyPolicyCL(
@@ -188,15 +189,18 @@ def main():
             config=policy_cfg,
             device=args_cli.device,
             log=args_cli.log_timings,
+            debug=True
         )
 
         frames = []
         video_dir = None
         start_time = time.time()
-        for step in range(args_cli.num_steps):
+        for step in range(1500):
+            repeat = 10
             action = policy.get_action(obs)
             env_action = torch.as_tensor(action[None, :], device=env.unwrapped.device)
-            obs, _, terminated, truncated, info = env.step(env_action)
+            for sub in range(repeat):
+                obs, _, terminated, truncated, info = env.step(env_action)
 
             if args_cli.save_video and len(frames) < args_cli.video_length:
                 frame = isaac_utils.get_camera_frame(env.unwrapped, args_cli.camera_sensor, policy.cfg.env_index)["rgb"]

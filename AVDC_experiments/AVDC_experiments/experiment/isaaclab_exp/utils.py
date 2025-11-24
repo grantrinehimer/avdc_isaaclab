@@ -55,6 +55,7 @@ def get_camera_frame(env, camera_name: str, env_index: int = 0):
         raise ValueError(f"Camera '{camera_name}' does not publish RGB data.")
     rgb = _to_numpy(outputs["rgb"][env_index])
 
+    # TODO: Should we use depth or distance to image plane? it honestly seems to output the same thing
     depth_tensor = outputs.get("depth")
     if depth_tensor is None:
         raise ValueError(f"Camera '{camera_name}' does not publish depth data.")
@@ -66,7 +67,9 @@ def get_camera_frame(env, camera_name: str, env_index: int = 0):
 
     intrinsics = _to_numpy(data.intrinsic_matrices[env_index])
     position = _to_numpy(data.pos_w[env_index])
-    quat_world = _to_numpy(data.quat_w_world[env_index])
+    print("position")
+    print(position)
+    quat_world = _to_numpy(data.quat_w_opengl[env_index])
 
     seg_info = None
     if data.info and len(data.info) > env_index:
@@ -102,18 +105,29 @@ def _quat_to_matrix(quat: np.ndarray) -> np.ndarray:
         dtype=np.float64,
     )
 
+from isaaclab.utils.math import matrix_from_quat
+
 
 def get_cmat(env, camera_name: str, env_index: int = 0):
     """Return a 3x4 camera matrix that maps world coordinates to image coordinates."""
     frame = get_camera_frame(env, camera_name, env_index)
     intrinsics = frame["intrinsics"]
     position = frame["position"]
+    print("position")
+    print(position)
     quat_world = frame["quat_world"]
 
-    rotation_wc = _quat_to_matrix(quat_world)
+    rotation_wc = matrix_from_quat(torch.from_numpy(quat_world))
     rotation_cw = rotation_wc.T
     translation_cw = -rotation_cw @ position.reshape(3, 1)
     extrinsic = np.concatenate([rotation_cw, translation_cw], axis=1)
+    print("cmat")
+    print(intrinsics @ extrinsic)
+    cmat = intrinsics @ extrinsic
+    print(cmat.shape)
+    pixel = cmat @ np.array([0.5, 0, 0.0, 1])
+    print(pixel / pixel[2])
+
     return intrinsics @ extrinsic
 
 
@@ -166,7 +180,8 @@ def _match_instance_ids(seg_info, match_terms: Iterable[str]) -> set[int]:
                     continue
     return matched
 
-
+from PIL import Image
+from pathlib import Path
 def get_seg(
     env,
     camera_name: str,
@@ -189,13 +204,19 @@ def get_seg(
         mask = np.isin(seg, list(target_ids))
     else:
         # Fallback to any non-zero segmentation id.
+        print("WARNING: Falling back to any non-zero segmentation id. This is probably bad.")
         mask = seg != 0
 
     mask = mask.astype(np.uint8) * 255
+
     if resolution is not None:
         width, height = resolution
         mask = cv2.resize(mask, (width, height), interpolation=cv2.INTER_NEAREST)
     mask = cv2.medianBlur(mask, 3)
+    debug_dir = Path("debug")
+    Image.fromarray(mask).save(debug_dir / f"mask.png")
+    print("mask")
+    print(mask.shape)
     return mask
 
 

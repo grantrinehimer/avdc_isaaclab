@@ -66,6 +66,7 @@ class IsaacMyPolicyCL:
         config: DiffusionPolicyConfig = DiffusionPolicyConfig(),
         device: str | None = None,
         log: bool = False,
+        debug: bool = False,
     ):
         self.env = env
         self.task_prompt = task_prompt
@@ -82,10 +83,14 @@ class IsaacMyPolicyCL:
         self.target_terms = config.target_terms
         self.device = device or ("cuda:0" if torch.cuda.is_available() else "cpu")
         self.log = log
-        self.flow_image_path = "/tmp/avdc_flow_latest.png"
+        self.flow_image_path = "debug/avdc_flow_latest.png"
+        self.depth_image_path = Path("debug/avdc_depth_latest.png")
         self.diffusion_images_dir = Path(__file__).resolve().parent / "diffusion_images"
 
         self.scene = isaac_utils.get_scene(env)
+        print("env origin:", self.scene.env_origins[self.env_index])
+        frame = isaac_utils.get_camera_frame(env, self.camera_name, self.env_index)
+        print("camera pos_w:", frame["position"])
         self.robot = self.scene["robot"]
         hand_ids, _ = self.robot.find_bodies(config.hand_body_name)
         if len(hand_ids) == 0:
@@ -101,18 +106,19 @@ class IsaacMyPolicyCL:
         self.subgoals: list[np.ndarray] = []
         self.mode = "grasp"
         self.grasped = False
+        self.debug = debug
 
         self._initialize_plan()
 
     @property
     def action_dim(self) -> int:
-        return 7  # 6D pose command + binary gripper
+        return 4  # 6D pose command + binary gripper
 
     def _current_hand_pos(self) -> np.ndarray:
         pos = self.robot.data.body_pos_w[self.env_index, self.hand_body_id]
         if isinstance(pos, torch.Tensor):
             pos = pos.detach().cpu().numpy()
-        return np.asarray(pos, dtype=np.float32)
+        return np.asarray(pos, dtype=np.float32) + np.array([-0.5, 0, 0])
 
     def _initialize_plan(self):
         grasp, transforms = self.calculate_next_plan()
@@ -121,25 +127,33 @@ class IsaacMyPolicyCL:
         self.subgoals = self._configure_mode(self.subgoals)
         self.init_grasp()
 
+    # This is where we could configure different modes, but for now we keep it as grasp
     def _configure_mode(self, subgoals: list[np.ndarray]) -> list[np.ndarray]:
-        subgoals_np = np.array(subgoals)
-        if len(subgoals_np) > 3:
-            max_deltaz = np.abs(subgoals_np[1:-2, 2] - subgoals_np[2:-1, 2]).max()
-        else:
-            max_deltaz = 0.0
-        if max_deltaz > 0.1:
-            self.mode = "grasp"
-            return subgoals
-        self.mode = "push"
-        return [s - np.array([0, 0, 0.03]) for s in subgoals]
+        # subgoals_np = np.array(subgoals)
+        # if len(subgoals_np) > 3:
+        #     max_deltaz = np.abs(subgoals_np[1:-2, 2] - subgoals_np[2:-1, 2]).max()
+        # else:
+        #     max_deltaz = 0.0
+        # if max_deltaz > 0.1:
+        #     self.mode = "grasp"
+        #     return subgoals
+        # self.mode = "grasp"
+        # return [s - np.array([0, 0, 0.03]) for s in subgoals]
+        self.mode = "grasp"
+        return subgoals
 
     def calc_subgoals(self, grasp, transforms):
         subgoals = [grasp]
         for transform in transforms:
+            print("transform")
+            print(transform)
             grasp_ext = np.concatenate([subgoals[-1], [1]])
             next_subgoal = (transform @ grasp_ext)[:3]
             subgoals.append(next_subgoal)
-        return subgoals
+        print("subgoals")
+        print(subgoals)
+        # return subgoals
+        return [np.array([0, 0, 1])]
 
     def _resize_rgb(self, image: np.ndarray) -> np.ndarray:
         width, height = self.resolution
@@ -157,24 +171,45 @@ class IsaacMyPolicyCL:
         if not flow_images:
             return
         flow_vis = flow_images[0]
-        if flow_vis is None or flow_vis.ndim != 3:
+        for i, flow_vis in enumerate(flow_images):
+            if flow_vis is None or flow_vis.ndim != 3:
+                return
+            try:
+                if flow_vis.shape[2] == 3:
+                    img = cv2.cvtColor(flow_vis, cv2.COLOR_RGB2BGR)
+                else:
+                    img = flow_vis
+                cv2.imwrite(f"debug/avdc_flow_latest{i}.png", img)
+                if self.log:
+                    print(f"[Policy] optical flow image saved to {self.flow_image_path}")
+            except Exception as exc:
+                if self.log:
+                    print(f"[Policy] failed to save optical flow image: {exc}")
+
+    def _output_depth_image(self, depth: np.ndarray):
+        if depth is None or depth.size == 0:
             return
+        depth_min = np.nanmin(depth)
+        depth_max = np.nanmax(depth)
+        if not np.isfinite(depth_min) or not np.isfinite(depth_max) or depth_max - depth_min < 1e-6:
+            return
+        depth_norm = (depth - depth_min) / (depth_max - depth_min)
+        depth_vis = (depth_norm * 255).astype(np.uint8)
+        depth_color = cv2.applyColorMap(depth_vis, cv2.COLORMAP_INFERNO)
         try:
-            if flow_vis.shape[2] == 3:
-                img = cv2.cvtColor(flow_vis, cv2.COLOR_RGB2BGR)
-            else:
-                img = flow_vis
-            cv2.imwrite(self.flow_image_path, img)
+            self.depth_image_path.parent.mkdir(parents=True, exist_ok=True)
+            cv2.imwrite(str(self.depth_image_path), depth_color)
             if self.log:
-                print(f"[Policy] optical flow image saved to {self.flow_image_path}")
+                print(f"[Policy] depth image saved to {self.depth_image_path}")
         except Exception as exc:
             if self.log:
-                print(f"[Policy] failed to save optical flow image: {exc}")
+                print(f"[Policy] failed to save depth image: {exc}")
 
     def _fetch_camera_observations(self):
         frame = isaac_utils.get_camera_frame(self.env, self.camera_name, self.env_index)
         image = self._resize_rgb(frame["rgb"])
         depth = self._resize_depth(frame["depth"])
+        print(depth.min(), depth.max())
         cmat = isaac_utils.get_cmat(self.env, self.camera_name, self.env_index)
         seg = isaac_utils.get_seg(
             self.env,
@@ -184,6 +219,10 @@ class IsaacMyPolicyCL:
             target_terms=self.target_terms,
             env_index=self.env_index,
         )
+        if self.debug:
+            raw_seg = frame["segmentation"]
+            print("seg unique IDs:", np.unique(raw_seg)[0:10])
+            print("seg info keys:", frame["seg_info"])
         return image, depth, seg, cmat
 
     def _load_diffusion_images(self, frame_0: np.ndarray) -> np.ndarray:
@@ -224,11 +263,11 @@ class IsaacMyPolicyCL:
 
     def calculate_next_plan(self):
         image, depth, seg, cmat = self._fetch_camera_observations()
+        self._output_depth_image(depth)
 
         start = time.time()
         # images = pred_video(self.video_model, image, self.task_prompt)
         images = self._load_diffusion_images(image)
-        print(images.shape)
         time_vid = time.time() - start
         # print(f"video model to {self.video_model.model.device}")
         # if hasattr(self.video_model, "text_encoder"):
@@ -255,6 +294,10 @@ class IsaacMyPolicyCL:
         self.replans -= 1
         self.replan_countdown = self.plan_timeout
         self.time_from_last_plan = 0
+        print("grasp")
+        print(grasp)
+        
+        # grasp = np.array([[0, 0, 0.1]])
         return grasp, transform_mats
 
     def init_grasp(self):
@@ -278,16 +321,15 @@ class IsaacMyPolicyCL:
 
         desired = self._desired_pos(pos_curr)
         delta_pos = move(pos_curr, desired, p=self.position_gain)
-        delta_pos = np.clip(delta_pos, -1.0, 1.0)
 
         action = np.zeros(self.action_dim, dtype=np.float32)
         action[:3] = delta_pos
-        action[6] = self._grab_effort()
+        action[3] = self._grab_effort()
         return action
 
     def _desired_pos(self, pos_curr: np.ndarray):
         move_precision = 0.12 if self.mode == "push" else 0.04
-
+        # if stucked/stopped(all subgoals reached), replan
         if self.replan_countdown <= 0 and self.replans > 0:
             grasp, transforms = self.calculate_next_plan()
             self.grasp = grasp[0]
@@ -296,19 +338,30 @@ class IsaacMyPolicyCL:
             if self.mode == "push":
                 self.init_grasp()
             return self.subgoals[0]
+        # place end effector above object
         if not self.grasped and np.linalg.norm(pos_curr[:2] - self.grasp[:2]) > 0.02:
+            print("placing above object")
             return self.grasp + np.array([0.0, 0.0, 0.2])
+        # drop end effector down on top of object
         if not self.grasped and abs(pos_curr[2] - self.grasp[2]) > 0.04:
+            print("dropping down on top of object")
             return self.grasp
+        # grab object (if in grasp mode)
         if not self.grasped and abs(pos_curr[2] - self.grasp[2]) <= 0.04:
-            print("grasped")
+            print("grabbing object")
             self.grasped = True
             return self.grasp
+        # move end effector to the current subgoal
         if self.subgoals and np.linalg.norm(pos_curr - self.subgoals[0]) > move_precision:
+            print("moving to current subgoal")
             return self.subgoals[0]
+        # if close enough to the current subgoal, move to the next subgoal
         if self.subgoals and len(self.subgoals) > 1:
             self.subgoals.pop(0)
+            print("moving to next subgoal")
+            print(self.subgoals[0])
             return self.subgoals[0]
+        print("executing subgoal")
         return self.subgoals[0] if self.subgoals else self.grasp
 
     def _grab_effort(self):

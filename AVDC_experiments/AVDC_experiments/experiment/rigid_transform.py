@@ -134,7 +134,6 @@ def solve_3d_rigid_tfm(points_1, points_2_uv, cmat, max_iter=50, early_stop_thre
     solution = Solver(points1_ext, points_2_uv, cmat, x0=np.zeros(6)).calc_solution()
     # if solution.fun < early_stop_threshold:
     if True:
-        print("here good")
         best_solution = solution
     # otherwise, run {max_iter} times and pick the best one
     else:

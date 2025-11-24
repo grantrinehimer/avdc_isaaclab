@@ -136,14 +136,27 @@ def get_bbox_keypoints(img_size, label, r=4):
             kps.append((x, y))
     return kps, ((x0+x1)/2, (y0+y1)/2)
 
+# def sample_with_binear(fmap, kp):
+#     max_x, max_y = fmap.shape[1] - 1, fmap.shape[0] - 1
+#     x0 = int(np.clip(np.floor(kp[0]), 0, max_x))
+#     y0 = int(np.clip(np.floor(kp[1]), 0, max_y))
+#     x1 = min(max_x, x0 + 1)
+#     y1 = min(max_y, y0 + 1)
+#     x = max(0.0, min(1.0, kp[0] - x0))
+#     y = max(0.0, min(1.0, kp[1] - y0))
+#     fmap_x0y0 = fmap[y0, x0]
+#     fmap_x1y0 = fmap[y0, x1]
+#     fmap_x0y1 = fmap[y1, x0]
+#     fmap_x1y1 = fmap[y1, x1]
+#     fmap_y0 = fmap_x0y0 * (1-x) + fmap_x1y0 * x
+#     fmap_y1 = fmap_x0y1 * (1-x) + fmap_x1y1 * x
+#     feature = fmap_y0 * (1-y) + fmap_y1 * y
+#     return feature
 def sample_with_binear(fmap, kp):
-    max_x, max_y = fmap.shape[1] - 1, fmap.shape[0] - 1
-    x0 = int(np.clip(np.floor(kp[0]), 0, max_x))
-    y0 = int(np.clip(np.floor(kp[1]), 0, max_y))
-    x1 = min(max_x, x0 + 1)
-    y1 = min(max_y, y0 + 1)
-    x = max(0.0, min(1.0, kp[0] - x0))
-    y = max(0.0, min(1.0, kp[1] - y0))
+    max_x, max_y = fmap.shape[1]-1, fmap.shape[0]-1
+    x0, y0 = int(kp[0]), int(kp[1])
+    x1, y1 = x0+1, y0+1
+    x, y = kp[0]-x0, kp[1]-y0
     fmap_x0y0 = fmap[y0, x0]
     fmap_x1y0 = fmap[y0, x1]
     fmap_x0y1 = fmap[y1, x0]
@@ -154,13 +167,10 @@ def sample_with_binear(fmap, kp):
     return feature
 
 def warp_kp_with_bilinear(flow, kp):
-    max_x, max_y = flow.shape[1] - 1, flow.shape[0] - 1
-    x0 = int(np.clip(np.floor(kp[0]), 0, max_x))
-    y0 = int(np.clip(np.floor(kp[1]), 0, max_y))
-    x1 = min(max_x, x0 + 1)
-    y1 = min(max_y, y0 + 1)
-    x = max(0.0, min(1.0, kp[0] - x0))
-    y = max(0.0, min(1.0, kp[1] - y0))
+    max_x, max_y = flow.shape[1]-1, flow.shape[0]-1
+    x0, y0 = int(kp[0]), int(kp[1])
+    x1, y1 = x0+1, y0+1
+    x, y = kp[0]-x0, kp[1]-y0
     flow_x0y0 = flow[y0, x0]
     flow_x1y0 = flow[y0, x1]
     flow_x0y1 = flow[y1, x0]
@@ -170,6 +180,24 @@ def warp_kp_with_bilinear(flow, kp):
     flow = flow_y0 * (1-y) + flow_y1 * y
     new_kp = (np.clip(kp[0]+flow[0], 0, max_x-1), np.clip(kp[1]+flow[1], 0, max_y-1))
     return new_kp
+
+# def warp_kp_with_bilinear(flow, kp):
+#     max_x, max_y = flow.shape[1] - 1, flow.shape[0] - 1
+#     x0 = int(np.clip(np.floor(kp[0]), 0, max_x))
+#     y0 = int(np.clip(np.floor(kp[1]), 0, max_y))
+#     x1 = min(max_x, x0 + 1)
+#     y1 = min(max_y, y0 + 1)
+#     x = max(0.0, min(1.0, kp[0] - x0))
+#     y = max(0.0, min(1.0, kp[1] - y0))
+#     flow_x0y0 = flow[y0, x0]
+#     flow_x1y0 = flow[y0, x1]
+#     flow_x0y1 = flow[y1, x0]
+#     flow_x1y1 = flow[y1, x1]
+#     flow_y0 = flow_x0y0 * (1-x) + flow_x1y0 * x
+#     flow_y1 = flow_x0y1 * (1-x) + flow_x1y1 * x
+#     flow = flow_y0 * (1-y) + flow_y1 * y
+#     new_kp = (np.clip(kp[0]+flow[0], 0, max_x-1), np.clip(kp[1]+flow[1], 0, max_y-1))
+#     return new_kp
 
 def sample_with_binear_v2(fmap, kp):
     max_x, max_y = fmap.shape[1]-1, fmap.shape[0]-1
@@ -298,11 +326,25 @@ def get_grasp(samples, depth, cmat, r=5):
     # print(grasp_2d)
     return to_3d_uvd(grasp_2d, [d], cmat)
 
+def get_grasp_v2(samples, depth, cmat, r=5):
+    def loss(i):
+        return np.linalg.norm(samples - samples[i], axis=1).sum()
+    grasp_2d = samples[np.argmin([loss(i) for i in range(len(samples))])]
+    neighbor_threshold = r
+    neighbors = samples[np.linalg.norm(samples - grasp_2d, axis=1) < neighbor_threshold]
+    neighbors_d = np.array([[sample_with_binear_v2(depth, kp)] for kp in neighbors])
+    d = np.median(neighbors_d)
+    # print(d)
+    # print(grasp_2d)
+    return to_3d_uvd(grasp_2d, [d], cmat)
+
 def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshold=0.5, rgd_tfm_tries=50, rgd_tfm_threshold=1e-3):
     transformss = []
     center_2ds = []
     sampless = []
     samples_2d = sample_from_mask(seg, 500)
+    print("samples_2d")
+    print(samples_2d)
     sampless.append(samples_2d)
     samples_3d = to_3d(samples_2d, depth, cmat)
     grasp = get_grasp(samples_2d, depth, cmat)
