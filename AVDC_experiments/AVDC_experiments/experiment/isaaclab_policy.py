@@ -226,7 +226,7 @@ class IsaacMyPolicyCL:
         return image, depth, seg, cmat
 
     def _load_diffusion_images(self, frame_0: np.ndarray) -> np.ndarray:
-        """Load cached diffusion frames and pad them to mirror pred_video output."""
+        """Load cached diffusion frames, center-crop to 128x128, then pad to mirror pred_video output."""
         if not self.diffusion_images_dir.exists():
             raise FileNotFoundError(f"Diffusion image directory '{self.diffusion_images_dir}' not found.")
 
@@ -236,30 +236,71 @@ class IsaacMyPolicyCL:
                 f"Expected exactly 8 diffusion frames in '{self.diffusion_images_dir}', found {len(image_paths)}."
             )
 
-        frames = []
-        for path in image_paths:
-            img = cv2.imread(str(path), cv2.IMREAD_COLOR)
-            if img is None:
-                raise FileNotFoundError(f"Failed to load diffusion frame '{path}'.")
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            if img.shape[:2] != (128, 128):
-                img = cv2.resize(img, (128, 128), interpolation=cv2.INTER_LINEAR)
-            frames.append(img)
-
-        frames_np = np.stack(frames, axis=0).astype(np.uint8)
-
-        original_shape = frame_0.shape
+        original_shape = frame_0.shape  # (H, W, C)
         center = (original_shape[1] // 2, original_shape[0] // 2)
         xpad = center[0] - 64
         ypad = center[1] - 64
+
         if xpad < 0 or ypad < 0:
             raise ValueError(
                 f"Cannot pad diffusion frames to match original shape {original_shape}; resolution too small."
             )
 
+        frames = []
+        for path in image_paths:
+            img = cv2.imread(str(path), cv2.IMREAD_COLOR)
+            if img is None:
+                raise FileNotFoundError(f"Failed to load diffusion frame '{path}'.")
+
+            # BGR -> RGB
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+            # Center-crop to 128x128 (no resizing / interpolation)
+            h, w = img.shape[:2]
+            if h < 128 or w < 128:
+                raise ValueError(
+                    f"Diffusion frame '{path}' is too small for a 128x128 center crop: got {w}x{h}."
+                )
+
+            top = (h - 128) // 2
+            left = (w - 128) // 2
+            bottom = top + 128
+            right = left + 128
+
+            img_cropped = img[top:bottom, left:right]
+
+            # Safety check
+            if img_cropped.shape[:2] != (128, 128):
+                raise RuntimeError(
+                    f"Center crop for '{path}' did not produce 128x128; got {img_cropped.shape[:2]}."
+                )
+
+            frames.append(img_cropped)
+
+        # Stack into (F, H, W, C) uint8
+        frames_np = np.stack(frames, axis=0).astype(np.uint8)
+
+        # Convert to (F, C, H, W)
         frames_chw = frames_np.transpose(0, 3, 1, 2)
-        frames_padded = np.pad(frames_chw, ((0, 0), (0, 0), (ypad, ypad), (xpad, xpad)), mode="constant")
+
+        # Pad back to original spatial resolution (same as pred_video)
+        frames_padded = np.pad(
+            frames_chw,
+            pad_width=((0, 0), (0, 0), (ypad, ypad), (xpad, xpad)),
+            mode="constant",
+        )
+
+        # Save debug images
+        debug_dir = Path("debug")
+        debug_dir.mkdir(parents=True, exist_ok=True)
+        for i in range(frames_padded.shape[0]):
+            frame = frames_padded[i].transpose(1, 2, 0)  # C, H, W -> H, W, C
+            # Convert RGB to BGR for OpenCV
+            frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+            cv2.imwrite(str(debug_dir / f"diffusion_padded_{i}.png"), frame_bgr)
+
         return frames_padded
+ 
 
     def calculate_next_plan(self):
         image, depth, seg, cmat = self._fetch_camera_observations()
@@ -329,7 +370,8 @@ class IsaacMyPolicyCL:
         return action
 
     def _desired_pos(self, pos_curr: np.ndarray):
-        move_precision = 0.12 if self.mode == "push" else 0.04
+        move_precision = 0.06
+        print(self.mode)
         # if stucked/stopped(all subgoals reached), replan
         if self.replan_countdown <= 0 and self.replans > 0:
             grasp, transforms = self.calculate_next_plan()
@@ -355,6 +397,8 @@ class IsaacMyPolicyCL:
         # move end effector to the current subgoal
         if self.subgoals and np.linalg.norm(pos_curr - self.subgoals[0]) > move_precision:
             print("moving to current subgoal")
+            print(self.subgoals[0])
+            print(np.linalg.norm(pos_curr - self.subgoals[0]))
             return self.subgoals[0]
         # if close enough to the current subgoal, move to the next subgoal
         if self.subgoals and len(self.subgoals) > 1:

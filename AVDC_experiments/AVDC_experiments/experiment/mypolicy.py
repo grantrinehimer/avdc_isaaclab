@@ -838,4 +838,4 @@ class MyPolicy_Flow(Policy):
         if self.grasped or self.mode == "push" or not self.grasped and np.linalg.norm(pos_curr[2] - self.grasp[2]) < 0.08:
             return 0.8
         else:
-            return -0.8
+            return -0.8lve

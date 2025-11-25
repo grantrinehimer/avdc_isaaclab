@@ -28,7 +28,7 @@ DEFAULT_FLOW_CKPT = (
 
 def _parse_args():
     parser = argparse.ArgumentParser(description="Play the AVDC diffusion policy inside Isaac Lab.")
-    parser.add_argument("--task", type=str, default="Isaac-Lift-Cube-Franka-Custom-IK-Rel-v0", help="Name of the task.")
+    parser.add_argument("--task", type=str, default="Isaac-Lift-Cube-Franka-IK-Rel-v0", help="Name of the task.")
     parser.add_argument(
         "--agent",
         type=str,

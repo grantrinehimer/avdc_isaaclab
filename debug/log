@@ -3,7 +3,7 @@
 [INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.ik_rel_env_cfg:FrankaCubeLiftEnvCfg
 [INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.agents.rsl_rl_ppo_cfg:LiftCubePPORunnerCfg
 Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/user.config.json'
-[Info] [carb] Logging to file: /home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20251124_123722.log
+[Info] [carb] Logging to file: /home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20251125_141205.log
 
 |---------------------------------------------------------------------------------------------|
 | Driver Version: 580.95.05     | Graphics API: Vulkan
@@ -21,32 +21,32 @@ Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaac
 | Processor: AMD Ryzen 7 3700X 8-Core Processor
 | Cores: 8 | Logical Cores: 16
 |---------------------------------------------------------------------------------------------|
-| Total Memory (MB): 32018 | Free Memory: 15895
+| Total Memory (MB): 32018 | Free Memory: 21790
 | Total Page/Swap (MB): 8191 | Free Page/Swap: 8191
 |---------------------------------------------------------------------------------------------|
-2025-11-24T17:37:23Z [1,019ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
-2025-11-24T17:37:25Z [2,204ms] [Warning] [omni.log] Source: omni.hydra was already registered.
-2025-11-24T17:37:25Z [2,549ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
-2025-11-24T17:37:25Z [2,786ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
-2025-11-24T17:37:27Z [5,083ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
-2025-11-24T17:37:28Z [5,421ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
-2025-11-24T17:37:28Z [5,421ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
-2025-11-24T17:37:28Z [5,422ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
-2025-11-24T17:37:30Z [7,802ms] [Warning] [omni.fabric.plugin] Warning: attribute viewportHandle not found for bucket id 9
+2025-11-25T19:12:06Z [1,002ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
+2025-11-25T19:12:07Z [2,079ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+2025-11-25T19:12:07Z [2,414ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
+2025-11-25T19:12:07Z [2,651ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+2025-11-25T19:12:10Z [4,898ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+2025-11-25T19:12:10Z [5,224ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
+2025-11-25T19:12:10Z [5,224ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
+2025-11-25T19:12:10Z [5,225ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+2025-11-25T19:12:12Z [7,515ms] [Warning] [omni.fabric.plugin] Warning: attribute viewportHandle not found for bucket id 9
 
-2025-11-24T17:37:41Z [18,324ms] [Warning] [omni.fabric.plugin] USD->Fabric: Unhandled array type string[]
-2025-11-24T17:37:41Z [18,328ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:reflection_roughness_constant)
-2025-11-24T17:37:41Z [18,328ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:ior_constant)
-2025-11-24T17:37:41Z [18,328ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:transmittance_color)
-2025-11-24T17:37:42Z [19,348ms] [Warning] [rtx.postprocessing.plugin] DLSS increasing input dimensions: Render resolution of (186, 139) is below minimal input resolution of 300.
-[INFO] IsaacLab logging to file: /tmp/isaaclab_2025-11-24_12-37-37.log
+2025-11-25T19:12:22Z [17,464ms] [Warning] [omni.fabric.plugin] USD->Fabric: Unhandled array type string[]
+2025-11-25T19:12:22Z [17,467ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:transmittance_color)
+2025-11-25T19:12:22Z [17,467ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:reflection_roughness_constant)
+2025-11-25T19:12:22Z [17,467ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:ior_constant)
+2025-11-25T19:12:23Z [18,464ms] [Warning] [rtx.postprocessing.plugin] DLSS increasing input dimensions: Render resolution of (186, 139) is below minimal input resolution of 300.
+[INFO] IsaacLab logging to file: /tmp/isaaclab_2025-11-25_14-12-19.log
 [INFO]: Base environment:
 	Environment device    : cuda:0
 	Environment seed      : 0
 	Physics step-size     : 0.01
 	Rendering step-size   : 0.02
 	Environment step-size : 0.02
-[INFO]: Time taken for scene creation : 2.028469 seconds
+[INFO]: Time taken for scene creation : 1.835754 seconds
 [INFO]: Scene manager:  <class InteractiveScene>
 	Number of environments: 1
 	Environment spacing   : 2.5
@@ -54,7 +54,7 @@ Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaac
 	Global prim paths     : []
 	Replicate physics     : True
 [INFO]: Starting the simulation. This may take a few seconds. Please wait...
-[INFO]: Time taken for simulation start : 2.537718 seconds
+[INFO]: Time taken for simulation start : 2.280473 seconds
 [INFO] Command Manager:  <CommandManager> contains 1 active terms.
 +------------------------------------------+
 |           Active Command Terms           |
@@ -169,154 +169,112 @@ points1_uv
 flow shape
 (240, 320, 2)
 flow
-[0.02676856 0.06878513 0.12239151]
-[ 0.00011575 -0.02427765]
+[0.09029419 0.25024381 7.71188134]
+[-0.67735964 -6.590851  ]
 point2_uv
-[148.85965879 144.03446945]
+[147.79529612 137.53967798]
 solution
-0.0021339451387216712
+0.029961437608390096
 flow shape
 (240, 320, 2)
 flow
-[0.02691204 0.06940139 0.09765019]
-[0.0061374  0.00349666]
+[0.04284148 0.0801754  6.28025588]
+[-0.02357352 -0.21917225]
 point2_uv
-[148.86634156 144.03551311]
+[146.9380052  130.00802441]
 solution
-9.132850322446373e-06
+0.0013751847264005246
 flow shape
 (240, 320, 2)
 flow
-[0.03056613 0.07237294 0.09142353]
-[0.00250503 0.00618334]
+[0.03430185 0.0742168  3.26500049]
+[0.00990223 0.00886577]
 point2_uv
-[148.86999754 144.04138204]
+[146.72806059 128.36028304]
 solution
-7.196097214556829e-06
+0.017529929576935332
 flow shape
 (240, 320, 2)
 flow
-[0.03304375 0.07280025 0.1152677 ]
-[ 0.00750686 -0.00616525]
+[0.05199517 0.14818463 6.29405955]
+[-0.01605017 -0.07288491]
 point2_uv
-[148.87458044 144.03517331]
+[146.89947683 122.49999679]
 solution
-1.0067652693734885e-06
+0.0005722202656042175
 flow shape
 (240, 320, 2)
 flow
-[0.02262202 0.05461685 0.07795466]
-[-0.00578961  0.00561478]
+[0.04731898 0.10949377 9.3208712 ]
+[ 0.01369477 -0.03394561]
 point2_uv
-[148.87097008 144.04187948]
+[151.57751734 114.67026918]
 solution
-9.095948856341352e-07
+0.034531502471129016
 flow shape
 (240, 320, 2)
 flow
-[0.03682276 0.10259647 0.13695988]
-[ 0.0107687  -0.01189021]
+[0.03397079 0.14264222 0.46297353]
+[0.00350879 0.03334969]
 point2_uv
-[148.88184245 144.02941033]
+[148.73454197 114.52293554]
 solution
-2.4836190981591955e-06
+0.002847716251365151
 flow shape
 (240, 320, 2)
 flow
-[0.02030662 0.07070757 0.10520979]
-[0.00570983 0.00800462]
+[0.04358498 0.13076818 0.19249734]
+[-0.01709907  0.02977158]
 point2_uv
-[148.88546083 144.03735215]
+[148.69382908 114.55500893]
 solution
-1.441958944248256e-06
+4.8603654409618e-05
 grasp
 [[0.51566776 0.0034284  0.06644982]]
 transform
-[[ 9.99972597e-01 -6.73785692e-03  3.06705859e-03 -1.88803307e-03]
- [ 6.74057716e-03  9.99976897e-01 -8.77447846e-04 -4.06012029e-03]
- [-3.06107561e-03  8.98097546e-04  9.99994912e-01  6.33490804e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99632041  0.07192881 -0.04660353  0.06921092]
+ [-0.0617707   0.9795802   0.19132959  0.03407174]
+ [ 0.05941401 -0.18774684  0.98041884  0.05332468]
+ [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999906e-01  4.10060974e-04 -1.38139532e-04  5.17186042e-05]
- [-4.10023710e-04  9.99999880e-01  2.69679658e-04  2.49630936e-04]
- [ 1.38250100e-04 -2.69622992e-04  9.99999954e-01 -4.38102706e-05]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99984987  0.01031682  0.01392098  0.01748101]
+ [-0.01079878  0.9993289   0.03500198  0.00147738]
+ [-0.01355053 -0.03514705  0.99929028  0.05603576]
+ [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999940e-01  2.40243266e-04 -2.48391701e-04 -1.52065192e-06]
- [-2.40231850e-04  9.99999970e-01  4.59865844e-05  1.36681273e-04]
- [ 2.48402741e-04 -4.59269101e-05  9.99999968e-01 -1.75923697e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99996324  0.00697232  0.0049907  -0.01217584]
+ [-0.00720184  0.99884279  0.04755219 -0.01042693]
+ [-0.00465337 -0.04758638  0.99885629  0.00800296]
+ [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999998e-01  2.75970610e-05 -5.86999119e-05 -4.90354313e-04]
- [-2.75935568e-05  9.99999998e-01  5.96963574e-05 -1.24046161e-04]
- [ 5.87015592e-05 -5.96947376e-05  9.99999996e-01 -2.89257178e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99966963  0.00568879  0.02506537 -0.03115538]
+ [-0.00616901  0.9997981   0.01912322 -0.00915745]
+ [-0.02495152 -0.01927153  0.99950289  0.0395104 ]
+ [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999906e-01  4.15674987e-04 -1.20102282e-04 -2.98341151e-04]
- [-4.15640659e-04  9.99999873e-01  2.85703233e-04  6.48573566e-05]
- [ 1.20221026e-04 -2.85653287e-04  9.99999952e-01 -3.07037619e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99564879  0.0378808   0.08513829 -0.43044857]
+ [-0.0390336   0.99916684  0.01191614 -0.08353566]
+ [-0.08461596 -0.01518755  0.99629789 -0.09915051]
+ [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999999e-01  3.54011362e-05 -2.63708224e-05  1.48253516e-04]
- [-3.54020423e-05  9.99999999e-01 -3.43594402e-05  1.43491458e-04]
- [ 2.63696060e-05  3.43603737e-05  9.99999999e-01  1.82765682e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99987435  0.01203705  0.01031449 -0.08781626]
+ [-0.01256528  0.99852719  0.05277849 -0.05541639]
+ [-0.009664   -0.05290146  0.99855297 -0.04793056]
+ [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999992e-01  4.61100831e-06 -1.22922295e-04 -5.57819324e-04]
- [-4.57294567e-06  9.99999952e-01  3.09646423e-04 -1.83232396e-04]
- [ 1.22923716e-04 -3.09645858e-04  9.99999945e-01 -4.72353031e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99999726 -0.00157064 -0.00173506  0.00992547]
+ [ 0.00156223  0.99998705 -0.00484255  0.00316166]
+ [ 0.00174264  0.00483983  0.99998677  0.00526127]
+ [ 0.          0.          0.          1.        ]]
 subgoals
-[array([0.51566776, 0.0034284 , 0.06644982]), array([0.5139463 , 0.0027858 , 0.06550755]), array([0.51399007, 0.00284236, 0.06553404]), array([0.51397292, 0.00285858, 0.06548566]), array([0.5134788 , 0.00272426, 0.0652264 ]), array([0.51317371, 0.00259433, 0.06498031]), array([0.51332034, 0.00271742, 0.0651767 ]), array([0.51275452, 0.00255202, 0.0647666 ])]
+[array([0.51566776, 0.0034284 , 0.06644982]), array([0.58013103, 0.0182908 , 0.14846755]), array([0.59978047, 0.01868785, 0.19589399]), array([0.58869052, 0.01323497, 0.19999262]), array([0.56242883, 0.00426771, 0.22445982]), array([ 0.14880481, -0.09855043,  0.07682305]), array([ 0.06057599, -0.15163684,  0.03255674]), array([ 0.07068297, -0.14853625,  0.03718925])]
+grasp
 placing above object
+grasp
 placing above object
+grasp
 dropping down on top of object
+grasp
 grabbing object
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-moving to current subgoal
-[INFO] Rollout finished after 50 steps (39.87s).
-2025-11-24T17:37:48Z [26,069ms] [Warning] [carb] Client gpu.foundation.plugin has acquired [gpu::unstable::IMemoryBudgetManagerFactory v0.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
+grasp
+moving to next subgoal2025-11-25T19:12:30Z [24,929ms] [Warning] [carb] Client gpu.foundation.plugin has acquired [gpu::unstable::IMemoryBudgetManagerFactory v0.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
