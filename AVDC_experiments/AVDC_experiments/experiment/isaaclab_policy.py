@@ -307,8 +307,8 @@ class IsaacMyPolicyCL:
         self._output_depth_image(depth)
 
         start = time.time()
-        # images = pred_video(self.video_model, image, self.task_prompt)
-        images = self._load_diffusion_images(image)
+        images = pred_video(self.video_model, image, self.task_prompt)
+        # images = self._load_diffusion_images(image)
         time_vid = time.time() - start
         # print(f"video model to {self.video_model.model.device}")
         # if hasattr(self.video_model, "text_encoder"):
@@ -316,7 +316,7 @@ class IsaacMyPolicyCL:
         #     self.video_model.text_encoder.to("cpu")
 
         start = time.time()
-        _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device="cuda:0")
+        _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device="cuda:1")
 
         self._output_flow_image(flow_images)
         time_flow = time.time() - start

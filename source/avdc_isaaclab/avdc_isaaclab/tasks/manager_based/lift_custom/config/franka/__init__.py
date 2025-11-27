@@ -14,6 +14,57 @@ from . import agents
 # Joint Position Control
 ##
 
+"""Henry is using these tasks to generate a Cube Lift dataset."""
+""" ####################################################################################### """
+
+# With-camera versions used for recording. Loaded by gen_vid_dataset.py
+
+gym.register(
+    id="Isaac-Lift-Cube-Franka-Dataset-Randomized-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.joint_pos_env_cfg:RandomizedFrankaCubeLiftEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:RandomizedLiftCubePPORunnerCfg",
+    },
+    disable_env_checker=True,
+)
+
+gym.register(
+    id="Isaac-Lift-Cube-Franka-Dataset-Deterministic-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.joint_pos_env_cfg:DeterministicFrankaCubeLiftEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:DeterministicLiftCubePPORunnerCfg",
+    },
+    disable_env_checker=True,
+)
+
+# Cameraless versions used to train the PPO agent. Not to be used with gen_vid_dataset.py
+# These share the same PPO Runner configs as the with-camera tasks, so the default 
+# checkpoint that gets loaded should be the correct one.
+
+gym.register(
+    id="Isaac-Lift-Cube-Franka-Dataset-Cameraless-Randomized-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.joint_pos_env_cfg:CameralessRandomizedFrankaCubeLiftEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:RandomizedLiftCubePPORunnerCfg",
+    },
+    disable_env_checker=True,
+)
+
+gym.register(
+    id="Isaac-Lift-Cube-Franka-Dataset-Cameraless-Deterministic-v0",
+    entry_point="isaaclab.envs:ManagerBasedRLEnv",
+    kwargs={
+        "env_cfg_entry_point": f"{__name__}.joint_pos_env_cfg:CameralessDeterministicFrankaCubeLiftEnvCfg",
+        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:DeterministicLiftCubePPORunnerCfg",
+    },
+    disable_env_checker=True,
+)
+""" ####################################################################################### """
+
+
 gym.register(
     id="Isaac-Lift-Cube-Franka-v0",
     entry_point="isaaclab.envs:ManagerBasedRLEnv",

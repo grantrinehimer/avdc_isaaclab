@@ -53,13 +53,13 @@ def _parse_args():
     parser.add_argument(
         "--video_ckpt_dir",
         type=str,
-        default=DEFAULT_VIDEO_DIR,
+        default='AVDC_experiments/AVDC_experiments/ckpts',
         help="Directory that stores diffusion checkpoints (expects model-<milestone>.pt).",
     )
     parser.add_argument(
         "--video_ckpt_path",
         type=str,
-        default=None,
+        default='AVDC_experiments/AVDC_experiments/ckpts/model-24.pt',
         help="Optional explicit checkpoint file path. Overrides --video_ckpt_dir and --video_milestone.",
     )
     parser.add_argument("--video_milestone", type=int, default=24, help="Checkpoint milestone index to load.")
@@ -164,13 +164,13 @@ def main():
 
         obs, _ = env.reset()
 
-        # video_model = load_diffusion_video_model(
-        #     args_cli._video_ckpt_dir,
-        #     args_cli._video_milestone,
-        #     flow=args_cli.video_flow,
-        #     timestep=args_cli.video_timestep,
-        # )
-        video_model = None
+        video_model = load_diffusion_video_model(
+            args_cli._video_ckpt_dir,
+            args_cli._video_milestone,
+            flow=args_cli.video_flow,
+            timestep=args_cli.video_timestep,
+        )
+        # video_model = None
         flow_model = get_flow_model(checkpoint_path=args_cli.flow_checkpoint)
 
         policy_cfg = DiffusionPolicyConfig(

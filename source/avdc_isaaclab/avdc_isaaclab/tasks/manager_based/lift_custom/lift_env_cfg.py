@@ -32,6 +32,7 @@ from . import mdp
 @configclass
 class ObjectTableSceneCfg(InteractiveSceneCfg):
     """Configuration for the lift scene with a robot and a object.
+    THIS IS THE DETERMINISTIC VERSION THAT YOU (Grant and Aarush) HAVE BEEN WORKING ON.
     This is the abstract base implementation, the exact scene is defined in the derived classes
     which need to set the target object, robot and end-effector frames
     """
@@ -92,7 +93,7 @@ class ObjectTableSceneCfg(InteractiveSceneCfg):
 
 
 @configclass
-class CommandsCfg:
+class DeterministicCommandsCfg:
     """Command terms for the MDP."""
 
     object_pose = mdp.UniformPoseCommandCfg(
@@ -105,7 +106,22 @@ class CommandsCfg:
         #     pos_x=(0.4, 0.6), pos_y=(-0.25, 0.25), pos_z=(0.25, 0.5), roll=(0.0, 0.0), pitch=(0.0, 0.0), yaw=(0.0, 0.0)
         # ),
         ranges=mdp.UniformPoseCommandCfg.Ranges(
-            pos_x=(0.5, 0.5), pos_y=(0, 0), pos_z=(0.25, 0.25), roll=(0.0, 0.0), pitch=(0.0, 0.0), yaw=(0.0, 0.0)
+            pos_x=(0.5, 0.5), pos_y=(0.0, 0.0), pos_z=(0.25, 0.25), roll=(0.0, 0.0), pitch=(0.0, 0.0), yaw=(0.0, 0.0)
+        ),
+    )
+
+
+@configclass
+class RandomizedCommandsCfg:
+    """Command terms for the MDP."""
+
+    object_pose = mdp.UniformPoseCommandCfg(
+        asset_name="robot",
+        body_name=MISSING,  # will be set by agent env cfg
+        resampling_time_range=(5.0, 5.0),
+        debug_vis=True,
+        ranges=mdp.UniformPoseCommandCfg.Ranges(
+            pos_x=(0.4, 0.6), pos_y=(-0.25, 0.25), pos_z=(0.25, 0.5), roll=(0.0, 0.0), pitch=(0.0, 0.0), yaw=(0.0, 0.0)
         ),
     )
 
@@ -142,7 +158,7 @@ class ObservationsCfg:
 
 
 @configclass
-class EventCfg:
+class DeterministicEventCfg:
     """Configuration for events."""
 
     reset_all = EventTerm(func=mdp.reset_scene_to_default, mode="reset")
@@ -163,6 +179,24 @@ class EventCfg:
     #     mode="reset",
     #     params={"asset_cfg": SceneEntityCfg("object", body_names="Object")},
     # )
+
+
+@configclass
+class RandomizedEventCfg:
+    # default from the Franka cube lift task.
+    """Configuration for events."""
+
+    reset_all = EventTerm(func=mdp.reset_scene_to_default, mode="reset")
+
+    reset_object_position = EventTerm(
+        func=mdp.reset_root_state_uniform,
+        mode="reset",
+        params={
+            "pose_range": {"x": (-0.1, 0.1), "y": (-0.25, 0.25), "z": (0.0, 0.0)},
+            "velocity_range": {},
+            "asset_cfg": SceneEntityCfg("object", body_names="Object"),
+        },
+    )
 
 
 @configclass
@@ -223,6 +257,8 @@ class CurriculumCfg:
 # Environment configuration
 ##
 
+"""Grant and Aarush, this is what you guys have been using. 
+Henry didn't touch it except for renaming the command manager cfg and the event manager cfg to "deterministic"."""
 
 @configclass
 class LiftEnvCfg(ManagerBasedRLEnvCfg):
@@ -234,11 +270,11 @@ class LiftEnvCfg(ManagerBasedRLEnvCfg):
     # Basic settings
     observations: ObservationsCfg = ObservationsCfg()
     actions: ActionsCfg = ActionsCfg()
-    commands: CommandsCfg = CommandsCfg()
+    commands: DeterministicCommandsCfg = DeterministicCommandsCfg()
     # MDP settings
     rewards: RewardsCfg = RewardsCfg()
     terminations: TerminationsCfg = TerminationsCfg()
-    events: EventCfg = EventCfg()
+    events: DeterministicEventCfg = DeterministicEventCfg()
     curriculum: CurriculumCfg = CurriculumCfg()
 
     def __post_init__(self):
@@ -262,4 +298,45 @@ class LiftEnvCfg(ManagerBasedRLEnvCfg):
             self.scene.overhead_camera.width = width
             self.scene.overhead_camera.height = height
         # make sure sensor outputs are refreshed after resets
-        self.num_rerenders_on_reset = max(1, self.num_rerenders_on_reset)
+        # self.num_rerenders_on_reset = max(1, self.num_rerenders_on_reset)
+
+
+"""Henry made this, it is randomized like the base Franka cube lift task."""
+
+class RandomizedLiftEnvCfg(ManagerBasedRLEnvCfg):
+
+    # Scene settings
+    scene: ObjectTableSceneCfg = ObjectTableSceneCfg(num_envs=4096, env_spacing=2.5)
+    camera_resolution: tuple[int, int] = (320, 240)
+    # Basic settings
+    observations: ObservationsCfg = ObservationsCfg()
+    actions: ActionsCfg = ActionsCfg()
+    commands: RandomizedCommandsCfg = RandomizedCommandsCfg()
+    # MDP settings
+    rewards: RewardsCfg = RewardsCfg()
+    terminations: TerminationsCfg = TerminationsCfg()
+    events: RandomizedEventCfg = RandomizedEventCfg()
+    curriculum: CurriculumCfg = CurriculumCfg()
+
+    def __post_init__(self):
+        """Post initialization."""
+        # general settings
+        self.decimation = 2
+        self.episode_length_s = 20
+        # simulation settings
+        self.sim.dt = 0.01  # 100Hz
+        self.sim.render_interval = self.decimation
+
+        self.sim.physx.bounce_threshold_velocity = 0.2
+        self.sim.physx.bounce_threshold_velocity = 0.01
+        self.sim.physx.gpu_found_lost_aggregate_pairs_capacity = 1024 * 1024 * 4
+        self.sim.physx.gpu_total_aggregate_pairs_capacity = 16 * 1024
+        self.sim.physx.friction_correlation_distance = 0.00625
+
+        # ensure camera resolution can be controlled from env cfg
+        if hasattr(self.scene, "overhead_camera") and self.scene.overhead_camera is not None:
+            width, height = self.camera_resolution
+            self.scene.overhead_camera.width = width
+            self.scene.overhead_camera.height = height
+        # make sure sensor outputs are refreshed after resets
+        # self.num_rerenders_on_reset = max(1, self.num_rerenders_on_reset)

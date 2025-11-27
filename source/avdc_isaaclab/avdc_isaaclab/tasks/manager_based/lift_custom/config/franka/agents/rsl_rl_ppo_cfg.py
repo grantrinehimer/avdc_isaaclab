@@ -36,3 +36,12 @@ class LiftCubePPORunnerCfg(RslRlOnPolicyRunnerCfg):
         desired_kl=0.01,
         max_grad_norm=1.0,
     )
+
+# Henry made these just so the checkpoints get saved to unique folders.
+@configclass
+class RandomizedLiftCubePPORunnerCfg(LiftCubePPORunnerCfg):
+    experiment_name = "franka_lift_randomized"
+
+@configclass
+class DeterministicLiftCubePPORunnerCfg(LiftCubePPORunnerCfg):
+    experiment_name = "franka_lift_deterministic"
