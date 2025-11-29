@@ -177,7 +177,7 @@ def main():
             camera_name=args_cli.camera_sensor,
             resolution=(args_cli.camera_width, args_cli.camera_height),
             plan_timeout=args_cli.plan_timeout,
-            max_replans=0,
+            max_replans=5,
             seg_ids=[2],
             target_terms=(args_cli.target_label,) if args_cli.target_label else ("Object",),
         )

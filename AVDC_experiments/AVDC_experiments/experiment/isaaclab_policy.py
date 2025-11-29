@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import time
 import warnings
 from dataclasses import dataclass
@@ -308,6 +309,19 @@ class IsaacMyPolicyCL:
 
         start = time.time()
         images = pred_video(self.video_model, image, self.task_prompt)
+        save_generated_path = 'AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated'
+        for img in images:
+            files = os.listdir(save_generated_path)
+            if len(files) == 0:
+                i = 0
+            else:
+                nums = sorted([int(os.path.splitext(os.path.basename(f))[0]) for f in files])
+                i = nums[-1] + 1
+
+            print(np.transpose(img, (1,2,0)).shape)
+            print(f'saving to {os.path.join(save_generated_path, f"{i}.png")}')
+            cv2.imwrite(os.path.join(save_generated_path, f'{i}.png'), np.transpose(img, (1,2,0)))
+
         # images = self._load_diffusion_images(image)
         time_vid = time.time() - start
         # print(f"video model to {self.video_model.model.device}")
@@ -374,6 +388,7 @@ class IsaacMyPolicyCL:
         print(self.mode)
         # if stucked/stopped(all subgoals reached), replan
         if self.replan_countdown <= 0 and self.replans > 0:
+            print('Would have replanned at this point')
             grasp, transforms = self.calculate_next_plan()
             self.grasp = grasp[0]
             self.subgoals = self.calc_subgoals(self.grasp, transforms)
