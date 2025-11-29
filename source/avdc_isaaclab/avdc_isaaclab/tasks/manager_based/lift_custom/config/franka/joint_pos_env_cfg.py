@@ -91,7 +91,7 @@ class RandomizedFrankaCubeLiftEnvCfg(RandomizedLiftEnvCfg):
 
         # Since this is used for recording only, reset the task more often. 
         # Produces more concise output videos for training the diffusion model.
-        self.episode_length_s = 2
+        self.episode_length_s = 2.0
 
         # Set Franka as robot
         self.scene.robot = FRANKA_PANDA_CFG.replace(prim_path="{ENV_REGEX_NS}/Robot")
@@ -154,7 +154,7 @@ class DeterministicFrankaCubeLiftEnvCfg(FrankaCubeLiftEnvCfg):
 
         # Since this is used for recording only, reset the task more often. 
         # Produces more concise output videos for training the diffusion model.
-        self.episode_length_s = 2
+        self.episode_length_s = 2.0
 
 @configclass
 class CameralessRandomizedFrankaCubeLiftEnvCfg(RandomizedFrankaCubeLiftEnvCfg):

@@ -244,8 +244,8 @@ class MySeqDatasetMW(SequentialDataset):
         print("Done")
 
 ### Randomly sample, from any intermediate to the last frame
-# included_tasks = ["door-open", "door-close", "basketball", "shelf-place", "button-press", "button-press-topdown", "faucet-close", "faucet-open", "handle-press", "hammer", "assembly"]
-# included_idx = [i for i in range(5)]
+included_tasks = [f"pos{i:03d}" for i in range(27)]
+included_idx = [i for i in range(8)]
 class SequentialDatasetv2(Dataset):
     def __init__(self, path="../datasets/valid", sample_per_seq=7, target_size=(128, 128), frameskip=None, randomcrop=False):
         print("Preparing dataset...")
@@ -253,17 +253,17 @@ class SequentialDatasetv2(Dataset):
 
         self.frame_skip = frameskip
 
-        sequence_dirs = glob(f"{path}/**/isaaclab_dataset/*/*/*/", recursive=True)
+        sequence_dirs = glob(f"{path}/pos*/*/", recursive=True)
         self.tasks = []
         self.sequences = []
         for seq_dir in sequence_dirs:
-            task = seq_dir.split("/")[-4]
+            task = seq_dir.split("/")[-3]
             seq_id= int(seq_dir.split("/")[-2])
-            # if task not in included_tasks or seq_id not in included_idx:
-            #     continue
+            if task not in included_tasks or seq_id not in included_idx:
+                continue
             seq = sorted(glob(f"{seq_dir}*.png"), key=lambda x: int(x.split("/")[-1].rstrip(".png")))
             self.sequences.append(seq)
-            self.tasks.append(seq_dir.split("/")[-4].replace("-", " "))
+            self.tasks.append(seq_dir.split("/")[-3].replace("-", " "))
     
         if randomcrop:
             self.transform = video_transforms.Compose([

@@ -113,13 +113,12 @@ class DeterministicCommandsCfg:
 
 @configclass
 class RandomizedCommandsCfg:
-    """Command terms for the MDP."""
-
+    """The y-axis will be discretized uniformly into n_commands bins"""
     object_pose = mdp.UniformPoseCommandCfg(
         asset_name="robot",
         body_name=MISSING,  # will be set by agent env cfg
         resampling_time_range=(5.0, 5.0),
-        debug_vis=True,
+        debug_vis=False,
         ranges=mdp.UniformPoseCommandCfg.Ranges(
             pos_x=(0.4, 0.6), pos_y=(-0.25, 0.25), pos_z=(0.25, 0.5), roll=(0.0, 0.0), pitch=(0.0, 0.0), yaw=(0.0, 0.0)
         ),
