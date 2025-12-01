@@ -209,9 +209,9 @@ def main():
             for sub in range(repeat):
                 obs, _, terminated, truncated, info = env.step(env_action)
 
-            if args_cli.save_video and len(frames) < args_cli.video_length:
-                frame = isaac_utils.get_camera_frame(env.unwrapped, args_cli.camera_sensor, policy.cfg.env_index)["rgb"]
-                frames.append(frame.copy())
+                if args_cli.save_video and len(frames) < args_cli.video_length:
+                    frame = isaac_utils.get_camera_frame(env.unwrapped, args_cli.camera_sensor, policy.cfg.env_index)["rgb"]
+                    frames.append(frame.copy())
 
             def _any_flag(value):
                 if value is None:
