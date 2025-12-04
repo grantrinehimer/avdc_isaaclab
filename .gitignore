@@ -61,8 +61,9 @@ _build
 # Pre-Trained Checkpoints
 /.pretrained_checkpoints/
 
-# Teleop Recorded Dataset
+# Recorded Dataset
 /datasets/
+AVDC/datasets/isaaclab
 
 # Tests
 tests/
