@@ -149,6 +149,7 @@ def main():
 
     import isaaclab_tasks  # noqa: F401
     import avdc_isaaclab.tasks  # noqa: F401
+    print("here")
 
     @hydra_task_config(args_cli.task, args_cli.agent)
     def _run(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, _agent_cfg):
@@ -164,22 +165,26 @@ def main():
 
         obs, _ = env.reset()
 
-        video_model = load_diffusion_video_model(
-            args_cli._video_ckpt_dir,
-            args_cli._video_milestone,
-            flow=args_cli.video_flow,
-            timestep=args_cli.video_timestep,
-        )
-        # video_model = None
+        # video_model = load_diffusion_video_model(
+        #     args_cli._video_ckpt_dir,
+        #     args_cli._video_milestone,
+        #     flow=args_cli.video_flow,
+        #     timestep=args_cli.video_timestep,
+        # )
+        video_model = None
         flow_model = get_flow_model(checkpoint_path=args_cli.flow_checkpoint)
 
         policy_cfg = DiffusionPolicyConfig(
             camera_name=args_cli.camera_sensor,
             resolution=(args_cli.camera_width, args_cli.camera_height),
             plan_timeout=args_cli.plan_timeout,
-            max_replans=5,
+            max_replans=args_cli.max_replans,
+            hand_body_name="panda_hand" if ("Franka" in args_cli.task) else "ee_link",
+            mode="grasp" if ("Franka" in args_cli.task) else "suction",
             seg_ids=[2],
             target_terms=(args_cli.target_label,) if args_cli.target_label else ("Object",),
+            # Sunction works better with a longer grasp wait
+            grasp_wait=0 if ("Franka" in args_cli.task) else 10
         )
         policy = IsaacMyPolicyCL(
             env.unwrapped,
@@ -196,15 +201,17 @@ def main():
         video_dir = None
         start_time = time.time()
         for step in range(1500):
-            repeat = 20
+            repeat = 1
             action = policy.get_action(obs)
             env_action = torch.as_tensor(action[None, :], device=env.unwrapped.device)
+            print("action")
+            print(env_action)
             for sub in range(repeat):
                 obs, _, terminated, truncated, info = env.step(env_action)
 
-            if args_cli.save_video and len(frames) < args_cli.video_length:
-                frame = isaac_utils.get_camera_frame(env.unwrapped, args_cli.camera_sensor, policy.cfg.env_index)["rgb"]
-                frames.append(frame.copy())
+                if args_cli.save_video and len(frames) < args_cli.video_length:
+                    frame = isaac_utils.get_camera_frame(env.unwrapped, args_cli.camera_sensor, policy.cfg.env_index)["rgb"]
+                    frames.append(frame.copy())
 
             def _any_flag(value):
                 if value is None:

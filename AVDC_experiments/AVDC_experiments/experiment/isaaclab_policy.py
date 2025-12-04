@@ -53,6 +53,8 @@ class DiffusionPolicyConfig:
     hand_body_name: str = "panda_hand"
     gripper_close_value: float = -1.0
     gripper_open_value: float = 1.0
+    mode: str = "grasp"
+    grasp_wait: int = 0
 
 
 class IsaacMyPolicyCL:
@@ -70,6 +72,7 @@ class IsaacMyPolicyCL:
         debug: bool = False,
     ):
         self.env = env
+        self.mode = config.mode
         self.task_prompt = task_prompt
         self.video_model = video_model
         self.flow_model = flow_model
@@ -93,10 +96,19 @@ class IsaacMyPolicyCL:
         frame = isaac_utils.get_camera_frame(env, self.camera_name, self.env_index)
         print("camera pos_w:", frame["position"])
         self.robot = self.scene["robot"]
-        hand_ids, _ = self.robot.find_bodies(config.hand_body_name)
-        if len(hand_ids) == 0:
-            raise ValueError(f"Unable to resolve body named '{config.hand_body_name}'.")
-        self.hand_body_id = hand_ids[0]
+        if self.mode == "grasp":
+            hand_ids, _ = self.robot.find_bodies(config.hand_body_name)
+            if len(hand_ids) == 0:
+                raise ValueError(f"Unable to resolve body named '{config.hand_body_name}'.")
+            self.hand_body_id = hand_ids[0]
+        
+        if self.mode == "suction":
+            self.ee_sensor = self.scene["ee_frame"]
+            tip_ids, _ = self.ee_sensor.find_bodies("end_effector")  # matches FrameCfg.name
+            if not tip_ids:
+                raise RuntimeError("Unable to resolve suction_tip frame.")
+            self.suction_tip_frame_id = tip_ids[0]
+
 
         self.last_pos = self._current_hand_pos()
         self.replans = self.max_replans + 1
@@ -105,18 +117,25 @@ class IsaacMyPolicyCL:
 
         self.grasp = np.zeros(3)
         self.subgoals: list[np.ndarray] = []
-        self.mode = "grasp"
+
         self.grasped = False
         self.debug = debug
-
+        # Suncti
+        self.grasp_wait = config.grasp_wait
+        self.grasp_count = 0
         self._initialize_plan()
 
     @property
     def action_dim(self) -> int:
-        return 4  # 6D pose command + binary gripper
+        return 4 if self.mode == "grasp" else 7
 
     def _current_hand_pos(self) -> np.ndarray:
-        pos = self.robot.data.body_pos_w[self.env_index, self.hand_body_id]
+        if self.mode == "grasp":
+            pos = self.robot.data.body_pos_w[self.env_index, self.hand_body_id]
+        if self.mode == "suction":
+            pos = self.ee_sensor.data.target_pos_w[self.env_index, self.suction_tip_frame_id]
+            print("current hand pos")
+            print(pos)
         if isinstance(pos, torch.Tensor):
             pos = pos.detach().cpu().numpy()
         return np.asarray(pos, dtype=np.float32)
@@ -140,7 +159,6 @@ class IsaacMyPolicyCL:
         #     return subgoals
         # self.mode = "grasp"
         # return [s - np.array([0, 0, 0.03]) for s in subgoals]
-        self.mode = "grasp"
         return subgoals
 
     def calc_subgoals(self, grasp, transforms):
@@ -308,7 +326,8 @@ class IsaacMyPolicyCL:
         self._output_depth_image(depth)
 
         start = time.time()
-        images = pred_video(self.video_model, image, self.task_prompt)
+        # images = pred_video(self.video_model, image, self.task_prompt)
+        images = self._load_diffusion_images(image)
         save_generated_path = 'AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated'
         for img in images:
             files = os.listdir(save_generated_path)
@@ -330,7 +349,7 @@ class IsaacMyPolicyCL:
         #     self.video_model.text_encoder.to("cpu")
 
         start = time.time()
-        _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device="cuda:1")
+        _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device="cuda:0")
 
         self._output_flow_image(flow_images)
         time_flow = time.time() - start
@@ -380,11 +399,12 @@ class IsaacMyPolicyCL:
 
         action = np.zeros(self.action_dim, dtype=np.float32)
         action[:3] = delta_pos
-        action[3] = self._grab_effort()
+        action[-1] = self._grab_effort()
         return action
 
     def _desired_pos(self, pos_curr: np.ndarray):
         move_precision = 0.06
+        grasp_precision = 0.01 if self.mode == "suction" else 0.06
         print(self.mode)
         # if stucked/stopped(all subgoals reached), replan
         if self.replan_countdown <= 0 and self.replans > 0:
@@ -401,13 +421,17 @@ class IsaacMyPolicyCL:
             print("placing above object")
             return self.grasp + np.array([0.0, 0.0, 0.2])
         # drop end effector down on top of object
-        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) > 0.06:
+        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) > grasp_precision:
             print("dropping down on top of object")
-            return self.grasp
+            return self.grasp - np.array([0.0, 0.0, 0.01]) if self.mode == "suction" else self.grasp
         # grab object (if in grasp mode)
-        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) <= 0.06:
+        if not self.grasped and abs(pos_curr[2] - self.grasp[2]) <= grasp_precision:
             print("grabbing object")
             self.grasped = True
+            return self.grasp - np.array([0.0, 0.0, 0.01]) if self.mode == "suction" else self.grasp
+        if self.grasped and self.grasp_count < self.grasp_wait:
+            print("grasp waiting")
+            self.grasp_count += 1
             return self.grasp
         # move end effector to the current subgoal
         if self.subgoals and np.linalg.norm(pos_curr - self.subgoals[0]) > move_precision:
