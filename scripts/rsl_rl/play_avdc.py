@@ -16,6 +16,7 @@ import cli_args  # isort: skip
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_VIDEO_DIR = (REPO_ROOT / "AVDC" / "results" / "mw").as_posix()
+DEFAULT_LOCOTRACK_ROOT = (REPO_ROOT / "locotrack" / "locotrack_pytorch").as_posix()
 DEFAULT_FLOW_CKPT = (
     REPO_ROOT
     / "AVDC_experiments"
@@ -66,10 +67,67 @@ def _parse_args():
     parser.add_argument("--video_timestep", type=int, default=100, help="Sampling timesteps for diffusion sampling.")
     parser.add_argument("--video_flow", action="store_true", help="Load the flow-prediction diffusion model variant.")
     parser.add_argument(
+        "--diffusion_source",
+        type=str,
+        default="images",
+        choices=["images", "model"],
+        help="Use 'images' to load cached diffusion frames or 'model' to run the diffusion video model.",
+    )
+    parser.add_argument(
         "--flow_checkpoint",
         type=str,
         default=DEFAULT_FLOW_CKPT,
         help="Path to the pretrained GMFlow checkpoint.",
+    )
+    parser.add_argument(
+        "--motion_backend",
+        type=str,
+        default="flow",
+        choices=["flow", "locotrack"],
+        help="Motion estimation backend to drive planning.",
+    )
+    parser.add_argument(
+        "--locotrack_root",
+        type=str,
+        default=DEFAULT_LOCOTRACK_ROOT,
+        help="Path to the LocoTrack repository (used when motion_backend=locotrack).",
+    )
+    parser.add_argument(
+        "--locotrack_ckpt",
+        type=str,
+        default=None,
+        help="Optional path to a LocoTrack checkpoint.",
+    )
+    parser.add_argument(
+        "--locotrack_model_size",
+        type=str,
+        default="base",
+        choices=["small", "base"],
+        help="LocoTrack model size.",
+    )
+    parser.add_argument(
+        "--locotrack_query_chunk_size",
+        type=int,
+        default=256,
+        help="Chunk size for LocoTrack queries.",
+    )
+    parser.add_argument(
+        "--locotrack_max_points",
+        type=int,
+        default=256,
+        help="Maximum mask points to track per plan.",
+    )
+    parser.add_argument(
+        "--locotrack_sample_points",
+        type=int,
+        default=512,
+        help="Initial mask samples before trimming to max_points.",
+    )
+    parser.add_argument(
+        "--locotrack_min_points",
+        type=int,
+        default=32,
+        help="Minimum valid points required before falling back to flow.",
     )
     parser.add_argument("--log_timings", action="store_true", help="Print per-plan timing breakdowns.")
     parser.add_argument("--save_video", action="store_true", help="Record RGB frames from the overhead camera.")
@@ -80,6 +138,8 @@ def _parse_args():
         default=None,
         help="Output directory for the recorded rollout video. Defaults to logs/avdc/videos.",
     )
+    parser.add_argument("--sample_images", type=bool, help="Samples images from a sample directory.")
+    parser.add_argument("--random_seed", type=int, default=1, help="Random seed for sampling images.")
     cli_args.add_rsl_rl_args(parser)
     AppLauncher.add_app_launcher_args(parser)
     return parser.parse_known_args()
@@ -149,7 +209,7 @@ def main():
 
     import isaaclab_tasks  # noqa: F401
     import avdc_isaaclab.tasks  # noqa: F401
-    print("here")
+    print("here before _run")
 
     @hydra_task_config(args_cli.task, args_cli.agent)
     def _run(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, _agent_cfg):
@@ -165,14 +225,17 @@ def main():
 
         obs, _ = env.reset()
 
-        # video_model = load_diffusion_video_model(
-        #     args_cli._video_ckpt_dir,
-        #     args_cli._video_milestone,
-        #     flow=args_cli.video_flow,
-        #     timestep=args_cli.video_timestep,
-        # )
         video_model = None
-        flow_model = get_flow_model(checkpoint_path=args_cli.flow_checkpoint)
+        if args_cli.diffusion_source == "model":
+            video_model = load_diffusion_video_model(
+                args_cli._video_ckpt_dir,
+                args_cli._video_milestone,
+                flow=args_cli.video_flow,
+                timestep=args_cli.video_timestep,
+            )
+        flow_model = None
+        if args_cli.motion_backend == "flow":
+            flow_model = get_flow_model(checkpoint_path=args_cli.flow_checkpoint)
 
         policy_cfg = DiffusionPolicyConfig(
             camera_name=args_cli.camera_sensor,
@@ -183,8 +246,19 @@ def main():
             mode="grasp" if ("Franka" in args_cli.task) else "suction",
             seg_ids=[2],
             target_terms=(args_cli.target_label,) if args_cli.target_label else ("Object",),
-            # Sunction works better with a longer grasp wait
-            grasp_wait=0 if ("Franka" in args_cli.task) else 10
+            # Suction works better with a longer grasp wait
+            grasp_wait=0 if ("Franka" in args_cli.task) else 10,
+            sample_images=args_cli.sample_images,
+            random_seed=args_cli.random_seed,
+            motion_backend=args_cli.motion_backend,
+            locotrack_root=args_cli.locotrack_root,
+            locotrack_ckpt=args_cli.locotrack_ckpt,
+            locotrack_model_size=args_cli.locotrack_model_size,
+            locotrack_query_chunk_size=args_cli.locotrack_query_chunk_size,
+            locotrack_max_points=args_cli.locotrack_max_points,
+            locotrack_sample_points=args_cli.locotrack_sample_points,
+            locotrack_min_points=args_cli.locotrack_min_points,
+            diffusion_source=args_cli.diffusion_source,
         )
         policy = IsaacMyPolicyCL(
             env.unwrapped,
@@ -200,7 +274,7 @@ def main():
         frames = []
         video_dir = None
         start_time = time.time()
-        for step in range(1500):
+        for step in range(250):
             repeat = 1
             action = policy.get_action(obs)
             env_action = torch.as_tensor(action[None, :], device=env.unwrapped.device)
@@ -227,6 +301,7 @@ def main():
                 break
 
         elapsed = time.time() - start_time
+        # imageio.imsave('cube_images/03.png', frames[0])
         print(f"[INFO] Rollout finished after {step+1} steps ({elapsed:.2f}s).")
 
         if args_cli.save_video and frames:
@@ -243,10 +318,9 @@ def main():
         print(e)
         simulation_app.close()
     finally:
-        print("here")
+        print("here exception")
         simulation_app.close()
 
 
 if __name__ == "__main__":
     main()
-

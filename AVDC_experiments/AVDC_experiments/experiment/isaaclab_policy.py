@@ -6,16 +6,25 @@ import warnings
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
+import sys
 
 import cv2
 import numpy as np
 import torch
-
+import random
+import shutil
+import math
 
 from AVDC_experiments.flowdiffusion.flowdiffusion.inference_utils import get_video_model, pred_video
 
 from .isaaclab_exp import utils as isaac_utils
-from .myutils import get_transformation_matrix, pred_flow_frame, get_transforms
+from .myutils import (
+    get_transformation_matrix,
+    pred_flow_frame,
+    get_transforms,
+    get_transforms_from_tracks,
+    sample_from_mask,
+)
 
 def move(from_xyz, to_xyz, p):
     """Computes action components that help move from 1 position to another
@@ -55,6 +64,18 @@ class DiffusionPolicyConfig:
     gripper_open_value: float = 1.0
     mode: str = "grasp"
     grasp_wait: int = 0
+    sample_images: bool = False
+    random_seed: int = 1
+    motion_backend: str = "flow"
+    locotrack_root: str | None = None
+    locotrack_ckpt: str | None = None
+    locotrack_model_size: str = "base"
+    locotrack_query_chunk_size: int = 256
+    locotrack_max_points: int = 256
+    locotrack_sample_points: int = 512
+    locotrack_min_points: int = 32
+    diffusion_source: str = "images"
+    diffusion_images_dir: str | Path | None = None
 
 
 class IsaacMyPolicyCL:
@@ -77,6 +98,9 @@ class IsaacMyPolicyCL:
         self.video_model = video_model
         self.flow_model = flow_model
         self.cfg = config
+        self.motion_backend = (config.motion_backend or "flow").lower()
+        if self.motion_backend not in {"flow", "locotrack"}:
+            raise ValueError(f"Unsupported motion backend '{config.motion_backend}'.")
         self.camera_name = config.camera_name
         self.resolution = config.resolution
         self.plan_timeout = config.plan_timeout
@@ -89,8 +113,28 @@ class IsaacMyPolicyCL:
         self.log = log
         self.flow_image_path = "debug/avdc_flow_latest.png"
         self.depth_image_path = Path("debug/avdc_depth_latest.png")
-        self.diffusion_images_dir = Path(__file__).resolve().parent / "diffusion_images"
-
+        assets_root = Path(__file__).resolve().parent
+        if config.diffusion_images_dir is None:
+            self.diffusion_images_dir = assets_root / "diffusion_images"
+        else:
+            self.diffusion_images_dir = Path(config.diffusion_images_dir).expanduser()
+        self.diffusion_images_dir = self.diffusion_images_dir.resolve()
+        self.sample_dir = assets_root / "samples"
+        self.random_seed = config.random_seed
+        self.sample_images = config.sample_images
+        self.diffusion_source = (config.diffusion_source or "images").lower()
+        if self.diffusion_source not in {"images", "model"}:
+            raise ValueError(f"Unsupported diffusion_source '{config.diffusion_source}'.")
+        if self.diffusion_source == "model" and self.video_model is None:
+            raise ValueError("video_model must be provided when diffusion_source='model'.")
+        self.point_tracker = None
+        if self.motion_backend == "flow":
+            if self.flow_model is None:
+                raise ValueError("flow_model must be provided when motion_backend='flow'.")
+        elif self.motion_backend == "locotrack":
+            self.point_tracker = self._initialize_locotrack_tracker()
+        else:
+            raise ValueError(f"Unknown motion backend '{self.motion_backend}'.")
         self.scene = isaac_utils.get_scene(env)
         print("env origin:", self.scene.env_origins[self.env_index])
         frame = isaac_utils.get_camera_frame(env, self.camera_name, self.env_index)
@@ -120,9 +164,10 @@ class IsaacMyPolicyCL:
 
         self.grasped = False
         self.debug = debug
-        # Suncti
+        # Suction stuff
         self.grasp_wait = config.grasp_wait
         self.grasp_count = 0
+
         self._initialize_plan()
 
     @property
@@ -168,6 +213,8 @@ class IsaacMyPolicyCL:
             print(transform)
             grasp_ext = np.concatenate([subgoals[-1], [1]])
             next_subgoal = (transform @ grasp_ext)[:3]
+            if next_subgoal[2] < grasp[2]:
+                next_subgoal[2] = grasp[2]
             subgoals.append(next_subgoal)
         print("subgoals")
         print(subgoals)
@@ -223,6 +270,115 @@ class IsaacMyPolicyCL:
         except Exception as exc:
             if self.log:
                 print(f"[Policy] failed to save depth image: {exc}")
+
+    def _append_locotrack_root(self, root_path: str | Path):
+        root = Path(root_path).expanduser().resolve()
+        if not root.exists():
+            raise FileNotFoundError(f"LocoTrack root '{root}' does not exist.")
+        if str(root) not in sys.path:
+            sys.path.append(str(root))
+
+    def _initialize_locotrack_tracker(self):
+        root = self.cfg.locotrack_root
+        if root:
+            self._append_locotrack_root(root)
+        try:
+            from models.locotrack_model import load_model
+        except ImportError as exc:
+            raise ImportError(
+                "Unable to import LocoTrack. Set 'locotrack_root' to the repository "
+                "or install the package so 'models.locotrack_model' is importable."
+            ) from exc
+        tracker = load_model(
+            ckpt_path=self.cfg.locotrack_ckpt,
+            model_size=self.cfg.locotrack_model_size,
+        )
+        tracker = tracker.to(self.device)
+        tracker.eval()
+        return tracker
+
+    def _prepare_tracker_video(self, frames: np.ndarray) -> np.ndarray:
+        frames_np = np.asarray(frames)
+        if frames_np.ndim != 4 or frames_np.shape[1] != 3:
+            raise ValueError(
+                f"Expected frames with shape (T, C, H, W), got {frames_np.shape}"
+            )
+        video = frames_np.transpose(0, 2, 3, 1)  # T, H, W, C
+        video = video.astype(np.uint8, copy=False)
+        return np.ascontiguousarray(video[np.newaxis, ...])
+
+    def _build_tracker_queries(self, samples_2d: np.ndarray) -> torch.Tensor:
+        query = np.zeros((1, len(samples_2d), 3), dtype=np.float32)
+        query[0, :, 1] = samples_2d[:, 1]
+        query[0, :, 2] = samples_2d[:, 0]
+        return torch.from_numpy(query)
+
+    def _track_points_with_locotrack(
+        self, video: np.ndarray, query_points: torch.Tensor
+    ):
+        if self.point_tracker is None:
+            return None, None
+        resolution = (video.shape[2], video.shape[3])
+        self.point_tracker.eval()
+        with torch.no_grad():
+            preds = self.point_tracker.inference(
+                video=video,
+                query_points=query_points,
+                query_chunk_size=self.cfg.locotrack_query_chunk_size,
+                resolution=resolution,
+                query_format="tyx",
+            )
+        tracks = preds["tracks"].detach().cpu().numpy()
+        occlusion = preds["occlusion"].detach().cpu().numpy()
+        tracks = tracks[0].transpose(1, 0, 2)  # frames, points, xy
+        occlusion = occlusion[0].transpose(1, 0)  # frames, points
+        return tracks, occlusion
+
+    def _tracker_motion_plan(self, images, depth, seg, cmat):
+        if self.point_tracker is None:
+            return None
+        num_samples = max(self.cfg.locotrack_sample_points, self.cfg.locotrack_max_points)
+        samples_2d = sample_from_mask(seg, num_samples).astype(np.float32)
+        if samples_2d.size == 0:
+            return None
+        if len(samples_2d) > self.cfg.locotrack_max_points:
+            samples_2d = samples_2d[: self.cfg.locotrack_max_points]
+        if len(samples_2d) < self.cfg.locotrack_min_points:
+            return None
+
+        video = self._prepare_tracker_video(images)
+        query_points = self._build_tracker_queries(samples_2d)
+
+        motion_start = time.time()
+        tracks, occlusion = self._track_points_with_locotrack(video, query_points)
+        motion_time = time.time() - motion_start
+        if tracks is None or tracks.shape[0] <= 1:
+            return None
+
+        action_start = time.time()
+        grasp, transforms, _, _ = get_transforms_from_tracks(
+            samples_2d,
+            depth,
+            cmat,
+            tracks,
+            occlusion=occlusion,
+        )
+        transform_mats = [get_transformation_matrix(*transform) for transform in transforms]
+        action_time = time.time() - action_start
+        return grasp, transform_mats, motion_time, action_time
+
+    def _flow_motion_plan(self, images, depth, seg, cmat):
+        flow_device = self.device if "cuda" in self.device else "cpu"
+        start = time.time()
+        _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device=flow_device)
+        self._output_flow_image(flow_images)
+        time_motion = time.time() - start
+
+        action_start = time.time()
+        grasp, transforms, _, _ = get_transforms(seg, depth, cmat, flow)
+        transform_mats = [get_transformation_matrix(*transform) for transform in transforms]
+        time_action = time.time() - action_start
+        return grasp, transform_mats, time_motion, time_action
 
     def _fetch_camera_observations(self):
         frame = isaac_utils.get_camera_frame(self.env, self.camera_name, self.env_index)
@@ -319,16 +475,25 @@ class IsaacMyPolicyCL:
             cv2.imwrite(str(debug_dir / f"diffusion_padded_{i}.png"), frame_bgr)
 
         return frames_padded
- 
 
     def calculate_next_plan(self):
         image, depth, seg, cmat = self._fetch_camera_observations()
         self._output_depth_image(depth)
 
         start = time.time()
-        # images = pred_video(self.video_model, image, self.task_prompt)
-        images = self._load_diffusion_images(image)
+        if self.diffusion_source == "model":
+            images = pred_video(self.video_model, image, self.task_prompt)
+        else:
+            if self.sample_images:
+                self._sample_and_copy_files_spaced(
+                    self.sample_dir,
+                    self.diffusion_images_dir,
+                    8,
+                    self.random_seed,
+                )
+            images = self._load_diffusion_images(image)
         save_generated_path = 'AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated'
+        os.makedirs(save_generated_path, exist_ok=True)
         for img in images:
             files = os.listdir(save_generated_path)
             if len(files) == 0:
@@ -337,9 +502,12 @@ class IsaacMyPolicyCL:
                 nums = sorted([int(os.path.splitext(os.path.basename(f))[0]) for f in files])
                 i = nums[-1] + 1
 
-            print(np.transpose(img, (1,2,0)).shape)
+            print(np.transpose(img, (1, 2, 0)).shape)
             print(f'saving to {os.path.join(save_generated_path, f"{i}.png")}')
-            cv2.imwrite(os.path.join(save_generated_path, f'{i}.png'), np.transpose(img, (1,2,0)))
+            cv2.imwrite(
+                os.path.join(save_generated_path, f'{i}.png'),
+                np.transpose(img, (1, 2, 0)),
+            )
 
         # images = self._load_diffusion_images(image)
         time_vid = time.time() - start
@@ -348,23 +516,39 @@ class IsaacMyPolicyCL:
         #     print("text encoder in use")
         #     self.video_model.text_encoder.to("cpu")
 
-        start = time.time()
-        _, _, flow_images, flow, _ = pred_flow_frame(self.flow_model, images, device="cuda:0")
+        grasp = None
+        transform_mats: list[np.ndarray] | None = None
+        time_motion = 0.0
+        time_action = 0.0
+        backend_used = self.motion_backend
 
-        self._output_flow_image(flow_images)
-        time_flow = time.time() - start
+        if self.motion_backend == "locotrack":
+            tracker_start = time.time()
+            try:
+                tracker_result = self._tracker_motion_plan(images, depth, seg, cmat)
+            except Exception as exc:
+                tracker_result = None
+                warnings.warn(f"LocoTrack planning failed, falling back to optical flow: {exc}")
+            time_motion = time.time() - tracker_start
+            if tracker_result is not None:
+                grasp, transform_mats, time_motion, time_action = tracker_result
+            else:
+                backend_used = "flow"
 
-        start = time.time()
-        grasp, transforms, _, _ = get_transforms(seg, depth, cmat, flow)
-        transform_mats = [get_transformation_matrix(*transform) for transform in transforms]
-        time_action = time.time() - start
+        if transform_mats is None or grasp is None:
+            backend_used = "flow"
+            grasp, transform_mats, time_motion, time_action = self._flow_motion_plan(images, depth, seg, cmat)
 
         if self.log:
-            t = max(len(transform_mats), 1)
+            t = max(len(transform_mats) if transform_mats else 1, 1)
             print(
-                f"[Policy] plan timings (ms/frame): "
-                f"video={1000 * time_vid / t:.1f}, flow={1000 * time_flow / t:.1f}, action={1000 * time_action / t:.1f}"
+                f"[Policy] plan timings (ms/frame) [{backend_used}]: "
+                f"video={1000 * time_vid / t:.1f}, motion={1000 * time_motion / t:.1f}, "
+                f"action={1000 * time_action / t:.1f}"
             )
+
+        if grasp is None or transform_mats is None:
+            raise RuntimeError("Motion planning failed; no transforms generated.")
 
         self.replans -= 1
         self.replan_countdown = self.plan_timeout
@@ -403,7 +587,7 @@ class IsaacMyPolicyCL:
         return action
 
     def _desired_pos(self, pos_curr: np.ndarray):
-        move_precision = 0.06
+        move_precision = 0.08
         grasp_precision = 0.01 if self.mode == "suction" else 0.06
         print(self.mode)
         # if stucked/stopped(all subgoals reached), replan
@@ -454,9 +638,70 @@ class IsaacMyPolicyCL:
         if self.grasped or self.mode == "push":
             return close
         return open_
+    
+    def _sample_and_copy_files_spaced(self, src_dir, dst_dir, n, seed):
+        """
+        Sample n files from src_dir such that they are roughly spaced out
+        across the directory (based on sorted order), then copy them to dst_dir.
+        The destination directory is cleared before copying.
+
+        Parameters:
+            src_dir (str): Path to the directory to sample files from.
+            dst_dir (str): Path to the directory to copy sampled files into.
+            n (int): Number of files to sample.
+            seed (int): Seed for random sampling.
+        """
+        # Ensure source directory exists
+        if not os.path.isdir(src_dir):
+            raise ValueError(f"Source directory does not exist: {src_dir}")
+
+        # Create destination directory if it doesn't exist
+        os.makedirs(dst_dir, exist_ok=True)
+
+        # Clear destination directory
+        for item in os.listdir(dst_dir):
+            item_path = os.path.join(dst_dir, item)
+            if os.path.isfile(item_path):
+                os.remove(item_path)
+            else:
+                shutil.rmtree(item_path)
+
+        # Get sorted list of files (ignore subdirectories)
+        files = [f for f in os.listdir(src_dir)
+                if os.path.isfile(os.path.join(src_dir, f))]
+        files.sort()  # important for "spaced out" sampling
+
+        total = len(files)
+        if n > total:
+            raise ValueError(f"Requested {n} files, but only {total} available.")
+
+        # Stratified sampling across the sorted list
+        sampled_files = []
+        chunk_size = total / n
+
+        for i in range(n):
+            start = int(math.floor(i * chunk_size))
+            end = int(math.floor((i + 1) * chunk_size)) - 1
+            if end < start:
+                end = start
+            if end >= total:
+                end = total - 1
+
+            # choose a random index from this chunk
+            print(start, end)
+            random.seed(seed)
+            idx = random.randint(start, end)
+            sampled_files.append(files[idx])
+
+        # Copy files
+        for f in sampled_files:
+            shutil.copy2(os.path.join(src_dir, f), os.path.join(dst_dir, f))
+
+        return sampled_files
 
 
 def load_diffusion_video_model(ckpt_dir: str, milestone: int, flow: bool = False, timestep: int = 100):
     """Utility helper to mirror the old API when instantiating the video diffusion model."""
     return get_video_model(ckpts_dir=ckpt_dir, milestone=milestone, flow=flow, timestep=timestep)
+
 

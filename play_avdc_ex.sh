@@ -1,12 +1,23 @@
 python scripts/rsl_rl/play_avdc.py \
   --device=cpu \
-  --task Isaac-Lift-Cube-UR10-IK-Rel-v0 \
+  --headless \
+  --task Isaac-Lift-Cube-Franka-IK-Rel-v0 \
   --video_ckpt_dir AVDC/results/mw \
   --video_milestone 24 \
-  --task_prompt "lift_custom" \
+  --video_ckpt_path "AVDC/results/isaaclab/Lift-Cube-Randomized/model-24.pt" \
+  --task_prompt "pos000" \
   --plan_timeout 15 \
   --camera_sensor overhead_camera \
   --save_video \
   --video_length 2000 \
   --video_folder "debug" \
-  --video_ckpt_path "AVDC/results/mw/model-24.pt" > debug/log
+  --diffusion_source model \
+  --motion_backend flow \
+  --locotrack_root "/home/grant-rinehimer/cornell/dl_robotics/avdc_isaaclab/locotrack/locotrack_pytorch" \
+  --locotrack_ckpt "/home/grant-rinehimer/cornell/dl_robotics/avdc_isaaclab/locotrack/locotrack_pytorch/ckpt/locotrack_base.ckpt" \
+  --locotrack_model_size base \
+  --locotrack_query_chunk_size 256 \
+  --locotrack_max_points 256 \
+  --locotrack_sample_points 512 \
+  --locotrack_min_points 32 \
+  > debug/log

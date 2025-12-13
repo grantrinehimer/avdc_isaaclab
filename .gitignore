@@ -73,3 +73,5 @@ tests/
 # Model checkpoints
 AVDC/results/
 AVDC_experiments/AVDC_experiments/ckpts
+debug/*
+results/*

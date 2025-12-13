@@ -394,6 +394,112 @@ def get_transforms(seg, depth, cmat, flows=[], ransac_tries=100, ransac_threshol
     return grasp, np.array(transformss), np.array(center_2ds), sampless
 
 
+def get_transforms_from_tracks(
+    samples_2d,
+    depth,
+    cmat,
+    tracks,
+    occlusion=None,
+    ransac_tries=100,
+    ransac_threshold=0.5,
+    rgd_tfm_tries=50,
+    rgd_tfm_threshold=1e-3,
+):
+    """Derive rigid transforms from explicit point tracks instead of dense flow.
+
+    Args:
+        samples_2d (np.ndarray): Sampled pixel coordinates used as initial queries.
+        depth (np.ndarray): Depth map aligned with the current RGB frame.
+        cmat (np.ndarray): 3x4 camera matrix.
+        tracks (np.ndarray): Array of shape [num_frames, num_points, 2] containing
+            tracked pixel coordinates for each sampled point across frames.
+        occlusion (np.ndarray, optional): Boolean array with shape
+            [num_frames, num_points] indicating occlusion per point per frame.
+        ransac_tries (int): Number of RANSAC iterations.
+        ransac_threshold (float): Pixel threshold for RANSAC inliers.
+        rgd_tfm_tries (int): Number of optimization attempts for the rigid solver.
+        rgd_tfm_threshold (float): Optimization tolerance for the rigid solver.
+
+    Returns:
+        Tuple containing grasp point, transforms, center projections, and tracked samples.
+    """
+    tracks = np.asarray(tracks)
+    if tracks.ndim != 3:
+        raise ValueError("tracks must have shape [num_frames, num_points, 2]")
+    num_frames, num_points, _ = tracks.shape
+    if num_points == 0:
+        raise ValueError("tracks must contain at least one point")
+
+    if occlusion is None:
+        occlusion = np.zeros((num_frames, num_points), dtype=bool)
+    else:
+        occlusion = np.asarray(occlusion).astype(bool)
+        if occlusion.shape[:2] != tracks.shape[:2]:
+            raise ValueError("occlusion must match tracks shape in first two dims")
+
+    transformss = []
+    center_2ds = []
+    sampless = [samples_2d]
+    samples_3d = to_3d(samples_2d, depth, cmat)
+    grasp = get_grasp(samples_2d, depth, cmat)
+    points1_uv = np.asarray(samples_2d)
+    points1 = np.asarray(samples_3d)
+    center = grasp
+    h, w = depth.shape[:2]
+    tracks_active = tracks.copy()
+    occlusion_active = occlusion.copy()
+
+    if num_frames <= 1:
+        return grasp, np.array(transformss), np.array(center_2ds), sampless
+
+    for frame_idx in range(1, num_frames):
+        pts2 = tracks_active[frame_idx]
+        occ_frame = occlusion_active[frame_idx]
+
+        valid_mask = np.isfinite(pts2).all(axis=1)
+        valid_mask &= (pts2[:, 0] >= 0) & (pts2[:, 0] < w - 1)
+        valid_mask &= (pts2[:, 1] >= 0) & (pts2[:, 1] < h - 1)
+        valid_mask &= ~occ_frame
+
+        if not np.any(valid_mask):
+            break
+
+        points1_uv = np.asarray(points1_uv)[valid_mask]
+        points1 = np.asarray(points1)[valid_mask]
+        tracks_active = tracks_active[:, valid_mask, :]
+        occlusion_active = occlusion_active[:, valid_mask]
+        pts2 = pts2[valid_mask]
+
+        if len(points1_uv) < 4:
+            break
+
+        sampless.append(pts2)
+        center_uv = to_2d(center, cmat)[0]
+        center_2ds.append(center_uv)
+
+        _, inliers = ransac(points1_uv, center_uv, pts2, ransac_tries, ransac_threshold)
+        inliers = np.asarray(inliers, dtype=int)
+        if len(inliers) < 4:
+            break
+
+        points1_uv = points1_uv[inliers]
+        points1 = points1[inliers]
+        tracks_active = tracks_active[:, inliers, :]
+        occlusion_active = occlusion_active[:, inliers]
+        pts2 = pts2[inliers]
+
+        solution, mat = solve_3d_rigid_tfm(points1, pts2, cmat, rgd_tfm_tries, rgd_tfm_threshold)
+        T = get_transformation_matrix(*solution.x)
+        points1_ext = np.concatenate([points1, np.ones((len(points1), 1))], axis=1)
+        points1 = (T @ points1_ext.T).T[:, :3]
+        center = (T @ np.concatenate([center, np.ones((1, 1))], axis=1).T).T[:, :3]
+        points1_uv = to_2d(points1, cmat)
+
+        transformss.append(solution.x)
+
+    return grasp, np.array(transformss), np.array(center_2ds), sampless
+
+
 def get_inbound_kp_idxs(kps, size):
     h, w = size
     shrink = 4

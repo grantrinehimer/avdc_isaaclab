@@ -124,7 +124,7 @@ class Solver():
 def solve(solver):
     return solver.calc_solution()
 
-def solve_3d_rigid_tfm(points_1, points_2_uv, cmat, max_iter=50, early_stop_threshold=1e-3):
+def solve_3d_rigid_tfm(points_1, points_2_uv, cmat, max_iter=8, early_stop_threshold=1e-3):
     N = len(points_1)
     points1_ext = np.concatenate([points_1, np.ones([N, 1])], axis=1)
     points_2_uv = points_2_uv.T
@@ -134,12 +134,11 @@ def solve_3d_rigid_tfm(points_1, points_2_uv, cmat, max_iter=50, early_stop_thre
     solution = Solver(points1_ext, points_2_uv, cmat, x0=np.zeros(6)).calc_solution()
     print("solution")
     print(solution.fun)
-    # if solution.fun < early_stop_threshold:
-    if True:
+    if solution.fun < early_stop_threshold:
+        print("Bad solution encountered")
         best_solution = solution
     # otherwise, run {max_iter} times and pick the best one
     else:
-        print("here bad")
         solutions = [Solver(points1_ext, points_2_uv, cmat).calc_solution() for _ in range(max_iter)]
         best_solution = solutions[np.argmin([s.fun for s in solutions])]
 

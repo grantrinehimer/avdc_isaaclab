@@ -168,7 +168,7 @@ class DeterministicEventCfg:
         params={
             # This makes the cube spawn deterministcally at (0.5,0,0.055)
             # "pose_range": {"x": (-0.1, 0.1), "y": (-0.25, 0.25), "z": (0.0, 0.0)},
-            "pose_range": {"x": (0, 0), "y": (0, 0), "z": (0.0, 0.0)},
+            "pose_range": {"x": (0, 0), "y": (0.0, 0.0), "z": (0.0, 0.0)},
             "velocity_range": {},
             "asset_cfg": SceneEntityCfg("object", body_names="Object"),
         },
