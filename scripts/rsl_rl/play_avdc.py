@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import sys
+import os
+import csv
 import time
 from pathlib import Path
 
@@ -54,13 +56,14 @@ def _parse_args():
     parser.add_argument(
         "--video_ckpt_dir",
         type=str,
-        default='AVDC_experiments/AVDC_experiments/ckpts',
+        default='AVDC/results/isaaclab/Lift-Cube-Randomized',
         help="Directory that stores diffusion checkpoints (expects model-<milestone>.pt).",
     )
     parser.add_argument(
         "--video_ckpt_path",
         type=str,
-        default='AVDC_experiments/AVDC_experiments/ckpts/model-24.pt',
+        # default='AVDC_experiments/AVDC_experiments/ckpts/model-24.pt',
+        default='AVDC/results/isaaclab/Lift-Cube-Randomized/model-24.pt',
         help="Optional explicit checkpoint file path. Overrides --video_ckpt_dir and --video_milestone.",
     )
     parser.add_argument("--video_milestone", type=int, default=24, help="Checkpoint milestone index to load.")
@@ -140,6 +143,8 @@ def _parse_args():
     )
     parser.add_argument("--sample_images", type=bool, help="Samples images from a sample directory.")
     parser.add_argument("--random_seed", type=int, default=1, help="Random seed for sampling images.")
+    parser.add_argument("--save_generated", action="store_true", help="Saves the images saved by the diffusion model")
+    parser.add_argument("--results_csv", type=str, help="The directory where reward for the rollout will get saved at")
     cli_args.add_rsl_rl_args(parser)
     AppLauncher.add_app_launcher_args(parser)
     return parser.parse_known_args()
@@ -167,6 +172,30 @@ def _ensure_video_dir(path: str | None) -> Path:
         path = Path(path).expanduser()
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+def save_results(filename: str, **data: dict):
+    """
+    Saves the provided keyword arguments (data) as a new row in a CSV file.
+
+    Creates the file and writes headers if it doesn't exist, otherwise appends.
+
+    Args:
+        filename: The path to the CSV file.
+        **data: The key-value pairs to save (keys become headers).
+    """
+    fieldnames = list(data.keys())
+    file_exists = os.path.exists(filename)
+    
+    # Use 'a' for append mode. newline='' is important for CSV files in Python
+    with open(filename, 'a', newline='') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        if not file_exists:
+            # If the file doesn't exist, write the headers
+            writer.writeheader()
+        
+        # Write the data row
+        writer.writerow(data)
 
 
 def main():
@@ -265,24 +294,27 @@ def main():
             args_cli.task_prompt,
             video_model,
             flow_model,
-            config=policy_cfg,
+            policy_cfg,
             device=args_cli.device,
             log=args_cli.log_timings,
-            debug=True
+            debug=True,
+            save_generated=args_cli.save_generated
         )
 
         frames = []
         video_dir = None
         start_time = time.time()
+        total_reward = 0.0
         for step in range(250):
             repeat = 1
             action = policy.get_action(obs)
             env_action = torch.as_tensor(action[None, :], device=env.unwrapped.device)
-            print("action")
-            print(env_action)
+            # print("action")
+            # print(env_action)
             for sub in range(repeat):
-                obs, _, terminated, truncated, info = env.step(env_action)
-
+                obs, rewards, terminated, truncated, info = env.step(env_action)
+                total_reward += rewards
+                print(f'Step {step+1}/250 | Reward: {total_reward}')
                 if args_cli.save_video and len(frames) < args_cli.video_length:
                     frame = isaac_utils.get_camera_frame(env.unwrapped, args_cli.camera_sensor, policy.cfg.env_index)["rgb"]
                     frames.append(frame.copy())
@@ -304,12 +336,20 @@ def main():
         # imageio.imsave('cube_images/03.png', frames[0])
         print(f"[INFO] Rollout finished after {step+1} steps ({elapsed:.2f}s).")
 
+        video_name=""
         if args_cli.save_video and frames:
             video_dir = _ensure_video_dir(args_cli.video_folder)
-            video_path = video_dir / f"{Path(args_cli.task).name}-{int(time.time())}.mp4"
+            video_name = f"{Path(args_cli.task).name}-{int(time.time())}.mp4"
+            video_path = video_dir / video_name
             imageio.mimsave(video_path, frames, fps=30)
             print(f"[INFO] Saved rollout video to {video_path}")
 
+        if args_cli.results_csv:
+            save_results(args_cli.results_csv, 
+                         pose=args_cli.task_prompt, 
+                         reward=total_reward, 
+                         max_replans=args_cli.max_replans, 
+                         video_name=video_name)
         env.close()
 
     try:

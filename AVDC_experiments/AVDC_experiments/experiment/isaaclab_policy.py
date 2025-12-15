@@ -91,6 +91,7 @@ class IsaacMyPolicyCL:
         device: str | None = None,
         log: bool = False,
         debug: bool = False,
+        save_generated: bool = False,
     ):
         self.env = env
         self.mode = config.mode
@@ -167,6 +168,7 @@ class IsaacMyPolicyCL:
         # Suction stuff
         self.grasp_wait = config.grasp_wait
         self.grasp_count = 0
+        self.save_generated=save_generated
 
         self._initialize_plan()
 
@@ -485,29 +487,31 @@ class IsaacMyPolicyCL:
             images = pred_video(self.video_model, image, self.task_prompt)
         else:
             if self.sample_images:
-                self._sample_and_copy_files_spaced(
-                    self.sample_dir,
-                    self.diffusion_images_dir,
-                    8,
-                    self.random_seed,
-                )
+                print('USING SAMPLES IMAGES')
+                # self._sample_and_copy_files_spaced(
+                #     self.sample_dir,
+                #     self.diffusion_images_dir,
+                #     8,
+                #     self.random_seed,
+                # )
             images = self._load_diffusion_images(image)
-        save_generated_path = 'AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated'
+        save_generated_path = f'AVDC_experiments/AVDC_experiments/experiment/diffusion_images/{self.task_prompt}'
         os.makedirs(save_generated_path, exist_ok=True)
-        for img in images:
-            files = os.listdir(save_generated_path)
-            if len(files) == 0:
-                i = 0
-            else:
-                nums = sorted([int(os.path.splitext(os.path.basename(f))[0]) for f in files])
-                i = nums[-1] + 1
+        if self.save_generated:
+            for img in images:
+                files = os.listdir(save_generated_path)
+                if len(files) == 0:
+                    i = 0
+                else:
+                    nums = sorted([int(os.path.splitext(os.path.basename(f))[0]) for f in files])
+                    i = nums[-1] + 1
 
-            print(np.transpose(img, (1, 2, 0)).shape)
-            print(f'saving to {os.path.join(save_generated_path, f"{i}.png")}')
-            cv2.imwrite(
-                os.path.join(save_generated_path, f'{i}.png'),
-                np.transpose(img, (1, 2, 0)),
-            )
+                print(np.transpose(img, (1, 2, 0)).shape)
+                print(f'saving to {os.path.join(save_generated_path, f"{i}.png")}')
+                cv2.imwrite(
+                    os.path.join(save_generated_path, f'{i}.png'),
+                    np.transpose(img, (1, 2, 0)),
+                )
 
         # images = self._load_diffusion_images(image)
         time_vid = time.time() - start
@@ -589,7 +593,7 @@ class IsaacMyPolicyCL:
     def _desired_pos(self, pos_curr: np.ndarray):
         move_precision = 0.08
         grasp_precision = 0.01 if self.mode == "suction" else 0.06
-        print(self.mode)
+        # print(self.mode)
         # if stucked/stopped(all subgoals reached), replan
         if self.replan_countdown <= 0 and self.replans > 0:
             print('Would have replanned at this point')
@@ -602,11 +606,11 @@ class IsaacMyPolicyCL:
             return self.subgoals[0]
         # place end effector above object
         if not self.grasped and np.linalg.norm(pos_curr[:2] - self.grasp[:2]) > 0.02:
-            print("placing above object")
+            # print("placing above object")
             return self.grasp + np.array([0.0, 0.0, 0.2])
         # drop end effector down on top of object
         if not self.grasped and abs(pos_curr[2] - self.grasp[2]) > grasp_precision:
-            print("dropping down on top of object")
+            # print("dropping down on top of object")
             return self.grasp - np.array([0.0, 0.0, 0.01]) if self.mode == "suction" else self.grasp
         # grab object (if in grasp mode)
         if not self.grasped and abs(pos_curr[2] - self.grasp[2]) <= grasp_precision:
@@ -619,17 +623,17 @@ class IsaacMyPolicyCL:
             return self.grasp
         # move end effector to the current subgoal
         if self.subgoals and np.linalg.norm(pos_curr - self.subgoals[0]) > move_precision:
-            print("moving to current subgoal")
-            print(self.subgoals[0])
-            print(np.linalg.norm(pos_curr - self.subgoals[0]))
+            # print("moving to current subgoal")
+            # print(self.subgoals[0])
+            # print(np.linalg.norm(pos_curr - self.subgoals[0]))
             return self.subgoals[0]
         # if close enough to the current subgoal, move to the next subgoal
         if self.subgoals and len(self.subgoals) > 1:
             self.subgoals.pop(0)
-            print("moving to next subgoal")
-            print(self.subgoals[0])
+            # print("moving to next subgoal")
+            # print(self.subgoals[0])
             return self.subgoals[0]
-        print("executing subgoal")
+        # print("executing subgoal")
         return self.subgoals[0] if self.subgoals else self.grasp
 
     def _grab_effort(self):
