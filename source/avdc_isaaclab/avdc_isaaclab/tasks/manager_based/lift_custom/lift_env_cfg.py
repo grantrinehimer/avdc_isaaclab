@@ -77,13 +77,23 @@ class ObjectTableSceneCfg(InteractiveSceneCfg):
             horizontal_aperture=20.0,
             lock_camera=True,
         ),
-        # Got these from playing around in the sim
+        # ISOMETRIC VIEW CAMERA
         offset=CameraCfg.OffsetCfg(
             pos=(2.0, 0.5, 1.0),
             rot=(0.51056, 0.31886, 0.423, 0.6773),
             # make sure this is opengl if youre going to use stuff from the gui lol
             convention="opengl",
         ),
+
+        # This is an attempt to get a directly top down view (doing it with no GUI is so rough)
+        # TODO: OVERHEAD-CAM
+        # offset=CameraCfg.OffsetCfg(
+        #     pos=(0.5, 0.0, 2.0),
+        #     rot=(0.707106781, 0.0, 0.0, 0.707106781),
+        #     # make sure this is opengl if youre going to use stuff from the gui lol
+        #     convention="opengl",
+        # ),
+        
     )
 
 
@@ -256,8 +266,7 @@ class CurriculumCfg:
 # Environment configuration
 ##
 
-"""Grant and Aarush, this is what you guys have been using. 
-Henry didn't touch it except for renaming the command manager cfg and the event manager cfg to "deterministic"."""
+"""Henry didn't touch this except for renaming the command manager cfg and the event manager cfg to "deterministic"."""
 
 @configclass
 class LiftEnvCfg(ManagerBasedRLEnvCfg):
