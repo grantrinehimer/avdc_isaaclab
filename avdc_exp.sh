@@ -19,7 +19,6 @@ for seed in $(seq 1 10); do
     --save_video \
     --video_length 2000 \
     --video_folder "results/franka_test_selected" \
-    --video_ckpt_path "AVDC/results/mw/model-24.pt" \
     > "debug.txt"
 done
 

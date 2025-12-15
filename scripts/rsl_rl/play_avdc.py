@@ -54,14 +54,8 @@ def _parse_args():
     parser.add_argument(
         "--video_ckpt_dir",
         type=str,
-        default='AVDC_experiments/AVDC_experiments/ckpts',
+        default='AVDC/results/isaaclab/Lift-Cube-Randomized',
         help="Directory that stores diffusion checkpoints (expects model-<milestone>.pt).",
-    )
-    parser.add_argument(
-        "--video_ckpt_path",
-        type=str,
-        default='AVDC_experiments/AVDC_experiments/ckpts/model-24.pt',
-        help="Optional explicit checkpoint file path. Overrides --video_ckpt_dir and --video_milestone.",
     )
     parser.add_argument("--video_milestone", type=int, default=24, help="Checkpoint milestone index to load.")
     parser.add_argument("--video_timestep", type=int, default=100, help="Sampling timesteps for diffusion sampling.")
@@ -146,18 +140,8 @@ def _parse_args():
 
 
 def _resolve_ckpt(args_cli):
-    if args_cli.video_ckpt_path:
-        ckpt = Path(args_cli.video_ckpt_path).expanduser().resolve()
-        stem = ckpt.stem
-        if "-" in stem:
-            try:
-                milestone = int(stem.split("-")[-1])
-            except ValueError:
-                milestone = args_cli.video_milestone
-        else:
-            milestone = args_cli.video_milestone
-        return ckpt.parent.as_posix(), milestone
-    return Path(args_cli.video_ckpt_dir).expanduser().resolve().as_posix(), args_cli.video_milestone
+    ckpt_dir = Path(args_cli.video_ckpt_dir).expanduser().resolve()
+    return ckpt_dir.as_posix(), args_cli.video_milestone
 
 
 def _ensure_video_dir(path: str | None) -> Path:

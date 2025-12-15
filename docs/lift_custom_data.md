@@ -135,7 +135,7 @@ After training a diffusion checkpoint (for example under `AVDC/results/mw/model-
   --camera_sensor overhead_camera
 ```
 
-- Use `--video_ckpt_path /abs/path/to/model-XX.pt` if you would rather point at a single checkpoint file.
+- Checkpoints are resolved from `--video_ckpt_dir` using `model-<milestone>.pt`; set `--video_milestone` to pick which file to load.
 - `--video_flow` switches the diffusion model into the flow-prediction variant.
 - Videos can be recorded with `--save_video --video_folder logs/avdc/videos`.
 

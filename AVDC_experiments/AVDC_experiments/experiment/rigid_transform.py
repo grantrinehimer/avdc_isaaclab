@@ -141,6 +141,10 @@ def solve_3d_rigid_tfm(points_1, points_2_uv, cmat, max_iter=8, early_stop_thres
     else:
         solutions = [Solver(points1_ext, points_2_uv, cmat).calc_solution() for _ in range(max_iter)]
         best_solution = solutions[np.argmin([s.fun for s in solutions])]
+        # solvers = [Solver(points1_ext, points_2_uv, cmat) for _ in range(max_iter)]
+        # with mp.Pool(processes=min(max_iter, mp.cpu_count())) as pool:
+        #     solutions = pool.map(solve, solvers)
+        # best_solution = min(solutions, key=lambda s: s.fun)
 
     return best_solution, get_transformation_matrix(*best_solution.x)
 

@@ -267,7 +267,7 @@ def pred_video(model, frame_0, task, flow=False):
     ])
     image = transform(Image.fromarray(frame_0)).unsqueeze(0)
     text = [task]
-    preds = rearrange(model.sample(image.to(device), text).cpu().squeeze(0), "(f c) w h -> f c w h", c=channels)
+    preds = rearrange(model.sample(image.to(device), text, guidance_weight=10.0).cpu().squeeze(0), "(f c) w h -> f c w h", c=channels)
     if not flow:
         preds = torch.cat([image, preds], dim=0)
     # pad the image back to original shape (both sides)

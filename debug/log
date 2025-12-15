@@ -1,9 +1,12 @@
+[INFO][AppLauncher]: Using device: cpu
+[INFO][AppLauncher]: Loading experience file: /home/grant-rinehimer/cornell/dl_robotics/IsaacLab/apps/isaaclab.python.rendering.kit
+here
+here before _run
+[INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.ur10_ik_rel_env_cfg:UR10LiftEnvCfg
+[INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.agents.rsl_rl_ppo_cfg:LiftCubePPORunnerCfg
 Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/user.config.json'
-[Info] [carb] Logging to file: /home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20251212_192855.log
-2025-12-13T00:28:55Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/e0431db7-766d-4df9-db7132bc-383d5efb.dmp'
-2025-12-13T00:28:55Z [159ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
-2025-12-13T00:28:55Z [159ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
-2025-12-13T00:28:55Z [176ms] [Warning] [omni.platforminfo.plugin] failed to open the default display.  Can't verify X Server version.
+[Info] [carb] Logging to file: /home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20251214_183430.log
+2025-12-14T23:34:30Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/e0431db7-766d-4df9-db7132bc-383d5efb.dmp'
 
 |---------------------------------------------------------------------------------------------|
 | Driver Version: 580.95.05     | Graphics API: Vulkan
@@ -16,38 +19,36 @@ Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaac
 |     |                                  |        |     |            | 2f04      | 9ce59851.. |
 |     |                                  |        |     |            | 26        |            |
 |=============================================================================================|
-| OS: 24.04.3 LTS (Noble Numbat) ubuntu, Version: 24.04.3, Kernel: 6.14.0-36-generic
+| OS: 24.04.3 LTS (Noble Numbat) ubuntu, Version: 24.04.3, Kernel: 6.14.0-37-generic
+| XServer Vendor: The X.Org Foundation, XServer Version: 12101011 (1.21.1.11)
 | Processor: AMD Ryzen 7 3700X 8-Core Processor
 | Cores: 8 | Logical Cores: 16
 |---------------------------------------------------------------------------------------------|
-| Total Memory (MB): 32018 | Free Memory: 20997
-| Total Page/Swap (MB): 8191 | Free Page/Swap: 3432
+| Total Memory (MB): 32018 | Free Memory: 17491
+| Total Page/Swap (MB): 8191 | Free Page/Swap: 8189
 |---------------------------------------------------------------------------------------------|
-2025-12-13T00:28:56Z [1,102ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
-2025-12-13T00:28:57Z [1,786ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
-2025-12-13T00:28:57Z [1,786ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
-2025-12-13T00:28:57Z [1,804ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
-2025-12-13T00:28:57Z [1,804ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
-2025-12-13T00:28:57Z [1,813ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
-2025-12-13T00:28:57Z [1,813ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
-2025-12-13T00:28:57Z [1,833ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
-2025-12-13T00:28:57Z [1,833ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
-2025-12-13T00:28:57Z [1,834ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
-2025-12-13T00:28:57Z [1,834ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
-[INFO][AppLauncher]: Using device: cpu
-[INFO][AppLauncher]: Loading experience file: /home/grant-rinehimer/cornell/dl_robotics/IsaacLab/apps/isaaclab.python.headless.rendering.kit
-here
-here before _run
-[INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.ik_rel_env_cfg:FrankaCubeLiftEnvCfg
-[INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.agents.rsl_rl_ppo_cfg:LiftCubePPORunnerCfg
-[INFO] IsaacLab logging to file: /tmp/isaaclab_2025-12-12_19-29-09.log
+2025-12-14T23:34:31Z [1,072ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
+2025-12-14T23:34:32Z [2,174ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+2025-12-14T23:34:32Z [2,577ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
+2025-12-14T23:34:33Z [2,814ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+2025-12-14T23:34:35Z [5,020ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+2025-12-14T23:34:35Z [5,390ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
+2025-12-14T23:34:35Z [5,390ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
+2025-12-14T23:34:35Z [5,391ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+2025-12-14T23:34:38Z [7,794ms] [Warning] [omni.fabric.plugin] Warning: attribute viewportHandle not found for bucket id 9
+
+2025-12-14T23:34:47Z [17,607ms] [Warning] [omni.fabric.plugin] USD->Fabric: Unhandled array type string[]
+2025-12-14T23:34:47Z [17,610ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:reflection_roughness_constant)
+2025-12-14T23:34:47Z [17,611ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:ior_constant)
+2025-12-14T23:34:47Z [17,611ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:transmittance_color)
+[INFO] IsaacLab logging to file: /tmp/isaaclab_2025-12-14_18-34-44.log
 [INFO]: Base environment:
 	Environment device    : cpu
 	Environment seed      : 0
 	Physics step-size     : 0.01
 	Rendering step-size   : 0.02
 	Environment step-size : 0.02
-[INFO]: Time taken for scene creation : 16.520106 seconds
+[INFO]: Time taken for scene creation : 2.142295 seconds
 [INFO]: Scene manager:  <class InteractiveScene>
 	Number of environments: 1
 	Environment spacing   : 2.5
@@ -55,7 +56,7 @@ here before _run
 	Global prim paths     : []
 	Replicate physics     : True
 [INFO]: Starting the simulation. This may take a few seconds. Please wait...
-[INFO]: Time taken for simulation start : 2.034293 seconds
+[INFO]: Time taken for simulation start : 1.745130 seconds
 [INFO] Command Manager:  <CommandManager> contains 1 active terms.
 +------------------------------------------+
 |           Active Command Terms           |
@@ -85,25 +86,25 @@ here before _run
 
 [INFO] Action Manager:  <ActionManager> contains 2 active terms.
 +------------------------------------+
-|   Active Action Terms (shape: 4)   |
+|   Active Action Terms (shape: 7)   |
 +-------+----------------+-----------+
 | Index | Name           | Dimension |
 +-------+----------------+-----------+
-|   0   | arm_action     |         3 |
+|   0   | arm_action     |         6 |
 |   1   | gripper_action |         1 |
 +-------+----------------+-----------+
 
 [INFO] Observation Manager: <ObservationManager> contains 1 groups.
 +-----------------------------------------------------------+
-| Active Observation Terms in Group: 'policy' (shape: (32,)) |
+| Active Observation Terms in Group: 'policy' (shape: (29,)) |
 +----------+-------------------------------------+----------+
 |  Index   | Name                                |  Shape   |
 +----------+-------------------------------------+----------+
-|    0     | joint_pos                           |   (9,)   |
-|    1     | joint_vel                           |   (9,)   |
+|    0     | joint_pos                           |   (6,)   |
+|    1     | joint_vel                           |   (6,)   |
 |    2     | object_position                     |   (3,)   |
 |    3     | target_object_position              |   (7,)   |
-|    4     | actions                             |   (4,)   |
+|    4     | actions                             |   (7,)   |
 +----------+-------------------------------------+----------+
 
 [INFO] Termination Manager:  <TerminationManager> contains 2 active terms.
@@ -140,15 +141,17 @@ here before _run
 |    1    | joint_vel      |
 +---------+----------------+
 
+Creating window for environment.
 [INFO]: Completed setting up the environment...
-loading from version 0.0
 env origin: tensor([0., 0., 0.])
 position
 [2.  0.5 1. ]
 camera pos_w: [2.  0.5 1. ]
+current hand pos
+tensor([0.6879, 0.1641, 0.4885])
 position
 [2.  0.5 1. ]
-1.3312236 31.084005
+1.2740278 31.084011
 position
 [2.  0.5 1. ]
 position
@@ -166,1969 +169,2260 @@ mask
 seg unique IDs: [1 2]
 seg info keys: {'idToLabels': {0: 'BACKGROUND', 1: 'UNLABELLED', 2: '/World/envs/env_0/Object'}, 'idToSemantics': {0: {'class': 'BACKGROUND'}, 1: {'class': 'UNLABELLED'}, 2: {'class': 'target_object'}}}
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/40.png
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/56.png
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/41.png
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/57.png
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/42.png
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/58.png
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/43.png
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/59.png
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/44.png
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/60.png
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/45.png
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/61.png
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/46.png
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/62.png
 (240, 320, 3)
-saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/47.png
-points1_uv
-[148.87796323 144.05750602]
-flow shape
-(240, 320, 2)
-flow
-[ 0.04536979  0.12272233 15.8985015 ]
-[ 0.14312285 -0.02399061]
-point2_uv
-[148.99116737 144.04512376]
+saving to AVDC_experiments/AVDC_experiments/experiment/diffusion_images/generated/63.png
 solution
-0.0009764896686370594
-Bad solution encountered
-flow shape
-(240, 320, 2)
-flow
-[ 0.04059008  0.09506744 17.07415031]
-[0.00304776 0.01133285]
-point2_uv
-[148.9995111  144.05667695]
+0.03521760715283673
 solution
-1.4006285276702002e-05
-Bad solution encountered
-flow shape
-(240, 320, 2)
-flow
-[ 0.06707178  0.15243124 16.0603824 ]
-[-0.01417345  0.04465403]
-point2_uv
-[148.98987732 144.10330797]
+0.02311605715355114
 solution
-1.2985422704447913e-05
-Bad solution encountered
-flow shape
-(240, 320, 2)
-flow
-[ 0.02581431  0.1456029  11.40523142]
-[ 0.00495105 -0.01495403]
-point2_uv
-[149.12845852 144.00704109]
+0.017580251031098948
 solution
-0.006769044131782698
-flow shape
-(240, 320, 2)
-flow
-[0.05495987 0.10305762 1.7159253 ]
-[ -2.6331224 -10.972166 ]
-point2_uv
-[143.81392953 129.3509071 ]
+0.016266184242720305
 solution
-0.02404920942937494
-flow shape
-(240, 320, 2)
-flow
-[ 0.03124333  0.1276463  20.67900476]
-[-0.02255412  0.02046725]
-point2_uv
-[148.98323456 114.55301057]
+0.014661834691687137
 solution
-0.0235469562399242
-flow shape
-(240, 320, 2)
-flow
-[0.04487085 0.10787125 8.32386308]
-[-0.00343339 -0.09170316]
-point2_uv
-[149.78098448 124.4150057 ]
+0.0245389202830395
 solution
-8.871173819979816e-07
-Bad solution encountered
+0.03179861412070317
 grasp
-[[0.51566746 0.0034283  0.06644963]]
+[[0.51569979 0.00108799 0.06722519]]
 transform
-[[ 0.99999484 -0.00259801 -0.00188964 -0.00870939]
- [ 0.00261483  0.99995653  0.00895004 -0.0040897 ]
- [ 0.0018663  -0.00895493  0.99995816 -0.00628113]
+[[ 0.998224    0.05899926  0.0082426  -0.18185945]
+ [-0.05955149  0.98462548  0.16421415 -0.06487032]
+ [ 0.00157264 -0.16441336  0.98639027 -0.05207369]
  [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999884e-01  4.08357763e-04 -2.56432767e-04  8.56855454e-04]
- [-4.08342959e-04  9.99999915e-01  5.77792840e-05  5.36688010e-04]
- [ 2.56456340e-04 -5.76745647e-05  9.99999965e-01  3.23801377e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
-transform
-[[ 9.99999919e-01 -2.83430732e-05 -4.00707704e-04 -8.75628503e-04]
- [ 2.81874234e-05  9.99999924e-01 -3.88437485e-04 -3.63441457e-04]
- [ 4.00718683e-04  3.88426159e-04  9.99999844e-01 -1.12017439e-03]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
-transform
-[[ 0.9998623   0.01656351 -0.00101367  0.02218685]
- [-0.01654861  0.99977498  0.01327152  0.01555655]
- [ 0.00123326 -0.01325291  0.99991142  0.01369199]
+[[ 0.99896289  0.04478936 -0.0081894   0.01321893]
+ [-0.04467291  0.99890511  0.01388911  0.00979076]
+ [ 0.00880252 -0.01350886  0.99987     0.04677958]
  [ 0.          0.          0.          1.        ]]
 transform
-[[ 0.99416615 -0.03948785  0.1003712  -0.35629143]
- [ 0.04409533  0.99805318 -0.04410738 -0.15210799]
- [-0.09843409  0.04827596  0.99397191 -0.02025567]
+[[ 0.99994981  0.00942534  0.00339806 -0.00492032]
+ [-0.00938181  0.9998765  -0.01260796 -0.00117697]
+ [-0.00351648  0.01257545  0.99991474  0.0231768 ]
  [ 0.          0.          0.          1.        ]]
 transform
-[[ 0.9991369   0.01684078 -0.03797168  0.25168141]
- [-0.01479081  0.998451    0.05363607  0.0835272 ]
- [ 0.03881614 -0.05302815  0.99783832  0.12399662]
+[[ 0.99906996  0.03863284  0.01915008 -0.01225163]
+ [-0.03903404  0.99901638  0.02103856  0.00789524]
+ [-0.01831847 -0.0217665   0.99959524  0.04248479]
  [ 0.          0.          0.          1.        ]]
 transform
-[[ 9.99999432e-01  1.06334148e-03  7.78034748e-05 -2.07301940e-03]
- [-1.06349527e-03  9.99997426e-01  2.00413174e-03 -4.91977463e-04]
- [-7.56721982e-05 -2.00421334e-03  9.99997989e-01 -5.76626248e-04]
- [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+[[ 0.99970229  0.01507418  0.0191857  -0.00898291]
+ [-0.01478192  0.99977391 -0.01528464  0.01011588]
+ [-0.01941176  0.01499649  0.9996991   0.02423725]
+ [ 0.          0.          0.          1.        ]]
+transform
+[[ 0.99907417  0.01291761  0.04103591 -0.00457797]
+ [-0.01133472  0.99919144 -0.03857453  0.01715727]
+ [-0.04150102  0.03807368  0.99841277  0.03539329]
+ [ 0.          0.          0.          1.        ]]
+transform
+[[ 0.99857538  0.03973653  0.0356121   0.02615849]
+ [-0.03776572  0.99780466 -0.05440232  0.03937088]
+ [-0.03769568  0.0529799   0.99788384  0.04436279]
+ [ 0.          0.          0.          1.        ]]
 subgoals
-[array([0.51566746, 0.0034283 , 0.06644963]), array([0.50682094, 0.00128157, 0.06644963]), array([0.50766122, 0.00161514, 0.06690333]), array([0.50675869, 0.00124002, 0.06644963]), array([0.52882894, 0.00929202, 0.08074426]), array([ 0.17718988, -0.12307659,  0.06644963]), array([ 0.42412244, -0.03841543,  0.20370696]), array([ 0.42202418, -0.03895011,  0.20317482])]
-grasp
+[array([0.51569979, 0.00108799, 0.06722519]), array([ 0.33354275, -0.08347043,  0.06722519]), array([ 0.34212664, -0.08755491,  0.11805963]), array([ 0.3367651 , -0.09341932,  0.13892224]), array([ 0.32325158, -0.09565477,  0.17721519]), array([ 0.31613051, -0.09300421,  0.19368975]), array([ 0.3180067 , -0.08682648,  0.21211486]), array([ 0.34781582, -0.07081428,  0.23944125])]
+current hand pos
+tensor([0.6879, 0.1641, 0.4885])
+suction
 placing above object
 action
-tensor([[ 0.1262,  0.0034, -0.1914,  1.0000]])
+tensor([[-0.1722, -0.1631, -0.2213,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.6923, 0.1571, 0.4840])
+suction
 placing above object
 action
-tensor([[ 0.1237,  0.0032, -0.1881,  1.0000]])
+tensor([[-0.1766, -0.1560, -0.2168,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.6843, 0.1407, 0.4704])
+suction
 placing above object
 action
-tensor([[ 0.1202,  0.0030, -0.1815,  1.0000]])
+tensor([[-0.1686, -0.1396, -0.2031,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.6725, 0.1206, 0.4573])
+suction
 placing above object
 action
-tensor([[ 0.1168,  0.0028, -0.1738,  1.0000]])
+tensor([[-0.1568, -0.1195, -0.1901,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.6581, 0.0993, 0.4447])
+suction
 placing above object
 action
-tensor([[ 0.1135,  0.0027, -0.1659,  1.0000]])
+tensor([[-0.1424, -0.0982, -0.1775,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.6416, 0.0789, 0.4314])
+suction
 placing above object
 action
-tensor([[ 0.1103,  0.0026, -0.1583,  1.0000]])
+tensor([[-0.1259, -0.0778, -0.1642,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.6235, 0.0607, 0.4163])
+suction
 placing above object
 action
-tensor([[ 0.1071,  0.0024, -0.1509,  1.0000]])
+tensor([[-0.1078, -0.0596, -0.1491,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.6045, 0.0458, 0.3992])
+suction
 placing above object
 action
-tensor([[ 0.1039,  0.0023, -0.1439,  1.0000]])
+tensor([[-0.0888, -0.0447, -0.1320,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5864, 0.0346, 0.3815])
+suction
 placing above object
 action
-tensor([[ 0.1008,  0.0022, -0.1371,  1.0000]])
+tensor([[-0.0707, -0.0335, -0.1142,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5702, 0.0268, 0.3644])
+suction
 placing above object
 action
-tensor([[ 0.0978,  0.0021, -0.1307,  1.0000]])
+tensor([[-0.0545, -0.0257, -0.0971,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5563, 0.0216, 0.3485])
+suction
 placing above object
 action
-tensor([[ 0.0948,  0.0020, -0.1245,  1.0000]])
+tensor([[-0.0406, -0.0205, -0.0813,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5448, 0.0184, 0.3342])
+suction
 placing above object
 action
-tensor([[ 0.0918,  0.0020, -0.1186,  1.0000]])
+tensor([[-0.0291, -0.0173, -0.0670,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5356, 0.0164, 0.3216])
+suction
 placing above object
 action
-tensor([[ 0.0889,  0.0019, -0.1130,  1.0000]])
+tensor([[-0.0199, -0.0153, -0.0543,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0861,  0.0018, -0.1076,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0833,  0.0017, -0.1025,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0806,  0.0016, -0.0976,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0779,  0.0016, -0.0929,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0753,  0.0015, -0.0885,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0727,  0.0015, -0.0842,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0702,  0.0014, -0.0802,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0678,  0.0013, -0.0763,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0654,  0.0013, -0.0726,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0631,  0.0012, -0.0691,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0609,  0.0012, -0.0657,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0587,  0.0012, -0.0625,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0566,  0.0011, -0.0595,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0545,  0.0011, -0.0566,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0525,  0.0010, -0.0538,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 0.0505,  0.0010, -0.0512,  1.0000]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 4.8665e-02,  9.8665e-04, -4.8655e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 4.6839e-02,  9.5889e-04, -4.6265e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 4.5069e-02,  9.3271e-04, -4.3989e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 4.3357e-02,  9.0780e-04, -4.1823e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 4.1699e-02,  8.8415e-04, -3.9761e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 4.0096e-02,  8.6140e-04, -3.7798e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 3.8547e-02,  8.3968e-04, -3.5930e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 3.7049e-02,  8.1850e-04, -3.4153e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 3.5603e-02,  7.9836e-04, -3.2462e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 3.4206e-02,  7.7860e-04, -3.0854e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 3.2858e-02,  7.5937e-04, -2.9323e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 3.1558e-02,  7.4054e-04, -2.7868e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 3.0303e-02,  7.2214e-04, -2.6483e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.9094e-02,  7.0414e-04, -2.5166e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.7928e-02,  6.8626e-04, -2.3914e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.6806e-02,  6.6873e-04, -2.2723e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.5724e-02,  6.5149e-04, -2.1591e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.4682e-02,  6.3434e-04, -2.0514e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.3679e-02,  6.1734e-04, -1.9491e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.2714e-02,  6.0070e-04, -1.8518e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.1786e-02,  5.8425e-04, -1.7593e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.0892e-02,  5.6779e-04, -1.6714e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-placing above object
-action
-tensor([[ 2.0032e-02,  5.5162e-04, -1.5878e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5282, 0.0152, 0.3106])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9206e-02,  5.3560e-04, -2.1508e-01,  1.0000e+00]])
+tensor([[-0.0125, -0.0141, -0.2534,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5283, 0.0126, 0.2987])
+suction
 dropping down on top of object
 action
-tensor([[ 1.8306e-02,  4.2725e-04, -2.1117e-01,  1.0000e+00]])
+tensor([[-0.0126, -0.0115, -0.2415,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5251, 0.0119, 0.2778])
+suction
 dropping down on top of object
 action
-tensor([[ 1.8299e-02,  3.1976e-04, -2.0389e-01,  1.0000e+00]])
+tensor([[-0.0094, -0.0108, -0.2206,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5200, 0.0127, 0.2516])
+suction
 dropping down on top of object
 action
-tensor([[ 1.8845e-02,  2.3573e-04, -1.9530e-01,  1.0000e+00]])
+tensor([[-0.0043, -0.0116, -0.1943,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5144, 0.0144, 0.2232])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9579e-02,  1.7096e-04, -1.8636e-01,  1.0000e+00]])
+tensor([[ 0.0013, -0.0133, -0.1660,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5091, 0.0163, 0.1952])
+suction
+dropping down on top of object
+action
+tensor([[ 0.0066, -0.0152, -0.1380,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5042, 0.0181, 0.1688])
+suction
 placing above object
 action
-tensor([[2.0326e-02, 1.2187e-04, 2.2503e-02, 1.0000e+00]])
+tensor([[ 0.0115, -0.0170,  0.0985,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.4861, 0.0223, 0.1420])
+suction
 placing above object
 action
-tensor([[2.1462e-02, 1.9709e-04, 2.7941e-02, 1.0000e+00]])
+tensor([[ 0.0296, -0.0212,  0.1253,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.4730, 0.0234, 0.1295])
+suction
 placing above object
 action
-tensor([[2.1567e-02, 2.7664e-04, 2.9642e-02, 1.0000e+00]])
+tensor([[ 0.0427, -0.0223,  0.1377,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.4661, 0.0223, 0.1288])
+suction
 placing above object
 action
-tensor([[2.0889e-02, 3.2972e-04, 2.9617e-02, 1.0000e+00]])
+tensor([[ 0.0496, -0.0212,  0.1384,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.4645, 0.0202, 0.1363])
+suction
+placing above object
+action
+tensor([[ 0.0512, -0.0191,  0.1310,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.4670, 0.0176, 0.1491])
+suction
+placing above object
+action
+tensor([[ 0.0487, -0.0165,  0.1181,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.4723, 0.0149, 0.1649])
+suction
+placing above object
+action
+tensor([[ 0.0434, -0.0138,  0.1023,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.4793, 0.0121, 0.1820])
+suction
+placing above object
+action
+tensor([[ 0.0364, -0.0110,  0.0852,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.4869, 0.0095, 0.1990])
+suction
+placing above object
+action
+tensor([[ 0.0288, -0.0084,  0.0682,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.4944, 0.0070, 0.2149])
+suction
+placing above object
+action
+tensor([[ 0.0213, -0.0059,  0.0523,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5012, 0.0047, 0.2292])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9873e-02,  3.6399e-04, -1.7118e-01,  1.0000e+00]])
+tensor([[ 0.0145, -0.0036, -0.1720,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.5188, -0.0010,  0.2404])
+suction
 dropping down on top of object
 action
-tensor([[ 1.8222e-02,  2.7185e-04, -1.6913e-01,  1.0000e+00]])
+tensor([[-0.0031,  0.0020, -0.1832,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.5298, -0.0040,  0.2402])
+suction
 dropping down on top of object
 action
-tensor([[ 1.7521e-02,  1.7982e-04, -1.6377e-01,  1.0000e+00]])
+tensor([[-0.0141,  0.0051, -0.1830,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.5352, -0.0053,  0.2310])
+suction
+placing above object
+action
+tensor([[-0.0195,  0.0064,  0.0363,  0.0000,  0.0000,  0.0000,  1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.5254, -0.0020,  0.2154])
+suction
 dropping down on top of object
 action
-tensor([[ 1.7548e-02,  1.1711e-04, -1.5707e-01,  1.0000e+00]])
+tensor([[-0.0097,  0.0030, -0.1582,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.5289, -0.0032,  0.2063])
+suction
 dropping down on top of object
 action
-tensor([[ 1.7867e-02,  7.5717e-05, -1.4994e-01,  1.0000e+00]])
+tensor([[-0.0132,  0.0043, -0.1491,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.5301, -0.0030,  0.1926])
+suction
 dropping down on top of object
 action
-tensor([[ 1.8268e-02,  4.9055e-05, -1.4281e-01,  1.0000e+00]])
+tensor([[-0.0144,  0.0041, -0.1354,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.5290, -0.0017,  0.1761])
+suction
 dropping down on top of object
 action
-tensor([[ 1.8658e-02,  3.3506e-05, -1.3585e-01,  1.0000e+00]])
+tensor([[-0.0133,  0.0028, -0.1189,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([5.2633e-01, 9.9139e-06, 1.5826e-01])
+suction
 dropping down on top of object
 action
-tensor([[ 1.8993e-02,  2.5879e-05, -1.2915e-01,  1.0000e+00]])
+tensor([[-0.0106,  0.0011, -0.1010,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5226, 0.0019, 0.1403])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9258e-02,  2.3988e-05, -1.2275e-01,  1.0000e+00]])
+tensor([[-6.8819e-03, -8.6008e-04, -8.3071e-02,  0.0000e+00,  0.0000e+00,
+          0.0000e+00,  1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5183, 0.0038, 0.1231])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9450e-02,  2.6193e-05, -1.1663e-01,  1.0000e+00]])
+tensor([[-0.0026, -0.0027, -0.0659,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5141, 0.0054, 0.1074])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9571e-02,  3.1242e-05, -1.1080e-01,  1.0000e+00]])
+tensor([[ 0.0016, -0.0043, -0.0502,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5102, 0.0065, 0.0936])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9624e-02,  3.8213e-05, -1.0525e-01,  1.0000e+00]])
+tensor([[ 0.0055, -0.0054, -0.0363,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5068, 0.0072, 0.0817])
+suction
 dropping down on top of object
 action
-tensor([[ 1.9616e-02,  4.6210e-05, -9.9971e-02,  1.0000e+00]])
+tensor([[ 0.0089, -0.0061, -0.0244,  0.0000,  0.0000,  0.0000,  1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.9552e-02,  5.4731e-05, -9.4950e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.9438e-02,  6.3590e-05, -9.0175e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.9278e-02,  7.2281e-05, -8.5635e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.9078e-02,  8.0719e-05, -8.1320e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.8843e-02,  8.8717e-05, -7.7219e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.8576e-02,  9.6131e-05, -7.3322e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.8283e-02,  1.0286e-04, -6.9618e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.7966e-02,  1.0926e-04, -6.6100e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
-dropping down on top of object
-action
-tensor([[ 1.7628e-02,  1.1479e-04, -6.2758e-02,  1.0000e+00]])
-position
-[2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5042, 0.0074, 0.0718])
+suction
 grabbing object
 action
-tensor([[ 1.7274e-02,  1.1985e-04, -5.9583e-02, -1.0000e+00]])
+tensor([[ 0.0115, -0.0063, -0.0146,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([0.5024, 0.0073, 0.0639])
+suction
+grasp waiting
+action
+tensor([[ 0.0133, -0.0062,  0.0034,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5006, 0.0069, 0.0576])
+suction
+grasp waiting
+action
+tensor([[ 0.0151, -0.0058,  0.0096,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.4998, 0.0062, 0.0536])
+suction
+grasp waiting
+action
+tensor([[ 0.0159, -0.0051,  0.0137,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5012, 0.0047, 0.0533])
+suction
+grasp waiting
+action
+tensor([[ 0.0145, -0.0036,  0.0139,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5036, 0.0032, 0.0558])
+suction
+grasp waiting
+action
+tensor([[ 0.0121, -0.0021,  0.0114,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5061, 0.0021, 0.0581])
+suction
+grasp waiting
+action
+tensor([[ 0.0096, -0.0010,  0.0091,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5084, 0.0013, 0.0600])
+suction
+grasp waiting
+action
+tensor([[ 7.2833e-03, -2.2332e-04,  7.1881e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([0.5104, 0.0007, 0.0617])
+suction
+grasp waiting
+action
+tensor([[ 5.3291e-03,  3.5832e-04,  5.5460e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([5.1196e-01, 3.2373e-04, 6.3007e-02])
+suction
+grasp waiting
+action
+tensor([[ 3.7378e-03,  7.6426e-04,  4.2186e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([5.1319e-01, 6.4135e-05, 6.4034e-02])
+suction
+grasp waiting
+action
+tensor([[ 0.0025,  0.0010,  0.0032,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 5.1409e-01, -7.1837e-05,  6.4789e-02])
+suction
 moving to next subgoal
-[0.50682094 0.00128157 0.06644963]
+[ 0.33354275 -0.08347043  0.06722519]
 action
-tensor([[ 0.0081, -0.0020, -0.0566, -1.0000]])
+tensor([[-0.1805, -0.0834,  0.0024,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.5061, -0.0048,  0.0644])
+suction
+moving to current subgoal
+[ 0.33354275 -0.08347043  0.06722519]
+0.1896958963747394
+action
+tensor([[-0.1726, -0.0787,  0.0028,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.4876, -0.0158,  0.0633])
+suction
+moving to current subgoal
+[ 0.33354275 -0.08347043  0.06722519]
+0.16827558955478975
+action
+tensor([[-0.1540, -0.0677,  0.0039,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.4655, -0.0252,  0.0619])
+suction
+moving to current subgoal
+[ 0.33354275 -0.08347043  0.06722519]
+0.1443869471486487
+action
+tensor([[-0.1320, -0.0583,  0.0054,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.4433, -0.0327,  0.0600])
+suction
+moving to current subgoal
+[ 0.33354275 -0.08347043  0.06722519]
+0.12117241752147993
+action
+tensor([[-0.1098, -0.0508,  0.0072,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.4225, -0.0392,  0.0582])
+suction
+moving to current subgoal
+[ 0.33354275 -0.08347043  0.06722519]
+0.0998384013746857
+action
+tensor([[-0.0890, -0.0443,  0.0090,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.4042, -0.0449,  0.0572])
+suction
+moving to current subgoal
+[ 0.33354275 -0.08347043  0.06722519]
+0.08111257891604963
+action
+tensor([[-0.0707, -0.0385,  0.0100,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3889, -0.0498,  0.0570])
+suction
 moving to next subgoal
-[0.50766122 0.00161514 0.06690333]
+[ 0.34212664 -0.08755491  0.11805963]
 action
-tensor([[ 0.0088, -0.0016, -0.0533, -1.0000]])
+tensor([[-0.0468, -0.0377,  0.0610,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.3734, -0.0521,  0.0578])
+suction
 moving to next subgoal
-[0.50675869 0.00124002 0.06644963]
+[ 0.3367651  -0.09341932  0.13892224]
 action
-tensor([[ 0.0080, -0.0019, -0.0510, -1.0000]])
+tensor([[-0.0367, -0.0413,  0.0811,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.3604, -0.0543,  0.0620])
+suction
+moving to current subgoal
+[ 0.3367651  -0.09341932  0.13892224]
+0.0894567947270739
+action
+tensor([[-0.0236, -0.0391,  0.0769,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3513, -0.0575,  0.0695])
+suction
 moving to next subgoal
-[0.52882894 0.00929202 0.08074426]
+[ 0.32325158 -0.09565477  0.17721519]
 action
-tensor([[ 0.0299,  0.0067, -0.0344, -1.0000]])
+tensor([[-0.0280, -0.0381,  0.1077,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.3432, -0.0606,  0.0796])
+suction
+moving to current subgoal
+[ 0.32325158 -0.09565477  0.17721519]
+0.10560378045453142
+action
+tensor([[-0.0199, -0.0351,  0.0976,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3372, -0.0645,  0.0924])
+suction
+moving to current subgoal
+[ 0.32325158 -0.09565477  0.17721519]
+0.09143910646374281
+action
+tensor([[-0.0139, -0.0312,  0.0848,  0.0000,  0.0000,  0.0000, -1.0000]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3334, -0.0687,  0.1065])
+suction
 moving to next subgoal
-[ 0.17718988 -0.12307659  0.06644963]
+[ 0.31613051 -0.09300421  0.19368975]
 action
-tensor([[-0.3228, -0.1253, -0.0472, -1.0000]])
+tensor([[-0.0173, -0.0243,  0.0872,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.33940134046087284
+current hand pos
+tensor([ 0.3298, -0.0721,  0.1208])
+suction
+moving to next subgoal
+[ 0.3180067  -0.08682648  0.21211486]
 action
-tensor([[-0.3126, -0.1234, -0.0475, -1.0000]])
+tensor([[-0.0118, -0.0148,  0.0913,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.32442182441652034
+current hand pos
+tensor([ 0.3267, -0.0745,  0.1355])
+suction
+moving to next subgoal
+[ 0.34781582 -0.07081428  0.23944125]
 action
-tensor([[-0.2978, -0.1197, -0.0473, -1.0000]])
+tensor([[ 0.0212,  0.0037,  0.1039,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
+current hand pos
+tensor([ 0.3260, -0.0757,  0.1510])
+suction
 moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.30886846781146127
+[ 0.34781582 -0.07081428  0.23944125]
+0.09118372714069056
 action
-tensor([[-0.2828, -0.1151, -0.0464, -1.0000]])
+tensor([[ 0.0218,  0.0049,  0.0884,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.29416936297617635
+current hand pos
+tensor([ 0.3282, -0.0760,  0.1670])
+suction
+executing subgoal
 action
-tensor([[-0.2688, -0.1103, -0.0457, -1.0000]])
+tensor([[ 0.0196,  0.0052,  0.0724,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.28066542166061526
+current hand pos
+tensor([ 0.3317, -0.0760,  0.1824])
+suction
+executing subgoal
 action
-tensor([[-0.2561, -0.1056, -0.0453, -1.0000]])
+tensor([[ 0.0161,  0.0052,  0.0571,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.2674906417655307
+current hand pos
+tensor([ 0.3356, -0.0758,  0.1964])
+suction
+executing subgoal
 action
-tensor([[-0.2437, -0.1009, -0.0447, -1.0000]])
+tensor([[ 0.0122,  0.0050,  0.0431,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.25576587422942865
+current hand pos
+tensor([ 0.3394, -0.0756,  0.2086])
+suction
+executing subgoal
 action
-tensor([[-0.2326, -0.0965, -0.0446, -1.0000]])
+tensor([[ 0.0085,  0.0048,  0.0309,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.24517317997929944
+current hand pos
+tensor([ 0.3427, -0.0755,  0.2188])
+suction
+executing subgoal
 action
-tensor([[-0.2226, -0.0924, -0.0447, -1.0000]])
+tensor([[ 0.0051,  0.0046,  0.0206,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.2350673259601808
+current hand pos
+tensor([ 0.3454, -0.0753,  0.2271])
+suction
+executing subgoal
 action
-tensor([[-0.2131, -0.0885, -0.0448, -1.0000]])
+tensor([[ 0.0024,  0.0045,  0.0123,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.22569592874757974
+current hand pos
+tensor([ 0.3475, -0.0751,  0.2335])
+suction
+executing subgoal
 action
-tensor([[-0.2043, -0.0847, -0.0449, -1.0000]])
+tensor([[ 3.1239e-04,  4.2799e-03,  5.9005e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.21676202860777452
+current hand pos
+tensor([ 0.3490, -0.0749,  0.2383])
+suction
+executing subgoal
 action
-tensor([[-0.1959, -0.0812, -0.0449, -1.0000]])
+tensor([[-0.0012,  0.0040,  0.0012,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.2084803049524456
+current hand pos
+tensor([ 0.3500, -0.0746,  0.2415])
+suction
+executing subgoal
 action
-tensor([[-0.1881, -0.0778, -0.0450, -1.0000]])
+tensor([[-0.0022,  0.0038, -0.0021,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.20072031802115586
+current hand pos
+tensor([ 0.3505, -0.0742,  0.2435])
+suction
+executing subgoal
 action
-tensor([[-0.1808, -0.0746, -0.0451, -1.0000]])
+tensor([[-0.0027,  0.0034, -0.0041,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.19340802664822165
+current hand pos
+tensor([ 0.3507, -0.0738,  0.2446])
+suction
+executing subgoal
 action
-tensor([[-0.1739, -0.0716, -0.0451, -1.0000]])
+tensor([[-0.0029,  0.0030, -0.0051,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.18661678974025928
+current hand pos
+tensor([ 0.3506, -0.0733,  0.2449])
+suction
+executing subgoal
 action
-tensor([[-0.1675, -0.0687, -0.0451, -1.0000]])
+tensor([[-0.0028,  0.0025, -0.0054,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.18022573407309708
+current hand pos
+tensor([ 0.3503, -0.0728,  0.2447])
+suction
+executing subgoal
 action
-tensor([[-0.1615, -0.0660, -0.0451, -1.0000]])
+tensor([[-0.0025,  0.0020, -0.0052,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.17423701000017555
+current hand pos
+tensor([ 0.3499, -0.0723,  0.2441])
+suction
+executing subgoal
 action
-tensor([[-0.1559, -0.0634, -0.0451, -1.0000]])
+tensor([[-0.0021,  0.0015, -0.0046,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.16865455401062804
+current hand pos
+tensor([ 0.3495, -0.0718,  0.2433])
+suction
+executing subgoal
 action
-tensor([[-0.1506, -0.0609, -0.0452, -1.0000]])
+tensor([[-1.6732e-03,  9.6376e-04, -3.8095e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.16337390764536705
+current hand pos
+tensor([ 0.3490, -0.0713,  0.2423])
+suction
+executing subgoal
 action
-tensor([[-0.1457, -0.0586, -0.0451, -1.0000]])
+tensor([[-1.2030e-03,  4.7088e-04, -2.8850e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.15859320463766466
+current hand pos
+tensor([ 0.3486, -0.0708,  0.2414])
+suction
+executing subgoal
 action
-tensor([[-0.1412, -0.0563, -0.0452, -1.0000]])
+tensor([[-7.4443e-04,  1.7186e-05, -1.9333e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.15392692713310624
+current hand pos
+tensor([ 0.3481, -0.0704,  0.2405])
+suction
+executing subgoal
 action
-tensor([[-0.1368, -0.0542, -0.0451, -1.0000]])
+tensor([[-3.2010e-04, -3.8523e-04, -1.0152e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.14933423704590634
+current hand pos
+tensor([ 0.3478, -0.0701,  0.2396])
+suction
+executing subgoal
 action
-tensor([[-0.1325, -0.0522, -0.0449, -1.0000]])
+tensor([[ 5.6719e-05, -7.2941e-04, -1.6981e-04,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.14512491483354725
+current hand pos
+tensor([ 0.3474, -0.0698,  0.2389])
+suction
+executing subgoal
 action
-tensor([[-0.1285, -0.0504, -0.0448, -1.0000]])
+tensor([[ 3.7906e-04, -1.0117e-03,  5.7986e-04,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.1411227111108535
+current hand pos
+tensor([ 0.3472, -0.0696,  0.2382])
+suction
+executing subgoal
 action
-tensor([[-0.1248, -0.0485, -0.0446, -1.0000]])
+tensor([[ 6.4549e-04, -1.2324e-03,  1.2246e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.1374559565235856
+current hand pos
+tensor([ 0.3470, -0.0694,  0.2377])
+suction
+executing subgoal
 action
-tensor([[-0.1213, -0.0468, -0.0445, -1.0000]])
+tensor([[ 8.5778e-04, -1.3948e-03,  1.7632e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.13425332518523653
+current hand pos
+tensor([ 0.3468, -0.0693,  0.2372])
+suction
+executing subgoal
 action
-tensor([[-0.1184, -0.0452, -0.0445, -1.0000]])
+tensor([[ 0.0010, -0.0015,  0.0022,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.13127518659805518
+current hand pos
+tensor([ 0.3467, -0.0692,  0.2369])
+suction
+executing subgoal
 action
-tensor([[-0.1156, -0.0436, -0.0445, -1.0000]])
+tensor([[ 0.0011, -0.0016,  0.0025,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.1285074591507156
+current hand pos
+tensor([ 0.3466, -0.0692,  0.2366])
+suction
+executing subgoal
 action
-tensor([[-0.1130, -0.0421, -0.0445, -1.0000]])
+tensor([[ 0.0012, -0.0016,  0.0028,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.12587557939639094
+current hand pos
+tensor([ 0.3465, -0.0692,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.1106, -0.0406, -0.0444, -1.0000]])
+tensor([[ 0.0013, -0.0016,  0.0030,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.12348402576514911
+current hand pos
+tensor([ 0.3465, -0.0693,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.1083, -0.0392, -0.0444, -1.0000]])
+tensor([[ 0.0013, -0.0016,  0.0032,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.1212227406739059
+current hand pos
+tensor([ 0.3465, -0.0693,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.1062, -0.0379, -0.0444, -1.0000]])
+tensor([[ 0.0013, -0.0015,  0.0032,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.11914564791164164
+current hand pos
+tensor([ 0.3465, -0.0694,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.1043, -0.0367, -0.0444, -1.0000]])
+tensor([[ 0.0013, -0.0014,  0.0033,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.11722662189857314
+current hand pos
+tensor([ 0.3465, -0.0694,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.1025, -0.0355, -0.0444, -1.0000]])
+tensor([[ 0.0013, -0.0014,  0.0033,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.11537637125599191
+current hand pos
+tensor([ 0.3466, -0.0695,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.1008, -0.0344, -0.0444, -1.0000]])
+tensor([[ 0.0013, -0.0013,  0.0034,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.11373335509227317
+current hand pos
+tensor([ 0.3466, -0.0696,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.0993, -0.0333, -0.0444, -1.0000]])
+tensor([[ 0.0012, -0.0012,  0.0034,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.11207195729562483
+current hand pos
+tensor([ 0.3466, -0.0696,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.0977, -0.0323, -0.0444, -1.0000]])
+tensor([[ 0.0012, -0.0012,  0.0034,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.110800496614288
+current hand pos
+tensor([ 0.3466, -0.0697,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.0965, -0.0313, -0.0445, -1.0000]])
+tensor([[ 0.0012, -0.0011,  0.0034,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10944286323262255
+current hand pos
+tensor([ 0.3466, -0.0697,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.0952, -0.0305, -0.0445, -1.0000]])
+tensor([[ 0.0012, -0.0011,  0.0033,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10809891157821554
+current hand pos
+tensor([ 0.3467, -0.0698,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.0940, -0.0296, -0.0445, -1.0000]])
+tensor([[ 0.0012, -0.0010,  0.0033,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.1069377021822656
+current hand pos
+tensor([ 0.3467, -0.0698,  0.2361])
+suction
+executing subgoal
 action
-tensor([[-0.0929, -0.0288, -0.0444, -1.0000]])
+tensor([[ 0.0011, -0.0010,  0.0033,  0.0000,  0.0000,  0.0000, -1.0000]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10587323076807337
+current hand pos
+tensor([ 0.3467, -0.0698,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0919, -0.0281, -0.0444, -1.0000]])
+tensor([[ 1.1177e-03, -9.7650e-04,  3.2878e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10486538179795349
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0910, -0.0274, -0.0444, -1.0000]])
+tensor([[ 1.1056e-03, -9.5519e-04,  3.2727e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.1038862577589525
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0900, -0.0268, -0.0444, -1.0000]])
+tensor([[ 1.0951e-03, -9.3885e-04,  3.2570e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10302681541898448
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0892, -0.0262, -0.0444, -1.0000]])
+tensor([[ 1.0872e-03, -9.2758e-04,  3.2427e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10225868359988835
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0885, -0.0257, -0.0444, -1.0000]])
+tensor([[ 1.0803e-03, -9.1940e-04,  3.2301e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10151993908547921
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0877, -0.0253, -0.0443, -1.0000]])
+tensor([[ 1.0753e-03, -9.1508e-04,  3.2182e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10091341529669935
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0871, -0.0250, -0.0443, -1.0000]])
+tensor([[ 1.0715e-03, -9.1302e-04,  3.2083e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.10032488268956213
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2362])
+suction
+executing subgoal
 action
-tensor([[-0.0865, -0.0247, -0.0443, -1.0000]])
+tensor([[ 1.0685e-03, -9.1260e-04,  3.1985e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09975840670230227
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0860, -0.0244, -0.0443, -1.0000]])
+tensor([[ 1.0661e-03, -9.1351e-04,  3.1886e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09920063164297145
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0854, -0.0241, -0.0443, -1.0000]])
+tensor([[ 1.0646e-03, -9.1548e-04,  3.1803e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0987571284112281
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0850, -0.0239, -0.0443, -1.0000]])
+tensor([[ 1.0638e-03, -9.1795e-04,  3.1739e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09843440053227735
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0846, -0.0237, -0.0443, -1.0000]])
+tensor([[ 1.0631e-03, -9.2075e-04,  3.1678e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0979183327020779
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0841, -0.0235, -0.0443, -1.0000]])
+tensor([[ 1.0628e-03, -9.2360e-04,  3.1617e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0974695034229904
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0837, -0.0233, -0.0442, -1.0000]])
+tensor([[ 1.0626e-03, -9.2652e-04,  3.1563e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09714028757567693
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0833, -0.0231, -0.0443, -1.0000]])
+tensor([[ 1.0623e-03, -9.2890e-04,  3.1510e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09682254609419653
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0830, -0.0230, -0.0443, -1.0000]])
+tensor([[ 1.0622e-03, -9.3091e-04,  3.1461e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09654989796398543
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0827, -0.0229, -0.0442, -1.0000]])
+tensor([[ 1.0621e-03, -9.3257e-04,  3.1414e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0961861520128991
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0823, -0.0227, -0.0442, -1.0000]])
+tensor([[ 1.0621e-03, -9.3427e-04,  3.1371e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0958044297328249
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0819, -0.0226, -0.0442, -1.0000]])
+tensor([[ 1.0621e-03, -9.3577e-04,  3.1339e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09563246742687023
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0818, -0.0225, -0.0442, -1.0000]])
+tensor([[ 1.0624e-03, -9.3716e-04,  3.1308e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09541683721290176
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0815, -0.0224, -0.0442, -1.0000]])
+tensor([[ 1.0628e-03, -9.3813e-04,  3.1283e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09520258117283817
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0813, -0.0224, -0.0442, -1.0000]])
+tensor([[ 1.0632e-03, -9.3882e-04,  3.1257e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09495730457427819
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0810, -0.0223, -0.0442, -1.0000]])
+tensor([[ 1.0635e-03, -9.3968e-04,  3.1237e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09468016616489687
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0807, -0.0222, -0.0442, -1.0000]])
+tensor([[ 1.0638e-03, -9.4022e-04,  3.1218e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09441676111090887
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0804, -0.0222, -0.0441, -1.0000]])
+tensor([[ 1.0644e-03, -9.4084e-04,  3.1202e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.094231535569025
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0802, -0.0223, -0.0442, -1.0000]])
+tensor([[ 1.0649e-03, -9.4152e-04,  3.1188e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09412412250792267
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0801, -0.0222, -0.0442, -1.0000]])
+tensor([[ 1.0653e-03, -9.4208e-04,  3.1176e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0938488357592593
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0798, -0.0222, -0.0442, -1.0000]])
+tensor([[ 1.0657e-03, -9.4254e-04,  3.1162e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09369374840626828
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0796, -0.0222, -0.0442, -1.0000]])
+tensor([[ 1.0662e-03, -9.4290e-04,  3.1145e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09354831419340853
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0794, -0.0221, -0.0442, -1.0000]])
+tensor([[ 1.0663e-03, -9.4316e-04,  3.1129e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09330158604364197
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0792, -0.0221, -0.0442, -1.0000]])
+tensor([[ 1.0666e-03, -9.4332e-04,  3.1111e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09313453799125401
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0790, -0.0220, -0.0442, -1.0000]])
+tensor([[ 1.0668e-03, -9.4348e-04,  3.1094e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09288971968531358
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0787, -0.0219, -0.0442, -1.0000]])
+tensor([[ 1.0669e-03, -9.4357e-04,  3.1075e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09277455441515604
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0786, -0.0219, -0.0442, -1.0000]])
+tensor([[ 1.0667e-03, -9.4358e-04,  3.1053e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09254751708885495
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0783, -0.0218, -0.0442, -1.0000]])
+tensor([[ 1.0668e-03, -9.4347e-04,  3.1031e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09245551137411147
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0782, -0.0217, -0.0442, -1.0000]])
+tensor([[ 1.0666e-03, -9.4326e-04,  3.1003e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09227597922707931
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0781, -0.0216, -0.0442, -1.0000]])
+tensor([[ 1.0663e-03, -9.4293e-04,  3.0977e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0920964086665669
+current hand pos
+tensor([ 0.3467, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0779, -0.0215, -0.0442, -1.0000]])
+tensor([[ 1.0660e-03, -9.4253e-04,  3.0949e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09188757024333516
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2363])
+suction
+executing subgoal
 action
-tensor([[-0.0776, -0.0215, -0.0442, -1.0000]])
+tensor([[ 1.0657e-03, -9.4203e-04,  3.0919e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0917927537264617
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0776, -0.0214, -0.0442, -1.0000]])
+tensor([[ 1.0654e-03, -9.4164e-04,  3.0890e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09157327222818973
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0773, -0.0213, -0.0442, -1.0000]])
+tensor([[ 1.0651e-03, -9.4146e-04,  3.0864e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09141208504041072
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0771, -0.0213, -0.0442, -1.0000]])
+tensor([[ 1.0650e-03, -9.4122e-04,  3.0837e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09131702851954968
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0770, -0.0212, -0.0442, -1.0000]])
+tensor([[ 1.0648e-03, -9.4100e-04,  3.0807e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0911994641975265
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0769, -0.0211, -0.0442, -1.0000]])
+tensor([[ 1.0645e-03, -9.4060e-04,  3.0778e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09107029377691583
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0768, -0.0210, -0.0442, -1.0000]])
+tensor([[ 1.0642e-03, -9.4032e-04,  3.0748e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09088506839895577
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0766, -0.0210, -0.0442, -1.0000]])
+tensor([[ 1.0641e-03, -9.4017e-04,  3.0719e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09085885483324747
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0765, -0.0211, -0.0442, -1.0000]])
+tensor([[ 1.0642e-03, -9.4013e-04,  3.0693e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09086090481913989
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0765, -0.0211, -0.0442, -1.0000]])
+tensor([[ 1.0641e-03, -9.3997e-04,  3.0664e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09083886507939777
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0765, -0.0211, -0.0442, -1.0000]])
+tensor([[ 1.0639e-03, -9.3989e-04,  3.0636e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0906394565251184
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0763, -0.0210, -0.0442, -1.0000]])
+tensor([[ 1.0636e-03, -9.3959e-04,  3.0605e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09048203059055776
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0762, -0.0208, -0.0442, -1.0000]])
+tensor([[ 1.0635e-03, -9.3930e-04,  3.0576e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09037054640287932
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0761, -0.0207, -0.0442, -1.0000]])
+tensor([[ 1.0633e-03, -9.3887e-04,  3.0541e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0901785028001099
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0759, -0.0206, -0.0442, -1.0000]])
+tensor([[ 1.0629e-03, -9.3870e-04,  3.0505e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.09013996656530812
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0758, -0.0206, -0.0442, -1.0000]])
+tensor([[ 1.0625e-03, -9.3834e-04,  3.0469e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08995837569678314
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0756, -0.0205, -0.0442, -1.0000]])
+tensor([[ 1.0622e-03, -9.3793e-04,  3.0436e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08979304937097927
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0755, -0.0204, -0.0442, -1.0000]])
+tensor([[ 1.0615e-03, -9.3751e-04,  3.0402e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08967559338878393
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0753, -0.0202, -0.0442, -1.0000]])
+tensor([[ 1.0614e-03, -9.3709e-04,  3.0373e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0896835720423713
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0753, -0.0203, -0.0442, -1.0000]])
+tensor([[ 1.0611e-03, -9.3694e-04,  3.0346e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08964658062433176
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0753, -0.0205, -0.0442, -1.0000]])
+tensor([[ 1.0610e-03, -9.3684e-04,  3.0321e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08964629850629934
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0752, -0.0206, -0.0442, -1.0000]])
+tensor([[ 1.0608e-03, -9.3673e-04,  3.0298e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08960579705130829
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0752, -0.0206, -0.0442, -1.0000]])
+tensor([[ 1.0610e-03, -9.3682e-04,  3.0280e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08952377331075902
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0750, -0.0208, -0.0442, -1.0000]])
+tensor([[ 1.0614e-03, -9.3702e-04,  3.0264e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08956847413226347
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0750, -0.0209, -0.0442, -1.0000]])
+tensor([[ 1.0614e-03, -9.3714e-04,  3.0245e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0895332097392058
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0750, -0.0208, -0.0442, -1.0000]])
+tensor([[ 1.0616e-03, -9.3722e-04,  3.0229e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08949091478584528
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0750, -0.0208, -0.0442, -1.0000]])
+tensor([[ 1.0615e-03, -9.3745e-04,  3.0212e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08944115810215966
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0749, -0.0210, -0.0442, -1.0000]])
+tensor([[ 1.0614e-03, -9.3729e-04,  3.0191e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08940590349996064
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0748, -0.0210, -0.0442, -1.0000]])
+tensor([[ 1.0613e-03, -9.3731e-04,  3.0171e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08938998827870562
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0748, -0.0210, -0.0442, -1.0000]])
+tensor([[ 1.0614e-03, -9.3755e-04,  3.0153e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08931630667763044
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0747, -0.0211, -0.0442, -1.0000]])
+tensor([[ 1.0614e-03, -9.3754e-04,  3.0133e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08933016327955738
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0747, -0.0212, -0.0442, -1.0000]])
+tensor([[ 1.0616e-03, -9.3780e-04,  3.0116e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08930582174360283
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0746, -0.0212, -0.0442, -1.0000]])
+tensor([[ 1.0617e-03, -9.3804e-04,  3.0102e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08928750360729923
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0746, -0.0214, -0.0442, -1.0000]])
+tensor([[ 1.0617e-03, -9.3821e-04,  3.0083e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08926047429992319
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0745, -0.0215, -0.0442, -1.0000]])
+tensor([[ 1.0618e-03, -9.3819e-04,  3.0065e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08923896852668721
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0745, -0.0215, -0.0442, -1.0000]])
+tensor([[ 1.0617e-03, -9.3821e-04,  3.0044e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08922328857598401
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0745, -0.0215, -0.0442, -1.0000]])
+tensor([[ 1.0617e-03, -9.3820e-04,  3.0022e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08915507712804266
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0744, -0.0216, -0.0441, -1.0000]])
+tensor([[ 1.0616e-03, -9.3811e-04,  2.9997e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0892057793684813
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0744, -0.0218, -0.0442, -1.0000]])
+tensor([[ 1.0616e-03, -9.3819e-04,  2.9973e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08909600976023248
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0743, -0.0218, -0.0441, -1.0000]])
+tensor([[ 1.0614e-03, -9.3795e-04,  2.9949e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0891226679011095
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2364])
+suction
+executing subgoal
 action
-tensor([[-0.0742, -0.0220, -0.0441, -1.0000]])
+tensor([[ 1.0612e-03, -9.3784e-04,  2.9923e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08913135486353954
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0742, -0.0220, -0.0442, -1.0000]])
+tensor([[ 1.0610e-03, -9.3764e-04,  2.9895e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08910193713818608
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0742, -0.0220, -0.0442, -1.0000]])
+tensor([[ 1.0606e-03, -9.3714e-04,  2.9865e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08898775500974776
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0741, -0.0220, -0.0441, -1.0000]])
+tensor([[ 1.0604e-03, -9.3701e-04,  2.9840e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08900188537637721
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0740, -0.0222, -0.0441, -1.0000]])
+tensor([[ 1.0603e-03, -9.3688e-04,  2.9816e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08901489615126285
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0740, -0.0223, -0.0442, -1.0000]])
+tensor([[ 1.0602e-03, -9.3688e-04,  2.9794e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08890936888646632
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0739, -0.0223, -0.0441, -1.0000]])
+tensor([[ 1.0599e-03, -9.3645e-04,  2.9770e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08896425736773945
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0739, -0.0225, -0.0442, -1.0000]])
+tensor([[ 1.0597e-03, -9.3637e-04,  2.9747e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08893275515933924
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0738, -0.0225, -0.0442, -1.0000]])
+tensor([[ 1.0595e-03, -9.3606e-04,  2.9725e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08890224599944031
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0738, -0.0225, -0.0442, -1.0000]])
+tensor([[ 1.0590e-03, -9.3587e-04,  2.9700e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08886001485184393
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0737, -0.0226, -0.0442, -1.0000]])
+tensor([[ 1.0586e-03, -9.3554e-04,  2.9674e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08883576632149126
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0737, -0.0228, -0.0441, -1.0000]])
+tensor([[ 1.0584e-03, -9.3541e-04,  2.9653e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08883823120229083
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0736, -0.0228, -0.0442, -1.0000]])
+tensor([[ 1.0581e-03, -9.3525e-04,  2.9633e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08879425358752523
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0736, -0.0229, -0.0441, -1.0000]])
+tensor([[ 1.0579e-03, -9.3476e-04,  2.9612e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08879679183885845
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0735, -0.0231, -0.0441, -1.0000]])
+tensor([[ 1.0575e-03, -9.3444e-04,  2.9590e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08875156043680825
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0735, -0.0231, -0.0441, -1.0000]])
+tensor([[ 1.0572e-03, -9.3412e-04,  2.9567e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08871703805583882
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0734, -0.0232, -0.0441, -1.0000]])
+tensor([[ 1.0567e-03, -9.3368e-04,  2.9540e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08872616880620991
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0734, -0.0234, -0.0441, -1.0000]])
+tensor([[ 1.0561e-03, -9.3322e-04,  2.9515e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08868008080243277
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0733, -0.0233, -0.0441, -1.0000]])
+tensor([[ 1.0557e-03, -9.3276e-04,  2.9490e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08862211289176787
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0732, -0.0234, -0.0441, -1.0000]])
+tensor([[ 1.0552e-03, -9.3226e-04,  2.9463e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08863346329673522
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0732, -0.0236, -0.0441, -1.0000]])
+tensor([[ 1.0548e-03, -9.3188e-04,  2.9434e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08863083264174544
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0731, -0.0236, -0.0441, -1.0000]])
+tensor([[ 1.0543e-03, -9.3135e-04,  2.9408e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08859524710079465
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0731, -0.0236, -0.0441, -1.0000]])
+tensor([[ 1.0539e-03, -9.3081e-04,  2.9380e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0885238290571808
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0730, -0.0238, -0.0441, -1.0000]])
+tensor([[ 1.0537e-03, -9.3064e-04,  2.9356e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08854724649911141
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0730, -0.0239, -0.0441, -1.0000]])
+tensor([[ 1.0533e-03, -9.3047e-04,  2.9330e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08843903185623592
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0728, -0.0239, -0.0441, -1.0000]])
+tensor([[ 1.0533e-03, -9.3027e-04,  2.9304e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.088458081837932
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0728, -0.0241, -0.0441, -1.0000]])
+tensor([[ 1.0533e-03, -9.3029e-04,  2.9280e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0884673077646188
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0728, -0.0242, -0.0441, -1.0000]])
+tensor([[ 1.0532e-03, -9.3027e-04,  2.9258e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08841065959076612
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0727, -0.0241, -0.0441, -1.0000]])
+tensor([[ 1.0532e-03, -9.3017e-04,  2.9236e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08838998222313246
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0727, -0.0243, -0.0441, -1.0000]])
+tensor([[ 1.0530e-03, -9.3009e-04,  2.9212e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08839503661281152
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0726, -0.0245, -0.0441, -1.0000]])
+tensor([[ 1.0528e-03, -9.2992e-04,  2.9187e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0883443902964289
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0725, -0.0244, -0.0441, -1.0000]])
+tensor([[ 1.0527e-03, -9.2984e-04,  2.9164e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08832762412620149
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0725, -0.0244, -0.0441, -1.0000]])
+tensor([[ 1.0525e-03, -9.2968e-04,  2.9138e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08824363339580894
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0724, -0.0246, -0.0441, -1.0000]])
+tensor([[ 1.0523e-03, -9.2953e-04,  2.9114e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08827061872300122
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0724, -0.0246, -0.0441, -1.0000]])
+tensor([[ 1.0522e-03, -9.2957e-04,  2.9093e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08823289901123109
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0724, -0.0246, -0.0441, -1.0000]])
+tensor([[ 1.0522e-03, -9.2978e-04,  2.9073e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08818953187639604
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0723, -0.0246, -0.0441, -1.0000]])
+tensor([[ 1.0523e-03, -9.2993e-04,  2.9052e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08813911096905999
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0722, -0.0247, -0.0441, -1.0000]])
+tensor([[ 1.0524e-03, -9.3014e-04,  2.9032e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08811783859741272
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0722, -0.0248, -0.0441, -1.0000]])
+tensor([[ 1.0527e-03, -9.3029e-04,  2.9014e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08810595476760519
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0721, -0.0248, -0.0441, -1.0000]])
+tensor([[ 1.0530e-03, -9.3049e-04,  2.8994e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.08797021185636669
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0720, -0.0248, -0.0441, -1.0000]])
+tensor([[ 1.0530e-03, -9.3056e-04,  2.8971e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0880184722743031
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
 action
-tensor([[-0.0720, -0.0250, -0.0441, -1.0000]])
+tensor([[ 1.0530e-03, -9.3056e-04,  2.8946e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
 position
 [2.  0.5 1. ]
-grasp
-moving to current subgoal
-[ 0.17718988 -0.12307659  0.06644963]
-0.0879779308293826
-action
-tensor([[-0.0719, -0.0250, -0.0441, -1.0000]])
-position
-[2.  0.5 1. ]
-[INFO] Rollout finished after 250 steps (4.30s).
-[INFO] Saved rollout video to debug/Isaac-Lift-Cube-Franka-IK-Rel-v0-1765585959.mp4
-2025-12-13T00:28:57Z [1,835ms] [Warning] [carb.windowing-glfw.plugin] GLFW initialization failed.
-2025-12-13T00:28:57Z [1,835ms] [Warning] [carb] Failed to startup plugin carb.windowing-glfw.plugin (interfaces: [carb::windowing::IGLContext v1.0],[carb::windowing::IWindowing v1.5]) (impl: carb.windowing-glfw.plugin)
-2025-12-13T00:28:57Z [1,981ms] [Warning] [omni.log] Source: omni.hydra was already registered.
-2025-12-13T00:28:57Z [2,299ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
-2025-12-13T00:28:57Z [2,312ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
-2025-12-13T00:29:00Z [4,575ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
-2025-12-13T00:29:00Z [4,697ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
-2025-12-13T00:29:00Z [4,697ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
-2025-12-13T00:29:00Z [4,698ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
-2025-12-13T00:29:04Z [8,929ms] [Warning] [omni.fabric.plugin] Warning: attribute viewPickingId not found for bucket id 7
-
-2025-12-13T00:29:27Z [31,983ms] [Warning] [rtx.postprocessing.plugin] DLSS increasing input dimensions: Render resolution of (186, 139) is below minimal input resolution of 300.
-2025-12-13T00:29:27Z [32,060ms] [Warning] [omni.syntheticdata.plugin] OgnSdPostRenderVarToHost : rendervar copy from texture directly to host buffer is counter-performant. Please use copy from texture to device buffer first.
-2025-12-13T00:32:37Z [221,404ms] [Warning] [carb] Client gpu.foundation.plugin has acquired [gpu::unstable::IMemoryBudgetManagerFactory v0.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2365])
+suction
+executing subgoal
+action
+tensor([[ 1.0528e-03, -9.3047e-04,  2.8923e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0526e-03, -9.3041e-04,  2.8898e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0525e-03, -9.3036e-04,  2.8873e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0525e-03, -9.3004e-04,  2.8848e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0523e-03, -9.2986e-04,  2.8823e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0521e-03, -9.2957e-04,  2.8800e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0518e-03, -9.2941e-04,  2.8777e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0516e-03, -9.2904e-04,  2.8754e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0516e-03, -9.2877e-04,  2.8732e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0513e-03, -9.2869e-04,  2.8713e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0511e-03, -9.2837e-04,  2.8690e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0508e-03, -9.2796e-04,  2.8665e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0506e-03, -9.2776e-04,  2.8641e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0501e-03, -9.2725e-04,  2.8617e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0499e-03, -9.2700e-04,  2.8595e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0496e-03, -9.2685e-04,  2.8572e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0492e-03, -9.2656e-04,  2.8547e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0487e-03, -9.2618e-04,  2.8521e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0483e-03, -9.2562e-04,  2.8496e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0476e-03, -9.2500e-04,  2.8467e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0470e-03, -9.2446e-04,  2.8436e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+current hand pos
+tensor([ 0.3468, -0.0699,  0.2366])
+suction
+executing subgoal
+action
+tensor([[ 1.0467e-03, -9.2421e-04,  2.8415e-03,  0.0000e+00,  0.0000e+00,
+          0.0000e+00, -1.0000e+00]])
+position
+[2.  0.5 1. ]
+[INFO] Rollout finished after 250 steps (8.52s).
+[INFO] Saved rollout video to debug/Isaac-Lift-Cube-UR10-IK-Rel-v0-1765755343.mp4
+2025-12-14T23:34:47Z [17,651ms] [Warning] [omni.fabric.plugin] getAttributeCount called on non-existent path /World/envs/env_0/Robot/wrist_3_link/visuals/wrist3
+2025-12-14T23:34:47Z [17,651ms] [Warning] [omni.fabric.plugin] getTypes called on non-existent path /World/envs/env_0/Robot/wrist_3_link/visuals/wrist3
+2025-12-14T23:34:48Z [18,517ms] [Warning] [rtx.postprocessing.plugin] DLSS increasing input dimensions: Render resolution of (186, 139) is below minimal input resolution of 300.
+2025-12-14T23:34:48Z [18,580ms] [Warning] [omni.syntheticdata.plugin] OgnSdPostRenderVarToHost : rendervar copy from texture directly to host buffer is counter-performant. Please use copy from texture to device buffer first.
+2025-12-14T23:35:37Z [66,800ms] [Warning] [carb] Client gpu.foundation.plugin has acquired [gpu::unstable::IMemoryBudgetManagerFactory v0.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
