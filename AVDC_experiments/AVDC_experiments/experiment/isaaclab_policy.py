@@ -488,12 +488,12 @@ class IsaacMyPolicyCL:
         else:
             if self.sample_images:
                 print('USING SAMPLES IMAGES')
-                # self._sample_and_copy_files_spaced(
-                #     self.sample_dir,
-                #     self.diffusion_images_dir,
-                #     8,
-                #     self.random_seed,
-                # )
+                self._sample_and_copy_files_spaced(
+                    self.sample_dir,
+                    self.diffusion_images_dir,
+                    8,
+                    self.random_seed,
+                )
             images = self._load_diffusion_images(image)
         save_generated_path = f'AVDC_experiments/AVDC_experiments/experiment/diffusion_images/{self.task_prompt}'
         os.makedirs(save_generated_path, exist_ok=True)
@@ -534,6 +534,7 @@ class IsaacMyPolicyCL:
                 tracker_result = None
                 warnings.warn(f"LocoTrack planning failed, falling back to optical flow: {exc}")
             time_motion = time.time() - tracker_start
+            print(f"LocoTrack motion time: {time_motion}")
             if tracker_result is not None:
                 grasp, transform_mats, time_motion, time_action = tracker_result
             else:
@@ -541,8 +542,10 @@ class IsaacMyPolicyCL:
 
         if transform_mats is None or grasp is None:
             backend_used = "flow"
+            tracker_start = time.time()
             grasp, transform_mats, time_motion, time_action = self._flow_motion_plan(images, depth, seg, cmat)
-
+            time_motion = time.time() - tracker_start
+            print(f"Flow motion time: {time_motion}")
         if self.log:
             t = max(len(transform_mats) if transform_mats else 1, 1)
             print(

@@ -1,0 +1,41 @@
+Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/user.config.json'
+[Info] [carb] Logging to file: /home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20251214_221720.log
+2025-12-15T03:17:20Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/d7a27fa1-fb60-4462-e0ea199b-c042b149.dmp'
+2025-12-15T03:17:20Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/0272cd41-73cf-45cb-c46fd3ae-b2799dbc.dmp'
+2025-12-15T03:17:20Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/e0431db7-766d-4df9-db7132bc-383d5efb.dmp'
+
+|---------------------------------------------------------------------------------------------|
+| Driver Version: 580.95.05     | Graphics API: Vulkan
+|=============================================================================================|
+| GPU | Name                             | Active | LDA | GPU Memory | Vendor-ID | LUID       |
+|     |                                  |        |     |            | Device-ID | UUID       |
+|     |                                  |        |     |            | Bus-ID    |            |
+|---------------------------------------------------------------------------------------------|
+| 0   | NVIDIA GeForce RTX 5070          | Yes: 0 |     | 12227   MB | 10de      | 0          |
+|     |                                  |        |     |            | 2f04      | 9ce59851.. |
+|     |                                  |        |     |            | 26        |            |
+|=============================================================================================|
+| OS: 24.04.3 LTS (Noble Numbat) ubuntu, Version: 24.04.3, Kernel: 6.14.0-37-generic
+| XServer Vendor: The X.Org Foundation, XServer Version: 12101011 (1.21.1.11)
+| Processor: AMD Ryzen 7 3700X 8-Core Processor
+| Cores: 8 | Logical Cores: 16
+|---------------------------------------------------------------------------------------------|
+| Total Memory (MB): 32018 | Free Memory: 16500
+| Total Page/Swap (MB): 8191 | Free Page/Swap: 5922
+|---------------------------------------------------------------------------------------------|
+2025-12-15T03:17:21Z [1,001ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
+2025-12-15T03:17:22Z [2,116ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+2025-12-15T03:17:22Z [2,467ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
+2025-12-15T03:17:22Z [2,713ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+2025-12-15T03:17:25Z [5,005ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+2025-12-15T03:17:25Z [5,353ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
+2025-12-15T03:17:25Z [5,353ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
+2025-12-15T03:17:25Z [5,354ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+2025-12-15T03:17:27Z [7,829ms] [Warning] [omni.fabric.plugin] Warning: attribute viewportHandle not found for bucket id 9
+
+[INFO][AppLauncher]: Using device: cpu
+[INFO][AppLauncher]: Loading experience file: /home/grant-rinehimer/cornell/dl_robotics/IsaacLab/apps/isaaclab.python.rendering.kit
+here
+here before _run
+[INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.ik_rel_env_cfg:FrankaCubeLiftEnvCfg
+[INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.agents.rsl_rl_ppo_cfg:LiftCubePPORunnerCfg

@@ -266,7 +266,7 @@ def main():
             seg_ids=[2],
             target_terms=(args_cli.target_label,) if args_cli.target_label else ("Object",),
             # Suction works better with a longer grasp wait
-            grasp_wait=0 if ("Franka" in args_cli.task) else 10,
+            grasp_wait=3 if ("Franka" in args_cli.task) else 10,
             sample_images=args_cli.sample_images,
             random_seed=args_cli.random_seed,
             motion_backend=args_cli.motion_backend,
@@ -295,7 +295,7 @@ def main():
         video_dir = None
         start_time = time.time()
         total_reward = 0.0
-        for step in range(250):
+        for step in range(1):
             repeat = 1
             action = policy.get_action(obs)
             env_action = torch.as_tensor(action[None, :], device=env.unwrapped.device)

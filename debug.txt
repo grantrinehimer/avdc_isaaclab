@@ -1,8 +1,8 @@
 Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/user.config.json'
-[Info] [carb] Logging to file: /home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20251214_201243.log
-2025-12-15T01:12:43Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/d7a27fa1-fb60-4462-e0ea199b-c042b149.dmp'
-2025-12-15T01:12:43Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/0272cd41-73cf-45cb-c46fd3ae-b2799dbc.dmp'
-2025-12-15T01:12:43Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/e0431db7-766d-4df9-db7132bc-383d5efb.dmp'
+[Info] [carb] Logging to file: /home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/logs/Kit/Isaac-Sim/5.1/kit_20251214_211033.log
+2025-12-15T02:10:33Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/d7a27fa1-fb60-4462-e0ea199b-c042b149.dmp'
+2025-12-15T02:10:33Z [1ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/0272cd41-73cf-45cb-c46fd3ae-b2799dbc.dmp'
+2025-12-15T02:10:33Z [2ms] [Warning] [carb.crashreporter-breakpad.plugin] [previous crash] preventing upload of minidump due to user opt-out: '/home/grant-rinehimer/miniconda3/envs/env_isaaclab/lib/python3.11/site-packages/isaacsim/kit/data/Kit/Isaac-Sim/5.1/e0431db7-766d-4df9-db7132bc-383d5efb.dmp'
 
 |---------------------------------------------------------------------------------------------|
 | Driver Version: 580.95.05     | Graphics API: Vulkan
@@ -20,18 +20,18 @@ Loading user config located at: '/home/grant-rinehimer/miniconda3/envs/env_isaac
 | Processor: AMD Ryzen 7 3700X 8-Core Processor
 | Cores: 8 | Logical Cores: 16
 |---------------------------------------------------------------------------------------------|
-| Total Memory (MB): 32018 | Free Memory: 19477
-| Total Page/Swap (MB): 8191 | Free Page/Swap: 5949
+| Total Memory (MB): 32018 | Free Memory: 17736
+| Total Page/Swap (MB): 8191 | Free Page/Swap: 5969
 |---------------------------------------------------------------------------------------------|
-2025-12-15T01:12:44Z [992ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
-2025-12-15T01:12:45Z [2,084ms] [Warning] [omni.log] Source: omni.hydra was already registered.
-2025-12-15T01:12:46Z [2,420ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
-2025-12-15T01:12:46Z [2,655ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
-2025-12-15T01:12:48Z [4,819ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
-2025-12-15T01:12:49Z [5,147ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
-2025-12-15T01:12:49Z [5,148ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
-2025-12-15T01:12:49Z [5,148ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
-2025-12-15T01:12:51Z [7,429ms] [Warning] [omni.fabric.plugin] Warning: attribute viewportHandle not found for bucket id 9
+2025-12-15T02:10:34Z [1,061ms] [Warning] [gpu.foundation.plugin] IOMMU is enabled.
+2025-12-15T02:10:35Z [2,293ms] [Warning] [omni.log] Source: omni.hydra was already registered.
+2025-12-15T02:10:36Z [2,678ms] [Warning] [carb] Acquiring non optional plugin interface which is not listed as dependency: [omni::physx::IPhysxBenchmarks v1.0] (plugin: <default plugin>), by client: omni.physics.physx.plugin. Add it to CARB_PLUGIN_IMPL_DEPS() macro of a client.
+2025-12-15T02:10:36Z [2,926ms] [Warning] [omni.isaac.dynamic_control] omni.isaac.dynamic_control is deprecated as of Isaac Sim 4.5. No action is needed from end-users.
+2025-12-15T02:10:39Z [5,369ms] [Warning] [pxr.Semantics] pxr.Semantics is deprecated - please use Semantics instead
+2025-12-15T02:10:39Z [5,748ms] [Warning] [omni.graph.core.plugin] Found duplicate of category 'Replicator' - was 'Annotators', adding 'Fabric Reader'
+2025-12-15T02:10:39Z [5,748ms] [Warning] [omni.graph.core.plugin] Category 'Replicator' not accepted on node type 'omni.replicator.core.FabricReader' in extension 'omni.replicator.core'
+2025-12-15T02:10:39Z [5,749ms] [Warning] [omni.replicator.core.scripts.extension] No material configuration file, adding configuration to material settings directly.
+2025-12-15T02:10:42Z [8,480ms] [Warning] [omni.fabric.plugin] Warning: attribute viewportHandle not found for bucket id 9
 
 [INFO][AppLauncher]: Using device: cpu
 [INFO][AppLauncher]: Loading experience file: /home/grant-rinehimer/cornell/dl_robotics/IsaacLab/apps/isaaclab.python.rendering.kit
@@ -39,14 +39,14 @@ here
 here before _run
 [INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.ik_rel_env_cfg:FrankaCubeLiftEnvCfg
 [INFO]: Parsing configuration from: avdc_isaaclab.tasks.manager_based.lift_custom.config.franka.agents.rsl_rl_ppo_cfg:LiftCubePPORunnerCfg
-[INFO] IsaacLab logging to file: /tmp/isaaclab_2025-12-14_20-12-58.log
+[INFO] IsaacLab logging to file: /tmp/isaaclab_2025-12-14_21-10-49.log
 [INFO]: Base environment:
 	Environment device    : cpu
 	Environment seed      : 0
 	Physics step-size     : 0.01
 	Rendering step-size   : 0.02
 	Environment step-size : 0.02
-[INFO]: Time taken for scene creation : 2.808856 seconds
+[INFO]: Time taken for scene creation : 1.886186 seconds
 [INFO]: Scene manager:  <class InteractiveScene>
 	Number of environments: 1
 	Environment spacing   : 2.5
@@ -54,7 +54,7 @@ here before _run
 	Global prim paths     : []
 	Replicate physics     : True
 [INFO]: Starting the simulation. This may take a few seconds. Please wait...
-[INFO]: Time taken for simulation start : 2.194680 seconds
+[INFO]: Time taken for simulation start : 1.891769 seconds
 [INFO] Command Manager:  <CommandManager> contains 1 active terms.
 +------------------------------------------+
 |           Active Command Terms           |
@@ -164,66 +164,75 @@ mask
 (240, 320)
 seg unique IDs: [1 2]
 seg info keys: {'idToLabels': {0: 'BACKGROUND', 1: 'UNLABELLED', 2: '/World/envs/env_0/Object'}, 'idToSemantics': {0: {'class': 'BACKGROUND'}, 1: {'class': 'UNLABELLED'}, 2: {'class': 'target_object'}}}
+USING SAMPLES IMAGES
+0 4
+5 9
+10 14
+15 19
+20 24
+25 29
+30 34
+35 40
 solution
-0.03521760715283673
+0.0037572067748754545
 Bad solution encountered
 solution
-0.023116057226122644
+0.004059047596250531
 Bad solution encountered
 solution
-0.017580251034706285
+0.008904165032433964
 Bad solution encountered
 solution
-0.016266184259527305
+0.041056804770415845
 Bad solution encountered
 solution
-0.01466183468811244
+0.05089471140754043
 Bad solution encountered
 solution
-0.02453892028142124
+0.05488668764932125
 Bad solution encountered
 solution
-0.029230886974791037
+0.02858910822711369
 Bad solution encountered
 grasp
 [[0.51569979 0.00108799 0.06722519]]
 transform
-[[ 0.99822598  0.05897479  0.00817783 -0.18189055]
- [-0.0595167   0.98462727  0.16421604 -0.06490045]
- [ 0.00163249 -0.16441143  0.9863905  -0.05212535]
+[[ 9.99997912e-01  3.67240582e-04  2.01031953e-03 -1.32717596e-02]
+ [-3.64426556e-04  9.99998954e-01 -1.39997760e-03 -4.22159721e-03]
+ [-2.01083155e-03  1.39924206e-03  9.99996999e-01 -8.71657082e-03]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+transform
+[[ 9.99997918e-01 -7.09138790e-04 -1.91355113e-03 -5.64123829e-05]
+ [ 7.13288352e-04  9.99997394e-01  2.16870324e-03 -3.56933929e-04]
+ [ 1.91200823e-03 -2.17006364e-03  9.99995818e-01 -1.41599942e-03]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+transform
+[[ 9.99871810e-01 -1.45552435e-02  6.67148620e-03 -2.03099170e-03]
+ [ 1.45549105e-02  9.99894067e-01  9.84658417e-05 -8.23584100e-03]
+ [-6.67221266e-03 -1.35033498e-06  9.99977741e-01  1.87025023e-03]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+transform
+[[ 9.99000913e-01  4.45643637e-02 -3.34575834e-03 -5.65305745e-02]
+ [-4.45269734e-02  9.98952760e-01  1.05229042e-02 -2.85001958e-04]
+ [ 3.81120106e-03 -1.03634144e-02  9.99939035e-01 -4.12282219e-02]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
+transform
+[[ 0.99994122  0.00600902  0.00902473 -0.08102819]
+ [-0.006194    0.99976839  0.02061051 -0.0495534 ]
+ [-0.0088988  -0.02066519  0.99974685 -0.00440528]
  [ 0.          0.          0.          1.        ]]
 transform
-[[ 0.99896279  0.04479445 -0.00817327  0.01323456]
- [-0.04467838  0.99890513  0.01387053  0.00979624]
- [ 0.00878564 -0.01349098  0.99987039  0.04679609]
- [ 0.          0.          0.          1.        ]]
+[[ 9.98269447e-01 -4.91733863e-03  5.85997445e-02 -3.64835901e-01]
+ [ 9.60019080e-04  9.97727665e-01  6.73690151e-02 -1.48837317e-01]
+ [-5.87978625e-02 -6.71961726e-02  9.96005766e-01 -6.80694499e-02]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  1.00000000e+00]]
 transform
-[[ 0.99994998  0.00940817  0.00339376 -0.00499546]
- [-0.00936477  0.99987695 -0.01258494 -0.00121086]
- [-0.00351175  0.01255253  0.99991505  0.02313309]
- [ 0.          0.          0.          1.        ]]
-transform
-[[ 0.99906695  0.03869322  0.01918489 -0.01219981]
- [-0.03909484  0.99901438  0.02102071  0.00793113]
- [-0.01835262 -0.02175113  0.99959495  0.04252197]
- [ 0.          0.          0.          1.        ]]
-transform
-[[ 0.99970378  0.01500301  0.01916383 -0.00900156]
- [-0.01471139  0.99977519 -0.01526876  0.01008526]
- [-0.0193886   0.01498231  0.99969976  0.02422116]
- [ 0.          0.          0.          1.        ]]
-transform
-[[ 0.99907338  0.01292491  0.04105264 -0.00458244]
- [-0.0113418   0.99919175 -0.03856439  0.01715506]
- [-0.0415179   0.03806305  0.99841247  0.03539388]
- [ 0.          0.          0.          1.        ]]
-transform
-[[ 0.9983711   0.04887836  0.02942881  0.03838164]
- [-0.04736813  0.99762551 -0.04999606  0.04560933]
- [-0.03180266  0.04852063  0.99831575  0.0474191 ]
+[[ 0.99642626  0.03077986  0.07865941 -0.60524981]
+ [-0.02015075  0.99097644 -0.1325128  -0.18041676]
+ [-0.08202835  0.13045418  0.98805519 -0.1713554 ]
  [ 0.          0.          0.          1.        ]]
 subgoals
-[array([0.51569979, 0.00108799, 0.06722519]), array([ 0.3335083 , -0.08348248,  0.06722519]), array([ 0.34210793, -0.087563  ,  0.11806891]), array([ 0.33667225, -0.09345273,  0.13889143]), array([ 0.32320694, -0.09567204,  0.17721103]), array([ 0.31607032, -0.09302589,  0.19367907]), array([ 0.31794368, -0.08684956,  0.21210206]), array([ 0.35780427, -0.06669867,  0.24483848])]
+[array([0.51569979, 0.00108799, 0.06722519]), array([ 0.50256249, -0.00341566,  0.06722519]), array([ 0.50237882, -0.00326832,  0.06722519]), array([ 0.50077949, -0.00418512,  0.06722519]), array([ 0.44333717, -0.02605653,  0.06722519]), array([ 0.36273303, -0.07696438,  0.06722519]), array([ 0.00158724, -0.22074968,  0.06722519]), array([-0.605175  , -0.40811467,  0.06722519])]
 Step 1/250 | Reward: tensor([0.4351])
 position
 [2.  0.5 1. ]
@@ -489,31 +498,31 @@ grasp waiting
 Step 87/250 | Reward: tensor([1.2491])
 position
 [2.  0.5 1. ]
-Step 88/250 | Reward: tensor([1.2667])
+Step 88/250 | Reward: tensor([1.2668])
 position
 [2.  0.5 1. ]
-Step 89/250 | Reward: tensor([1.2842])
+Step 89/250 | Reward: tensor([1.2843])
 position
 [2.  0.5 1. ]
-Step 90/250 | Reward: tensor([1.3017])
+Step 90/250 | Reward: tensor([1.3018])
 position
 [2.  0.5 1. ]
-Step 91/250 | Reward: tensor([1.3191])
+Step 91/250 | Reward: tensor([1.3192])
 position
 [2.  0.5 1. ]
-Step 92/250 | Reward: tensor([1.3364])
+Step 92/250 | Reward: tensor([1.3365])
 position
 [2.  0.5 1. ]
-Step 93/250 | Reward: tensor([1.3537])
+Step 93/250 | Reward: tensor([1.3538])
 position
 [2.  0.5 1. ]
-Step 94/250 | Reward: tensor([1.3710])
+Step 94/250 | Reward: tensor([1.3711])
 position
 [2.  0.5 1. ]
-Step 95/250 | Reward: tensor([1.3883])
+Step 95/250 | Reward: tensor([1.3884])
 position
 [2.  0.5 1. ]
-Step 96/250 | Reward: tensor([1.4055])
+Step 96/250 | Reward: tensor([1.4056])
 position
 [2.  0.5 1. ]
 Step 97/250 | Reward: tensor([1.4227])
@@ -522,468 +531,468 @@ position
 Step 98/250 | Reward: tensor([1.4399])
 position
 [2.  0.5 1. ]
-Step 99/250 | Reward: tensor([1.4571])
+Step 99/250 | Reward: tensor([1.4569])
 position
 [2.  0.5 1. ]
-Step 100/250 | Reward: tensor([1.4742])
+Step 100/250 | Reward: tensor([1.4740])
 position
 [2.  0.5 1. ]
-Step 101/250 | Reward: tensor([1.4914])
+Step 101/250 | Reward: tensor([1.4910])
 position
 [2.  0.5 1. ]
-Step 102/250 | Reward: tensor([1.5084])
+Step 102/250 | Reward: tensor([1.5080])
 position
 [2.  0.5 1. ]
-Step 103/250 | Reward: tensor([1.5255])
+Step 103/250 | Reward: tensor([1.5250])
 position
 [2.  0.5 1. ]
-Step 104/250 | Reward: tensor([1.5425])
+Step 104/250 | Reward: tensor([1.5420])
 position
 [2.  0.5 1. ]
-Step 105/250 | Reward: tensor([1.5595])
+Step 105/250 | Reward: tensor([1.5590])
 position
 [2.  0.5 1. ]
-Step 106/250 | Reward: tensor([1.5765])
+Step 106/250 | Reward: tensor([1.5760])
 position
 [2.  0.5 1. ]
-Step 107/250 | Reward: tensor([1.5934])
+Step 107/250 | Reward: tensor([1.5930])
 position
 [2.  0.5 1. ]
-Step 108/250 | Reward: tensor([1.6103])
+Step 108/250 | Reward: tensor([1.6100])
 position
 [2.  0.5 1. ]
-Step 109/250 | Reward: tensor([1.6272])
+Step 109/250 | Reward: tensor([1.6270])
 position
 [2.  0.5 1. ]
-Step 110/250 | Reward: tensor([1.6441])
+Step 110/250 | Reward: tensor([1.6440])
 position
 [2.  0.5 1. ]
 Step 111/250 | Reward: tensor([1.6610])
 position
 [2.  0.5 1. ]
-Step 112/250 | Reward: tensor([1.6779])
+Step 112/250 | Reward: tensor([1.6780])
 position
 [2.  0.5 1. ]
-Step 113/250 | Reward: tensor([1.6948])
+Step 113/250 | Reward: tensor([1.6950])
 position
 [2.  0.5 1. ]
-Step 114/250 | Reward: tensor([1.7116])
+Step 114/250 | Reward: tensor([1.7120])
 position
 [2.  0.5 1. ]
-Step 115/250 | Reward: tensor([1.7285])
+Step 115/250 | Reward: tensor([1.7290])
 position
 [2.  0.5 1. ]
-Step 116/250 | Reward: tensor([1.7454])
+Step 116/250 | Reward: tensor([1.7460])
 position
 [2.  0.5 1. ]
-Step 117/250 | Reward: tensor([1.7623])
+Step 117/250 | Reward: tensor([1.7630])
 position
 [2.  0.5 1. ]
-Step 118/250 | Reward: tensor([1.7791])
+Step 118/250 | Reward: tensor([1.7800])
 position
 [2.  0.5 1. ]
-Step 119/250 | Reward: tensor([1.7960])
+Step 119/250 | Reward: tensor([1.7970])
 position
 [2.  0.5 1. ]
-Step 120/250 | Reward: tensor([1.8128])
+Step 120/250 | Reward: tensor([1.8139])
 position
 [2.  0.5 1. ]
-Step 121/250 | Reward: tensor([1.8297])
+Step 121/250 | Reward: tensor([1.8309])
 position
 [2.  0.5 1. ]
-Step 122/250 | Reward: tensor([1.8465])
+Step 122/250 | Reward: tensor([1.8479])
 position
 [2.  0.5 1. ]
-Step 123/250 | Reward: tensor([1.8634])
+Step 123/250 | Reward: tensor([1.8649])
 position
 [2.  0.5 1. ]
-Step 124/250 | Reward: tensor([1.8803])
+Step 124/250 | Reward: tensor([1.8819])
 position
 [2.  0.5 1. ]
-Step 125/250 | Reward: tensor([1.8972])
+Step 125/250 | Reward: tensor([1.8988])
 position
 [2.  0.5 1. ]
-Step 126/250 | Reward: tensor([1.9141])
+Step 126/250 | Reward: tensor([1.9158])
 position
 [2.  0.5 1. ]
-Step 127/250 | Reward: tensor([1.9310])
+Step 127/250 | Reward: tensor([1.9327])
 position
 [2.  0.5 1. ]
-Step 128/250 | Reward: tensor([1.9479])
+Step 128/250 | Reward: tensor([1.9497])
 position
 [2.  0.5 1. ]
-Step 129/250 | Reward: tensor([1.9648])
+Step 129/250 | Reward: tensor([1.9666])
 position
 [2.  0.5 1. ]
-Step 130/250 | Reward: tensor([1.9817])
+Step 130/250 | Reward: tensor([1.9835])
 position
 [2.  0.5 1. ]
-Step 131/250 | Reward: tensor([2.3949])
+Step 131/250 | Reward: tensor([2.0004])
 position
 [2.  0.5 1. ]
-Step 132/250 | Reward: tensor([2.8086])
+Step 132/250 | Reward: tensor([2.0173])
 position
 [2.  0.5 1. ]
-Step 133/250 | Reward: tensor([3.2229])
+Step 133/250 | Reward: tensor([2.0342])
 position
 [2.  0.5 1. ]
-Step 134/250 | Reward: tensor([3.6379])
+Step 134/250 | Reward: tensor([2.0511])
 position
 [2.  0.5 1. ]
-Step 135/250 | Reward: tensor([4.0537])
+Step 135/250 | Reward: tensor([2.0679])
 position
 [2.  0.5 1. ]
-Step 136/250 | Reward: tensor([4.4705])
+Step 136/250 | Reward: tensor([2.0848])
 position
 [2.  0.5 1. ]
-Step 137/250 | Reward: tensor([4.8889])
+Step 137/250 | Reward: tensor([2.1016])
 position
 [2.  0.5 1. ]
-Step 138/250 | Reward: tensor([5.3095])
+Step 138/250 | Reward: tensor([2.1184])
 position
 [2.  0.5 1. ]
-Step 139/250 | Reward: tensor([5.7327])
+Step 139/250 | Reward: tensor([2.1352])
 position
 [2.  0.5 1. ]
-Step 140/250 | Reward: tensor([6.1583])
+Step 140/250 | Reward: tensor([2.1520])
 position
 [2.  0.5 1. ]
-Step 141/250 | Reward: tensor([6.5865])
+Step 141/250 | Reward: tensor([2.1687])
 position
 [2.  0.5 1. ]
-Step 142/250 | Reward: tensor([7.0170])
+Step 142/250 | Reward: tensor([2.1854])
 position
 [2.  0.5 1. ]
-Step 143/250 | Reward: tensor([7.4498])
+Step 143/250 | Reward: tensor([2.2020])
 position
 [2.  0.5 1. ]
-Step 144/250 | Reward: tensor([7.8848])
+Step 144/250 | Reward: tensor([2.2187])
 position
 [2.  0.5 1. ]
-Step 145/250 | Reward: tensor([8.3220])
+Step 145/250 | Reward: tensor([2.2353])
 position
 [2.  0.5 1. ]
-Step 146/250 | Reward: tensor([8.7611])
+Step 146/250 | Reward: tensor([2.2519])
 position
 [2.  0.5 1. ]
-Step 147/250 | Reward: tensor([9.2022])
+Step 147/250 | Reward: tensor([2.2686])
 position
 [2.  0.5 1. ]
-Step 148/250 | Reward: tensor([9.6450])
+Step 148/250 | Reward: tensor([2.2852])
 position
 [2.  0.5 1. ]
-Step 149/250 | Reward: tensor([10.0896])
+Step 149/250 | Reward: tensor([2.3019])
 position
 [2.  0.5 1. ]
-Step 150/250 | Reward: tensor([10.5358])
+Step 150/250 | Reward: tensor([2.3185])
 position
 [2.  0.5 1. ]
-Step 151/250 | Reward: tensor([10.9836])
+Step 151/250 | Reward: tensor([2.3351])
 position
 [2.  0.5 1. ]
-Step 152/250 | Reward: tensor([11.4329])
+Step 152/250 | Reward: tensor([2.3517])
 position
 [2.  0.5 1. ]
-Step 153/250 | Reward: tensor([11.8835])
+Step 153/250 | Reward: tensor([2.3683])
 position
 [2.  0.5 1. ]
-Step 154/250 | Reward: tensor([12.3355])
+Step 154/250 | Reward: tensor([2.3849])
 position
 [2.  0.5 1. ]
-Step 155/250 | Reward: tensor([12.7888])
+Step 155/250 | Reward: tensor([2.4014])
 position
 [2.  0.5 1. ]
-Step 156/250 | Reward: tensor([13.2432])
+Step 156/250 | Reward: tensor([2.4179])
 position
 [2.  0.5 1. ]
-Step 157/250 | Reward: tensor([13.6987])
+Step 157/250 | Reward: tensor([2.4344])
 position
 [2.  0.5 1. ]
-Step 158/250 | Reward: tensor([14.1553])
+Step 158/250 | Reward: tensor([2.4508])
 position
 [2.  0.5 1. ]
-Step 159/250 | Reward: tensor([14.6129])
+Step 159/250 | Reward: tensor([2.4671])
 position
 [2.  0.5 1. ]
-Step 160/250 | Reward: tensor([15.0715])
+Step 160/250 | Reward: tensor([2.4835])
 position
 [2.  0.5 1. ]
-Step 161/250 | Reward: tensor([15.5309])
+Step 161/250 | Reward: tensor([2.4998])
 position
 [2.  0.5 1. ]
-Step 162/250 | Reward: tensor([15.9912])
+Step 162/250 | Reward: tensor([2.5161])
 position
 [2.  0.5 1. ]
-Step 163/250 | Reward: tensor([16.4522])
+Step 163/250 | Reward: tensor([2.5324])
 position
 [2.  0.5 1. ]
-Step 164/250 | Reward: tensor([16.9140])
+Step 164/250 | Reward: tensor([2.5487])
 position
 [2.  0.5 1. ]
-Step 165/250 | Reward: tensor([17.3765])
+Step 165/250 | Reward: tensor([2.5649])
 position
 [2.  0.5 1. ]
-Step 166/250 | Reward: tensor([17.8397])
+Step 166/250 | Reward: tensor([2.5812])
 position
 [2.  0.5 1. ]
-Step 167/250 | Reward: tensor([18.3034])
+Step 167/250 | Reward: tensor([2.5974])
 position
 [2.  0.5 1. ]
-Step 168/250 | Reward: tensor([18.7678])
+Step 168/250 | Reward: tensor([2.6136])
 position
 [2.  0.5 1. ]
-Step 169/250 | Reward: tensor([19.2327])
+Step 169/250 | Reward: tensor([2.6298])
 position
 [2.  0.5 1. ]
-Step 170/250 | Reward: tensor([19.6981])
+Step 170/250 | Reward: tensor([2.6460])
 position
 [2.  0.5 1. ]
-Step 171/250 | Reward: tensor([20.1640])
+Step 171/250 | Reward: tensor([2.6623])
 position
 [2.  0.5 1. ]
-Step 172/250 | Reward: tensor([20.6303])
+Step 172/250 | Reward: tensor([2.6785])
 position
 [2.  0.5 1. ]
-Step 173/250 | Reward: tensor([21.0971])
+Step 173/250 | Reward: tensor([2.6947])
 position
 [2.  0.5 1. ]
-Step 174/250 | Reward: tensor([21.5642])
+Step 174/250 | Reward: tensor([2.7110])
 position
 [2.  0.5 1. ]
-Step 175/250 | Reward: tensor([22.0318])
+Step 175/250 | Reward: tensor([2.7272])
 position
 [2.  0.5 1. ]
-Step 176/250 | Reward: tensor([22.4997])
+Step 176/250 | Reward: tensor([2.7434])
 position
 [2.  0.5 1. ]
-Step 177/250 | Reward: tensor([22.9679])
+Step 177/250 | Reward: tensor([2.7596])
 position
 [2.  0.5 1. ]
-Step 178/250 | Reward: tensor([23.4364])
+Step 178/250 | Reward: tensor([2.7758])
 position
 [2.  0.5 1. ]
-Step 179/250 | Reward: tensor([23.9052])
+Step 179/250 | Reward: tensor([2.7921])
 position
 [2.  0.5 1. ]
-Step 180/250 | Reward: tensor([24.3743])
+Step 180/250 | Reward: tensor([2.8083])
 position
 [2.  0.5 1. ]
-Step 181/250 | Reward: tensor([24.8436])
+Step 181/250 | Reward: tensor([2.8245])
 position
 [2.  0.5 1. ]
-Step 182/250 | Reward: tensor([25.3132])
+Step 182/250 | Reward: tensor([2.8407])
 position
 [2.  0.5 1. ]
-Step 183/250 | Reward: tensor([25.7830])
+Step 183/250 | Reward: tensor([2.8569])
 position
 [2.  0.5 1. ]
-Step 184/250 | Reward: tensor([26.2530])
+Step 184/250 | Reward: tensor([2.8731])
 position
 [2.  0.5 1. ]
-Step 185/250 | Reward: tensor([26.7232])
+Step 185/250 | Reward: tensor([2.8893])
 position
 [2.  0.5 1. ]
-Step 186/250 | Reward: tensor([27.1936])
+Step 186/250 | Reward: tensor([2.9055])
 position
 [2.  0.5 1. ]
-Step 187/250 | Reward: tensor([27.6642])
+Step 187/250 | Reward: tensor([2.9217])
 position
 [2.  0.5 1. ]
-Step 188/250 | Reward: tensor([28.1349])
+Step 188/250 | Reward: tensor([2.9379])
 position
 [2.  0.5 1. ]
-Step 189/250 | Reward: tensor([28.6057])
+Step 189/250 | Reward: tensor([2.9541])
 position
 [2.  0.5 1. ]
-Step 190/250 | Reward: tensor([29.0767])
+Step 190/250 | Reward: tensor([2.9703])
 position
 [2.  0.5 1. ]
-Step 191/250 | Reward: tensor([29.5478])
+Step 191/250 | Reward: tensor([2.9865])
 position
 [2.  0.5 1. ]
-Step 192/250 | Reward: tensor([30.0191])
+Step 192/250 | Reward: tensor([3.0026])
 position
 [2.  0.5 1. ]
-Step 193/250 | Reward: tensor([30.4904])
+Step 193/250 | Reward: tensor([3.0188])
 position
 [2.  0.5 1. ]
-Step 194/250 | Reward: tensor([30.9619])
+Step 194/250 | Reward: tensor([3.0350])
 position
 [2.  0.5 1. ]
-Step 195/250 | Reward: tensor([31.4334])
+Step 195/250 | Reward: tensor([3.0511])
 position
 [2.  0.5 1. ]
-Step 196/250 | Reward: tensor([31.9051])
+Step 196/250 | Reward: tensor([3.0673])
 position
 [2.  0.5 1. ]
-Step 197/250 | Reward: tensor([32.3768])
+Step 197/250 | Reward: tensor([3.0835])
 position
 [2.  0.5 1. ]
-Step 198/250 | Reward: tensor([32.8486])
+Step 198/250 | Reward: tensor([3.0996])
 position
 [2.  0.5 1. ]
-Step 199/250 | Reward: tensor([33.3205])
+Step 199/250 | Reward: tensor([3.1158])
 position
 [2.  0.5 1. ]
-Step 200/250 | Reward: tensor([33.7925])
+Step 200/250 | Reward: tensor([3.1319])
 position
 [2.  0.5 1. ]
-Step 201/250 | Reward: tensor([34.2645])
+Step 201/250 | Reward: tensor([3.1481])
 position
 [2.  0.5 1. ]
-Step 202/250 | Reward: tensor([34.7365])
+Step 202/250 | Reward: tensor([3.1642])
 position
 [2.  0.5 1. ]
-Step 203/250 | Reward: tensor([35.2087])
+Step 203/250 | Reward: tensor([3.1804])
 position
 [2.  0.5 1. ]
-Step 204/250 | Reward: tensor([35.6808])
+Step 204/250 | Reward: tensor([3.1965])
 position
 [2.  0.5 1. ]
-Step 205/250 | Reward: tensor([36.1531])
+Step 205/250 | Reward: tensor([3.2126])
 position
 [2.  0.5 1. ]
-Step 206/250 | Reward: tensor([36.6253])
+Step 206/250 | Reward: tensor([3.2288])
 position
 [2.  0.5 1. ]
-Step 207/250 | Reward: tensor([37.0976])
+Step 207/250 | Reward: tensor([3.2449])
 position
 [2.  0.5 1. ]
-Step 208/250 | Reward: tensor([37.5700])
+Step 208/250 | Reward: tensor([3.2610])
 position
 [2.  0.5 1. ]
-Step 209/250 | Reward: tensor([38.0424])
+Step 209/250 | Reward: tensor([3.2772])
 position
 [2.  0.5 1. ]
-Step 210/250 | Reward: tensor([38.5148])
+Step 210/250 | Reward: tensor([3.2933])
 position
 [2.  0.5 1. ]
-Step 211/250 | Reward: tensor([38.9872])
+Step 211/250 | Reward: tensor([3.3094])
 position
 [2.  0.5 1. ]
-Step 212/250 | Reward: tensor([39.4597])
+Step 212/250 | Reward: tensor([3.3255])
 position
 [2.  0.5 1. ]
-Step 213/250 | Reward: tensor([39.9321])
+Step 213/250 | Reward: tensor([3.3416])
 position
 [2.  0.5 1. ]
-Step 214/250 | Reward: tensor([40.4047])
+Step 214/250 | Reward: tensor([3.3577])
 position
 [2.  0.5 1. ]
-Step 215/250 | Reward: tensor([40.8772])
+Step 215/250 | Reward: tensor([3.3738])
 position
 [2.  0.5 1. ]
-Step 216/250 | Reward: tensor([41.3497])
+Step 216/250 | Reward: tensor([3.3899])
 position
 [2.  0.5 1. ]
-Step 217/250 | Reward: tensor([41.8223])
+Step 217/250 | Reward: tensor([3.4060])
 position
 [2.  0.5 1. ]
-Step 218/250 | Reward: tensor([42.2949])
+Step 218/250 | Reward: tensor([3.4221])
 position
 [2.  0.5 1. ]
-Step 219/250 | Reward: tensor([42.7675])
+Step 219/250 | Reward: tensor([3.4382])
 position
 [2.  0.5 1. ]
-Step 220/250 | Reward: tensor([43.2401])
+Step 220/250 | Reward: tensor([3.4542])
 position
 [2.  0.5 1. ]
-Step 221/250 | Reward: tensor([43.7127])
+Step 221/250 | Reward: tensor([3.4703])
 position
 [2.  0.5 1. ]
-Step 222/250 | Reward: tensor([44.1854])
+Step 222/250 | Reward: tensor([3.4863])
 position
 [2.  0.5 1. ]
-Step 223/250 | Reward: tensor([44.6580])
+Step 223/250 | Reward: tensor([3.5024])
 position
 [2.  0.5 1. ]
-Step 224/250 | Reward: tensor([45.1306])
+Step 224/250 | Reward: tensor([3.5185])
 position
 [2.  0.5 1. ]
-Step 225/250 | Reward: tensor([45.6033])
+Step 225/250 | Reward: tensor([3.5345])
 position
 [2.  0.5 1. ]
-Step 226/250 | Reward: tensor([46.0760])
+Step 226/250 | Reward: tensor([3.5506])
 position
 [2.  0.5 1. ]
-Step 227/250 | Reward: tensor([46.5487])
+Step 227/250 | Reward: tensor([3.5667])
 position
 [2.  0.5 1. ]
-Step 228/250 | Reward: tensor([47.0213])
+Step 228/250 | Reward: tensor([3.5827])
 position
 [2.  0.5 1. ]
-Step 229/250 | Reward: tensor([47.4940])
+Step 229/250 | Reward: tensor([3.5987])
 position
 [2.  0.5 1. ]
-Step 230/250 | Reward: tensor([47.9667])
+Step 230/250 | Reward: tensor([3.6148])
 position
 [2.  0.5 1. ]
-Step 231/250 | Reward: tensor([48.4394])
+Step 231/250 | Reward: tensor([3.6308])
 position
 [2.  0.5 1. ]
-Step 232/250 | Reward: tensor([48.9121])
+Step 232/250 | Reward: tensor([3.6468])
 position
 [2.  0.5 1. ]
-Step 233/250 | Reward: tensor([49.3848])
+Step 233/250 | Reward: tensor([3.6628])
 position
 [2.  0.5 1. ]
-Step 234/250 | Reward: tensor([49.8575])
+Step 234/250 | Reward: tensor([3.6788])
 position
 [2.  0.5 1. ]
-Step 235/250 | Reward: tensor([50.3302])
+Step 235/250 | Reward: tensor([3.6948])
 position
 [2.  0.5 1. ]
-Step 236/250 | Reward: tensor([50.8029])
+Step 236/250 | Reward: tensor([3.7108])
 position
 [2.  0.5 1. ]
-Step 237/250 | Reward: tensor([51.2756])
+Step 237/250 | Reward: tensor([3.7268])
 position
 [2.  0.5 1. ]
-Step 238/250 | Reward: tensor([51.7483])
+Step 238/250 | Reward: tensor([3.7428])
 position
 [2.  0.5 1. ]
-Step 239/250 | Reward: tensor([52.2210])
+Step 239/250 | Reward: tensor([3.7588])
 position
 [2.  0.5 1. ]
-Step 240/250 | Reward: tensor([52.6938])
+Step 240/250 | Reward: tensor([3.7748])
 position
 [2.  0.5 1. ]
-Step 241/250 | Reward: tensor([53.1665])
+Step 241/250 | Reward: tensor([3.7908])
 position
 [2.  0.5 1. ]
-Step 242/250 | Reward: tensor([53.6392])
+Step 242/250 | Reward: tensor([3.8068])
 position
 [2.  0.5 1. ]
-Step 243/250 | Reward: tensor([54.1119])
+Step 243/250 | Reward: tensor([3.8228])
 position
 [2.  0.5 1. ]
-Step 244/250 | Reward: tensor([54.5846])
+Step 244/250 | Reward: tensor([3.8387])
 position
 [2.  0.5 1. ]
-Step 245/250 | Reward: tensor([55.0573])
+Step 245/250 | Reward: tensor([3.8547])
 position
 [2.  0.5 1. ]
-Step 246/250 | Reward: tensor([55.5300])
+Step 246/250 | Reward: tensor([3.8707])
 position
 [2.  0.5 1. ]
-Step 247/250 | Reward: tensor([56.0027])
+Step 247/250 | Reward: tensor([3.8867])
 position
 [2.  0.5 1. ]
-Step 248/250 | Reward: tensor([56.4755])
+Step 248/250 | Reward: tensor([3.9026])
 position
 [2.  0.5 1. ]
-Step 249/250 | Reward: tensor([56.9482])
+Step 249/250 | Reward: tensor([3.9186])
 position
 [2.  0.5 1. ]
-Step 250/250 | Reward: tensor([57.4209])
+Step 250/250 | Reward: tensor([3.9346])
 position
 [2.  0.5 1. ]
-[INFO] Rollout finished after 250 steps (8.29s).
-[INFO] Saved rollout video to debug/Isaac-Lift-Cube-Franka-IK-Rel-v0-1765761195.mp4
-2025-12-15T01:13:02Z [18,334ms] [Warning] [omni.fabric.plugin] USD->Fabric: Unhandled array type string[]
-2025-12-15T01:13:02Z [18,337ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:reflection_roughness_constant)
-2025-12-15T01:13:02Z [18,338ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:transmittance_color)
-2025-12-15T01:13:02Z [18,338ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:ior_constant)
-2025-12-15T01:13:03Z [19,342ms] [Warning] [rtx.postprocessing.plugin] DLSS increasing input dimensions: Render resolution of (186, 139) is below minimal input resolution of 300.
-2025-12-15T01:13:03Z [19,403ms] [Warning] [omni.syntheticdata.plugin] OgnSdPostRenderVarToHost : rendervar copy from texture directly to host buffer is counter-performant. Please use copy from texture to device buffer first.
-2025-12-15T01:13:08Z [24,639ms] [Warning] [carb] Client gpu.foundation.plugin has acquired [gpu::unstable::IMemoryBudgetManagerFactory v0.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)
+[INFO] Rollout finished after 250 steps (8.50s).
+[INFO] Saved rollout video to results/point_tracker/franka_test_sampled/Isaac-Lift-Cube-Franka-IK-Rel-v0-1765764666.mp4
+2025-12-15T02:10:52Z [18,962ms] [Warning] [omni.fabric.plugin] USD->Fabric: Unhandled array type string[]
+2025-12-15T02:10:52Z [18,965ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:reflection_roughness_constant)
+2025-12-15T02:10:52Z [18,965ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:transmittance_color)
+2025-12-15T02:10:52Z [18,966ms] [Warning] [usdrt.population.plugin] [UsdNoticeHandler] Unhandled attribute type VtArray<std::string> (prim attribute: omni:rtx:material:db:flattener:ior_constant)
+2025-12-15T02:10:53Z [19,996ms] [Warning] [rtx.postprocessing.plugin] DLSS increasing input dimensions: Render resolution of (186, 139) is below minimal input resolution of 300.
+2025-12-15T02:10:53Z [20,059ms] [Warning] [omni.syntheticdata.plugin] OgnSdPostRenderVarToHost : rendervar copy from texture directly to host buffer is counter-performant. Please use copy from texture to device buffer first.
+2025-12-15T02:10:59Z [25,401ms] [Warning] [carb] Client gpu.foundation.plugin has acquired [gpu::unstable::IMemoryBudgetManagerFactory v0.1] 100 times. Consider accessing this interface with carb::getCachedInterface() (Performance warning)

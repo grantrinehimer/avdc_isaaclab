@@ -1,7 +1,6 @@
 python scripts/rsl_rl/play_avdc.py \
-  --headless \
   --device=cpu \
-  --task Isaac-Lift-Cube-UR10-IK-Rel-v0 \
+  --task Isaac-Lift-Cube-Franka-IK-Rel-v0 \
   --video_ckpt_dir AVDC/results/isaaclab/Lift-Cube-Randomized/ \
   --video_milestone 24 \
   --task_prompt "pos001" \
@@ -11,7 +10,7 @@ python scripts/rsl_rl/play_avdc.py \
   --video_length 2000 \
   --video_folder "debug" \
   --diffusion_source images \
-  --motion_backend locotrack\
+  --motion_backend locotrack \
   --locotrack_root "/home/grant-rinehimer/cornell/dl_robotics/avdc_isaaclab/locotrack/locotrack_pytorch" \
   --locotrack_ckpt "/home/grant-rinehimer/cornell/dl_robotics/avdc_isaaclab/locotrack/locotrack_pytorch/ckpt/locotrack_base.ckpt" \
   --locotrack_model_size base \
